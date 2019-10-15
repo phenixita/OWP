@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,23 +9,22 @@ using owp_web.Models;
 
 namespace owp_web.Controllers
 {
-    [Authorize]
-    public class WorkItemsController : Controller
+    public class CitizenItemsController : Controller
     {
         private readonly OwpContext _context;
 
-        public WorkItemsController(OwpContext context)
+        public CitizenItemsController(OwpContext context)
         {
             _context = context;
         }
 
-        // GET: WorkItems
+        // GET: CitizenItems
         public async Task<IActionResult> Index()
         {
             return View(await _context.WorkItem.ToListAsync());
         }
 
-        // GET: WorkItems/Details/5
+        // GET: CitizenItems/Details/5
         public async Task<IActionResult> Details(long? id)
         {
             if (id == null)
@@ -44,13 +42,13 @@ namespace owp_web.Controllers
             return View(workItem);
         }
 
-        // GET: WorkItems/Create
+        // GET: CitizenItems/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: WorkItems/Create
+        // POST: CitizenItems/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -66,7 +64,7 @@ namespace owp_web.Controllers
             return View(workItem);
         }
 
-        // GET: WorkItems/Edit/5
+        // GET: CitizenItems/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
@@ -82,7 +80,7 @@ namespace owp_web.Controllers
             return View(workItem);
         }
 
-        // POST: WorkItems/Edit/5
+        // POST: CitizenItems/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -117,7 +115,7 @@ namespace owp_web.Controllers
             return View(workItem);
         }
 
-        // GET: WorkItems/Delete/5
+        // GET: CitizenItems/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
@@ -135,7 +133,7 @@ namespace owp_web.Controllers
             return View(workItem);
         }
 
-        // POST: WorkItems/Delete/5
+        // POST: CitizenItems/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)

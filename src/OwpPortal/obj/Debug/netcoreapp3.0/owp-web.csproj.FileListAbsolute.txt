@@ -283,3 +283,9 @@ C:\Users\tocouchm\source\repos\OnBoarding-Imagination\src\OwpPortal\obj\Debug\ne
 C:\Users\tocouchm\source\repos\OnBoarding-Imagination\src\OwpPortal\obj\Debug\netcoreapp3.0\owp-web.csproj.CopyComplete
 C:\Users\tocouchm\source\repos\OnBoarding-Imagination\src\OwpPortal\obj\Debug\netcoreapp3.0\owp-web.dll
 C:\Users\tocouchm\source\repos\OnBoarding-Imagination\src\OwpPortal\obj\Debug\netcoreapp3.0\owp-web.pdb
+C:\Users\tocouchm\source\repos\OnBoarding-Imagination\src\OwpPortal\obj\Debug\netcoreapp3.0\owp-web.csprojAssemblyReference.cache
+C:\Users\tocouchm\source\repos\OnBoarding-Imagination\src\OwpPortal\obj\Debug\netcoreapp3.0\Razor\Views\CitizenItems\Create.cshtml.g.cs
+C:\Users\tocouchm\source\repos\OnBoarding-Imagination\src\OwpPortal\obj\Debug\netcoreapp3.0\Razor\Views\CitizenItems\Delete.cshtml.g.cs
+C:\Users\tocouchm\source\repos\OnBoarding-Imagination\src\OwpPortal\obj\Debug\netcoreapp3.0\Razor\Views\CitizenItems\Details.cshtml.g.cs
+C:\Users\tocouchm\source\repos\OnBoarding-Imagination\src\OwpPortal\obj\Debug\netcoreapp3.0\Razor\Views\CitizenItems\Edit.cshtml.g.cs
+C:\Users\tocouchm\source\repos\OnBoarding-Imagination\src\OwpPortal\obj\Debug\netcoreapp3.0\Razor\Views\CitizenItems\Index.cshtml.g.cs
