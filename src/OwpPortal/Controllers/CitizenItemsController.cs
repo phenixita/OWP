@@ -59,7 +59,7 @@ namespace owp_web.Controllers
             {
                 _context.Add(workItem);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Edit), new { Id = workItem.WorkItemId });
             }
             return View(workItem);
         }
