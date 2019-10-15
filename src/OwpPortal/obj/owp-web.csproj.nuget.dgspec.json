@@ -1,31 +1,34 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tocouchm\\source\\repos\\OnBoarding-Imagination\\src\\OwpPortal\\owp-web.csproj": {}
+    "C:\\Users\\juordas\\Source\\Repos\\OnBoarding-Imagination\\src\\OwpPortal\\owp-web.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tocouchm\\source\\repos\\OnBoarding-Imagination\\src\\OwpPortal\\owp-web.csproj": {
+    "C:\\Users\\juordas\\Source\\Repos\\OnBoarding-Imagination\\src\\OwpPortal\\owp-web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tocouchm\\source\\repos\\OnBoarding-Imagination\\src\\OwpPortal\\owp-web.csproj",
+        "projectUniqueName": "C:\\Users\\juordas\\Source\\Repos\\OnBoarding-Imagination\\src\\OwpPortal\\owp-web.csproj",
         "projectName": "owp-web",
-        "projectPath": "C:\\Users\\tocouchm\\source\\repos\\OnBoarding-Imagination\\src\\OwpPortal\\owp-web.csproj",
-        "packagesPath": "C:\\Users\\tocouchm\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tocouchm\\source\\repos\\OnBoarding-Imagination\\src\\OwpPortal\\obj\\",
+        "projectPath": "C:\\Users\\juordas\\Source\\Repos\\OnBoarding-Imagination\\src\\OwpPortal\\owp-web.csproj",
+        "packagesPath": "C:\\Users\\juordas\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\juordas\\Source\\Repos\\OnBoarding-Imagination\\src\\OwpPortal\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\tocouchm\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\juordas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/juordas/_packaging/juordas/nuget/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.0": {

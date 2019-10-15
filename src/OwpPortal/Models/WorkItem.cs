@@ -9,6 +9,7 @@ namespace owp_web.Models
 {
     public class WorkItem
     {
+        [Display(Name = "Tracking number")]
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long WorkItemId { get; set; }
