@@ -1,1 +1,9 @@
 ﻿.vs
+bin
+obj
+packages
+_ReSharper.*
+*.dll
+*.suo
+*.user
+
