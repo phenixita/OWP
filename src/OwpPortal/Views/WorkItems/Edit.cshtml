@@ -1,7 +1,7 @@
 ﻿@model owp_web.Models.WorkItem
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -29,16 +29,6 @@
                 <label asp-for="WorkItemType" class="control-label"></label>
                 <select asp-for="WorkItemType" class="form-control"></select>
                 <span asp-validation-for="WorkItemType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedOn" class="control-label"></label>
-                <input asp-for="CreatedOn" class="form-control" />
-                <span asp-validation-for="CreatedOn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastChangedOn" class="control-label"></label>
-                <input asp-for="LastChangedOn" class="form-control" />
-                <span asp-validation-for="LastChangedOn" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
