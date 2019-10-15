@@ -9,29 +9,37 @@ variables:
 
 steps:
 - task: DotNetCoreCLI@2
+  displayName: Restore packages
   inputs:
     command: 'restore'
     projects: '**/*.csproj'
     feedsToUse: 'select'
 
 - task: DotNetCoreCLI@2
+  displayName: Build source code
+
   inputs:
     command: 'build'
     projects: '**/*.csproj'
     arguments: '--configuration $(BuildConfiguration)'
 
 - task: DotNetCoreCLI@2
+  displayName: Unit testing
+
   enabled: false
   inputs:
     command: 'test'
 
 - task: DotNetCoreCLI@2
+  displayName: Publish ASP.Net Core WebApp
   inputs:
     command: 'publish'
     publishWebProjects: true
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     
 - task: PublishBuildArtifacts@1
+  displayName: Publish build artifacts
+
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
