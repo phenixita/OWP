@@ -31,12 +31,12 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="WorkItem.WorkItemType" class="control-label"></label>
-                    <select asp-for="WorkItem.WorkItemType" class="form-control" asp-items="Model.WorkItemTypes"></select>
+                    <select asp-for="WorkItem.WorkItemType" class="form-control" asp-items="Html.GetEnumSelectList(typeof(WorkItemTypes)) "></select>
                     <span asp-validation-for="WorkItem.WorkItemType" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="WorkItem.Status" class="control-label"></label>
-                    <select asp-for="WorkItem.Status" class="form-control" asp-items="Model.WorkItemStatuses"></select>
+                    <select asp-for="WorkItem.Status" class="form-control" asp-items="Html.GetEnumSelectList(typeof(WorkItemStatus))"></select>
                     <span asp-validation-for="WorkItem.Status" class="text-danger" ></span>
                 </div>
                 <div class="form-group">
