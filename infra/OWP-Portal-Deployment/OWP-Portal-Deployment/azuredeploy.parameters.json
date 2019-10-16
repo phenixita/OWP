@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "skuName": {
+      "value": "S1"
+    },
+    "skuCapacity": {
+      "value": 1
+    },
+    "sqlAdministratorLogin": {
+      "value": "owpadmin"
+    },
+    "sqlAdministratorLoginPassword": {
+      "value": "O#W%P&123456$3cr37!"
+    },
+    "databaseName": {
+      "value": "owp-portal-db"
+    },
+    "sqlDatabaseServiceObjective": {
+      "value": "Standard"
+    },
+    "webSiteName": {
+      "value": "owp-portal"
+    }
+
+  }
+}
