@@ -16,8 +16,16 @@
     {
         <div class="jumbotron jumbotron-fluid citizen-home">
             <div class="container">
-                <h1 class="display-4">OWP Citizen Portal</h1>
-                <p class="lead">Welcome to the Citizen Portal for the Office of Public Works</p>
+                    <h1 class="display-4">OWP Citizen Portal</h1>
+                    <p class="lead">Welcome to the Citizen Portal for the Office of Public Works</p>
+                    <form asp-action="Search" method="get">
+                        <div class="form-actions">
+                            <p>
+                                Looking for a previous issue ? <input type="text" name="searchText" />
+                                <input type="submit" value="Search" class="btn btn-light" />
+                            </p>
+                        </div>
+                    </form>
             </div>
         </div>
     }
