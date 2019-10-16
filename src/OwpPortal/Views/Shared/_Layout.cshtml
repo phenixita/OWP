@@ -16,16 +16,16 @@
     {
         <div class="jumbotron jumbotron-fluid citizen-home">
             <div class="container">
-                    <h1 class="display-4">OWP Citizen Portal</h1>
-                    <p class="lead">Welcome to the Citizen Portal for the Office of Public Works</p>
-                    <form asp-action="Search" method="get">
-                        <div class="form-actions">
-                            <p>
-                                Looking for a previous issue ? <input type="text" name="searchText" />
-                                <input type="submit" value="Search" class="btn btn-light" />
-                            </p>
-                        </div>
-                    </form>
+                <h1 class="display-4">OWP Citizen Portal</h1>
+                <p class="lead">Welcome to the Citizen Portal for the Office of Public Works</p>
+                <form asp-action="Search" method="get">
+                    <div class="form-actions">
+                        <p>
+                            Looking for a previous issue ? <input type="text" name="searchText" />
+                            <input type="submit" value="Search" class="btn btn-light" />
+                        </p>
+                    </div>
+                </form>
             </div>
         </div>
     }
@@ -43,11 +43,11 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/TechManagerSite.js" asp-append-version="true"></script>
     <script src="https://kit.fontawesome.com/73ec8572a9.js" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/TechManagerSite.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
