@@ -13,7 +13,7 @@ variables:
 
 jobs:
   - job: Database
-    pool: windows-latest
+    pool: 'windows-latest'
     steps:
     - task: MSBuild@1
       displayName: Database DACPAC build
