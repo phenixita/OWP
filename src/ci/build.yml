@@ -81,3 +81,33 @@ jobs:
         PathtoPublish: 'infra/OWP-Portal-Deployment/OWP-Portal-Deployment'
         ArtifactName: 'drop-IaC'
         publishLocation: 'Container'
+
+
+  - job: Selenium
+    displayName: Build UI Tests
+    pool:
+      name: Hosted Windows 2019 with VS2019 
+      vmImage: 'windows-2019'
+      demands: msbuild
+
+    steps:
+
+    - task: DotNetCoreCLI@2
+      displayName: Restore UI tests
+      inputs:
+        command: 'restore'
+        projects: '**/OwpPortal.UITests.csproj'
+        feedsToUse: 'select'
+    
+    - task: DotNetCoreCLI@2
+      displayName: Build UI tests
+      inputs:
+        command: 'build'
+        projects: '**/OwpPortal.UITests.csproj'
+
+    - task: PublishBuildArtifacts@1
+      displayName: Publish UI tests
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'ui-tests'
+        publishLocation: 'Container'
