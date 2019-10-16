@@ -1,26 +1,24 @@
 ﻿@model IEnumerable<owp_web.Models.WorkItem>
 
 @{
+    ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">OWP Citizen Portal</h1>
+        <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+    </div>
+</div>
+
 <p>
     <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.WorkItemId)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
@@ -45,9 +43,6 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.WorkItemId)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
@@ -75,5 +70,3 @@
 }
     </tbody>
 </table>
-</body>
-</html>

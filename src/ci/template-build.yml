@@ -8,11 +8,6 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: GitVersion@5
-  inputs:
-    runtime: 'core'
-    configFilePath: 'gitversion.yml'
-
 - task: DotNetCoreCLI@2
   displayName: Restore packages
   inputs:
@@ -26,7 +21,7 @@ steps:
   inputs:
     command: 'build'
     projects: '**/*.csproj'
-    arguments: '--configuration $(BuildConfiguration) /p:AssemblyVersion=$(GitVersion.SemVer)'
+    arguments: '--configuration $(BuildConfiguration)'
 
 - task: DotNetCoreCLI@2
   displayName: Unit testing
