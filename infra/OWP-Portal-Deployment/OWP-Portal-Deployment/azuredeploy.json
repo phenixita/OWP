@@ -37,6 +37,12 @@
         "description": "The admin user of the SQL Server"
       }
     },
+    "sqlServerName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the SQL Server instance"
+      }
+    },
     "sqlAdministratorLoginPassword": {
       "type": "securestring",
       "metadata": {
@@ -91,10 +97,10 @@
           "tags": {
             "displayName": "Database"
           },
-          "apiVersion": "2015-01-01",
           "dependsOn": [
             "[parameters('sqlserverName')]"
           ],
+          "apiVersion": "2015-01-01",
           "properties": {
             "edition": "[parameters('sqlDatabaseServiceObjective')]",
             "collation": "SQL_Latin1_General_CP1_CI_AS",
@@ -129,7 +135,7 @@
           },
           "apiVersion": "2015-01-01",
           "dependsOn": [
-            "[parameters('sqlserverName')]"
+            "[resourceId('Microsoft.Sql/servers', parameters('sqlserverName'))]"
           ],
           "properties": {
             "edition": "[parameters('sqlDatabaseServiceObjective')]",

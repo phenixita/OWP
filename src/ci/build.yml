@@ -5,7 +5,6 @@ trigger:
   paths:
     include:
       - src/*
-      - infra/*
     
 
 pool:
@@ -27,6 +26,7 @@ steps:
     projects: '**/*.csproj'
     feedsToUse: 'select'
 
+
 - task: DotNetCoreCLI@2
   displayName: Build source code
 
@@ -36,11 +36,10 @@ steps:
     arguments: '--configuration $(BuildConfiguration) /p:AssemblyVersion=$(GitVersion.SemVer)'
 
 - task: DotNetCoreCLI@2
-  displayName: Unit testing
-
-  enabled: false
   inputs:
     command: 'test'
+    projects: 'src/OwpPortal.UnitTests/OwpPortal.UnitTests.csproj'
+    testRunTitle: 'Unit Testing' 
 
 - task: DotNetCoreCLI@2
   displayName: Publish ASP.Net Core WebApp
