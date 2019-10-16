@@ -1,11 +1,10 @@
 trigger:
   branches:
-    include:
-      - master
+      include:
+        - master
   paths:
-    include:
-      - src/*
-    
+      include:
+        - src/*
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -14,6 +13,7 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+
 - task: GitVersion@5
   inputs:
     runtime: 'core'
@@ -48,8 +48,12 @@ steps:
     publishWebProjects: true
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
 
-
-    
+- task: MSBuild@1
+  displayName: Database DACPAC build
+  inputs:
+    solution: 'src/OwpPortal.Database/OwpPortal.Database.sqlproj'
+    msbuildArguments: '/p:OutDir=$(Build.ArtifactStagingDirectory)'
+  
 - task: PublishBuildArtifacts@1
   displayName: Publish binaries
   inputs:
