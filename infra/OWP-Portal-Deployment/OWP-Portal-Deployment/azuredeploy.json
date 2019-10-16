@@ -97,6 +97,9 @@
           "tags": {
             "displayName": "Database"
           },
+          "dependsOn": [
+            "[parameters('sqlserverName')]"
+          ],
           "apiVersion": "2015-01-01",
           "properties": {
             "edition": "[parameters('sqlDatabaseServiceObjective')]",
