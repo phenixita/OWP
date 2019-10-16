@@ -12,10 +12,10 @@
       "value": "admin"
     },
     "sqlAdministratorLoginPassword": {
-      "value": "O#W%P&123456$3cr37!"
+      "value": "@Aa123456"
     },
     "databaseName": {
-      "value": "owp-portal-db"
+      "value": "owp"
     },
     "sqlDatabaseServiceObjective": {
       "value": "Standard"
