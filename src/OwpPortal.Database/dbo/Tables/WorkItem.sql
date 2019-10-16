@@ -8,6 +8,8 @@
     [AssignedToWorkerId] BIGINT         NULL,
     [Address]            NVARCHAR (MAX) NULL,
     [AssignedToEmail]    NVARCHAR (255) NULL,
+    [Latitude] DECIMAL(30, 14) NULL, 
+    [Longitude] DECIMAL(30, 14) NULL, 
     CONSTRAINT [PK_WorkItem] PRIMARY KEY CLUSTERED ([WorkItemId] ASC),
     CONSTRAINT [FK_WorkItem_Worker_AssignedToWorkerId] FOREIGN KEY ([AssignedToWorkerId]) REFERENCES [dbo].[Worker] ([WorkerId])
 );
