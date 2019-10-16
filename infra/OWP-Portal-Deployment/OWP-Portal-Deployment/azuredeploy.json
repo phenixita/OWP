@@ -121,7 +121,7 @@
           }
         },
         {
-          "name": "[concat(parameters('databaseName'), '-production')]",
+          "name": "[parameters('databaseName')]",
           "type": "databases",
           "location": "[parameters('location')]",
           "tags": {
