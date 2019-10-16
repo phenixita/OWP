@@ -74,11 +74,11 @@
             </fieldset>
 
             <div class="form-group">
-                <label asp-for="Address" class="control-label">Please specify the address or location of fault:</label>
+                <label asp-for="Address" class="control-label">Please specify the address or location of fault or click 'Use current location':</label>
                 <div class="input-group">
                     <input asp-for="Address" class="form-control" autocomplete="off" />
                     <div class="input-group-append">
-                        <button class="btn btn-secondary" type="button" id="useCurrentLocation" onclick="getCurrentLocation()">Use current</button>
+                        <button class="btn btn-secondary" type="button" id="useCurrentLocation" onclick="getCurrentLocation()">Use current location</button>
                     </div>
                     <span asp-validation-for="Address" class="text-danger"></span>
                 </div>

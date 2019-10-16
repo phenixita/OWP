@@ -6,13 +6,13 @@
 function getCurrentLocation()
 {
     if (navigator.geolocation) {
+
+        const addrEle = document.getElementById('Address');
+        addrEle.placeholder = "Fetching location...";
+
         navigator.geolocation.getCurrentPosition(async (geoPos) => {
             const lat = geoPos.coords.latitude;
             const long = geoPos.coords.longitude;
-
-            const addrEle = document.getElementById('Address');
-
-            addrEle.placeholder = "Fetching location..."
 
             const data = await lookupLocation(lat, long);
 
@@ -24,7 +24,6 @@ function getCurrentLocation()
                 alert('Could not resolve current location to an address - please enter manually');
             }
 
-                        
         }, errorPosition);
     } else {
         alert('Location not available');
