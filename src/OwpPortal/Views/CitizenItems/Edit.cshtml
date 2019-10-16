@@ -1,4 +1,4 @@
-﻿@model owp_web.Models.WorkItem
+﻿@model owp_web.Models.WorkItemViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="alert alert-success" role="alert">
-        Thankyou for reporting this fault.  For your details, the tracking number is <span>@Model.WorkItemId</span>
+        Thankyou for reporting this fault.  For your details, the tracking number is <span>@Model.WorkItem.WorkItemId</span>
     </div>
 
     @*<div class="col-md-4">

@@ -47,7 +47,7 @@ namespace owp_web.Controllers
         // GET: WorkItems/Create
         public IActionResult Create()
         {
-            return View();
+            return View(new WorkItemViewModel ());
         }
 
         // POST: WorkItems/Create
@@ -55,7 +55,7 @@ namespace owp_web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status")] WorkItem workItem)
+        public async Task<IActionResult> Create([Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address")] WorkItem workItem)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,9 @@ namespace owp_web.Controllers
             {
                 return NotFound();
             }
-            return View(workItem);
+
+            var viewModel = new WorkItemViewModel ( workItem );
+            return View(viewModel);
         }
 
         // POST: WorkItems/Edit/5
@@ -87,7 +89,7 @@ namespace owp_web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status")] WorkItem workItem)
+        public async Task<IActionResult> Edit(long id, [Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address")] WorkItem workItem)
         {
             if (id != workItem.WorkItemId)
             {
