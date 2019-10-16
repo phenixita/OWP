@@ -164,6 +164,54 @@
               "type": "SQLAzure"
             }
           }
+        },
+        {
+          "apiVersion": "2016-08-01",
+          "type": "Microsoft.Web/sites/slots",
+          "name": "[concat(parameters('webSiteName'), '/', 'dev')]",
+          "kind": "app",
+          "location": "[parameters('location')]",
+          "properties": {
+            "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]"
+          },
+          "dependsOn": [
+            "[parameters('webSiteName')]"
+          ],
+          "tags": {
+            "displayName": "DEV Web App Slot"
+          }
+        },
+        {
+          "apiVersion": "2016-08-01",
+          "type": "Microsoft.Web/sites/slots",
+          "name": "[concat(parameters('webSiteName'), '/', 'test')]",
+          "kind": "app",
+          "location": "[parameters('location')]",
+          "properties": {
+            "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]"
+          },
+          "dependsOn": [
+            "[parameters('webSiteName')]"
+          ],
+          "tags": {
+            "displayName": "TEST Web App Slots"
+          }
+        },
+        {
+          "apiVersion": "2016-08-01",
+          "type": "Microsoft.Web/sites/slots",
+          "name": "[concat(parameters('webSiteName'), '/', 'production')]",
+          "kind": "app",
+          "location": "[parameters('location')]",
+          "properties": {
+            "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]"
+          },
+          "dependsOn": [
+            "[parameters('webSiteName')]"
+          ],
+          "tags": {
+            "displayName": "PRODUCTION Web App Slots"
+          }
         }
       ]
     },
