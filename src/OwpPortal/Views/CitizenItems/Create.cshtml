@@ -14,13 +14,13 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             
-            <div class="form-row d-lg-none">
-                <span>Type:</span>
+            <div class="form-row xd-lg-none">
+                <span class="h6">Please specify the type of issue:</span>
             </div>
 
             <fieldset class="container form-group">
                 <div class="row">
-                    <legend class="col-form-label col-lg-2 pt-0 d-none d-lg-block">Type:</legend>
+                    <legend class="col-form-label col-lg-2 pt-0 d-none d-lg-block"></legend>
 
                     <div class="col-sm-10">
                         <div class="form-group">
@@ -74,7 +74,7 @@
             </fieldset>
 
             <div class="form-group">
-                <label asp-for="Address" class="control-label">Please specify the address or location of fault or click 'Use current location':</label>
+                <label asp-for="Address" class="control-label h6">Please specify the address or location of fault or click 'Use current location':</label>
                 <div class="input-group">
                     <input asp-for="Address" class="form-control" autocomplete="off" />
                     <div class="input-group-append">
@@ -85,7 +85,7 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="Description" class="control-label">Please briefly describe the fault:</label>
+                <label asp-for="Description" class="control-label h6">Please briefly describe the fault:</label>
                 <textarea asp-for="Description" class="form-control" autocomplete="off"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
