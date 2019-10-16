@@ -28,7 +28,7 @@
 {
     @if (Model == null)
     {
-        <div>Not found</div>
+        <div>No issue with this tracking number can be found.</div>
     }
     else
     {
@@ -84,5 +84,9 @@
         
     }
 }
+
+<div>
+    <a asp-action="Create">Back to Home</a>
+</div>
 
 
