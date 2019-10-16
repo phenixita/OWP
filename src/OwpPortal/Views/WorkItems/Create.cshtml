@@ -1,4 +1,4 @@
-﻿@model owp_web.Models.WorkItem
+﻿@model owp_web.Models.WorkItemViewModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -20,24 +20,24 @@
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="Description" class="control-label"></label>
-                    <input asp-for="Description" class="form-control" />
-                    <span asp-validation-for="Description" class="text-danger"></span>
+                    <label asp-for="WorkItem.Description" class="control-label"></label>
+                    <input asp-for="WorkItem.Description" class="form-control" />
+                    <span asp-validation-for="WorkItem.Description" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Address" class="control-label"></label>
-                    <input asp-for="Address" class="form-control" />
-                    <span asp-validation-for="Address" class="text-danger"></span>
+                    <label asp-for="WorkItem.Address" class="control-label"></label>
+                    <input asp-for="WorkItem.Address" class="form-control" />
+                    <span asp-validation-for="WorkItem.Address" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="WorkItemType" class="control-label"></label>
-                    <select asp-for="WorkItemType" class="form-control"></select>
-                    <span asp-validation-for="WorkItemType" class="text-danger"></span>
+                    <label asp-for="WorkItem.WorkItemType" class="control-label"></label>
+                    <select asp-for="WorkItem.WorkItemType" class="form-control" asp-items="Model.WorkItemTypes"></select>
+                    <span asp-validation-for="WorkItem.WorkItemType" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Status" class="control-label"></label>
-                    <select asp-for="Status" class="form-control"></select>
-                    <span asp-validation-for="Status" class="text-danger"></span>
+                    <label asp-for="WorkItem.Status" class="control-label"></label>
+                    <select asp-for="WorkItem.Status" class="form-control" asp-items="Model.WorkItemStatuses"></select>
+                    <span asp-validation-for="WorkItem.Status" class="text-danger" ></span>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" />

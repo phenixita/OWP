@@ -47,7 +47,7 @@ namespace owp_web.Controllers
         // GET: CitizenItems/Create
         public IActionResult Create()
         {
-            return View();
+            return View(new WorkItemViewModel());
         }
 
         // POST: CitizenItems/Create
@@ -55,7 +55,7 @@ namespace owp_web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("WorkItemId,Address,Description,WorkItemType,CreatedOn,LastChangedOn,Status")] WorkItem workItem)
+        public async Task<IActionResult> Create([Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address")] WorkItem workItem)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +63,7 @@ namespace owp_web.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Edit), new { Id = workItem.WorkItemId });
             }
-            return View(workItem);
+            return View(new WorkItemViewModel(workItem));
         }
 
         // GET: CitizenItems/Edit/5
@@ -79,7 +79,8 @@ namespace owp_web.Controllers
             {
                 return NotFound();
             }
-            return View(workItem);
+
+            return View(new WorkItemViewModel(workItem));
         }
 
         // POST: CitizenItems/Edit/5
@@ -87,7 +88,7 @@ namespace owp_web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status")] WorkItem workItem)
+        public async Task<IActionResult> Edit(long id, [Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address")] WorkItem workItem)
         {
             if (id != workItem.WorkItemId)
             {

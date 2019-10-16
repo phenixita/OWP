@@ -17,7 +17,7 @@
         <h4>WorkItem</h4>
         <hr />
         <dl class="row">
-            
+
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Description)
             </dt>
@@ -29,6 +29,12 @@
             </dt>
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.WorkItemType)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Address)
             </dd>
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.CreatedOn)

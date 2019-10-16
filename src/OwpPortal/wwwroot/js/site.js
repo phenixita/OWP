@@ -7,7 +7,7 @@ function getCurrentLocation()
 {
     if (navigator.geolocation) {
 
-        const addrEle = document.getElementById('Address');
+        const addrEle = document.getElementById('WorkItem_Address');
         addrEle.placeholder = "Fetching location...";
 
         navigator.geolocation.getCurrentPosition(async (geoPos) => {
@@ -19,7 +19,7 @@ function getCurrentLocation()
             addrEle.placeholder = "";
 
             if (data && data.resources && data.resources.length > 0) {
-                document.getElementById('Address').value = data.resources[0].name;
+                addrEle.value = data.resources[0].name;
             } else {
                 alert('Could not resolve current location to an address - please enter manually');
             }
