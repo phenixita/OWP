@@ -1,0 +1,96 @@
+﻿@model owp_web.Models.WorkItem
+
+@{
+    ViewData["Title"] = "Search Issue";
+    Layout = "~/Views/Shared/_CitizenLayout.cshtml";
+}
+
+
+    <div class="jumbotron jumbotron-fluid citizen-home">
+        <div class="container">
+            <h1 class="display-4">OWP Citizen Portal</h1>
+            <p class="lead">Welcome to the Citizen Portal for the Office of Public Works</p>
+            @*<form asp-action="Search" method="get">
+                <div class="form-actions">
+                    <p>
+                        Looking for a previous issue ? <input type="text" name="searchText" />
+                        <input type="submit" value="Search" class="btn btn-light" />
+                    </p>
+                </div>
+            </form>*@
+        </div>
+    </div>
+
+<div class="container">
+    <main role="main" class="pb-3">
+
+        @if (ViewData["currentSearch"] != null && !string.IsNullOrEmpty(ViewData["currentSearch"].ToString()))
+        {
+            @if (Model == null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    No issue with this tracking number can be found
+                </div>
+            }
+            else
+            {
+                <h1>Details</h1>
+
+                <div>
+                    <hr />
+                    <dl class="row">
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.WorkItemId)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.WorkItemId)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Description)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Description)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.WorkItemType)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.WorkItemType)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Address)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Address)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.CreatedOn)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.CreatedOn)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.LastChangedOn)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.LastChangedOn)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Status)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Status)
+                        </dd>
+                    </dl>
+                </div>
+
+            }
+        }
+
+        <div>
+            <a asp-action="Create">Back to Home</a>
+        </div>
+
+    </main>
+</div>
+

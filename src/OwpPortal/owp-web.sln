@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "owp-web", "owp-web.csproj",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OwpPortal.UITests", "..\OwpPortal.UITests\OwpPortal.UITests.csproj", "{D475C936-FAB5-4054-92F9-39E694BBD3BF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OwpPortal.UnitTests", "..\OwpPortal.UnitTests\OwpPortal.UnitTests.csproj", "{E6D34714-38A0-45D6-B7E4-EFFFFF7C341B}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "OwpPortal.Database", "..\OwpPortal.Database\OwpPortal.Database.sqlproj", "{9E56BDE9-66FD-4FC4-8797-A462BEA7BF2A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,16 @@ Global
 		{D475C936-FAB5-4054-92F9-39E694BBD3BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D475C936-FAB5-4054-92F9-39E694BBD3BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D475C936-FAB5-4054-92F9-39E694BBD3BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6D34714-38A0-45D6-B7E4-EFFFFF7C341B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6D34714-38A0-45D6-B7E4-EFFFFF7C341B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6D34714-38A0-45D6-B7E4-EFFFFF7C341B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6D34714-38A0-45D6-B7E4-EFFFFF7C341B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E56BDE9-66FD-4FC4-8797-A462BEA7BF2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E56BDE9-66FD-4FC4-8797-A462BEA7BF2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E56BDE9-66FD-4FC4-8797-A462BEA7BF2A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{9E56BDE9-66FD-4FC4-8797-A462BEA7BF2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E56BDE9-66FD-4FC4-8797-A462BEA7BF2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E56BDE9-66FD-4FC4-8797-A462BEA7BF2A}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

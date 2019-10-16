@@ -97,6 +97,9 @@
           "tags": {
             "displayName": "Database"
           },
+          "dependsOn": [
+            "[parameters('sqlserverName')]"
+          ],
           "apiVersion": "2015-01-01",
           "properties": {
             "edition": "[parameters('sqlDatabaseServiceObjective')]",
@@ -132,7 +135,7 @@
           },
           "apiVersion": "2015-01-01",
           "dependsOn": [
-            "[parameters('sqlserverName')]"
+            "[resourceId('Microsoft.Sql/servers', parameters('sqlserverName'))]"
           ],
           "properties": {
             "edition": "[parameters('sqlDatabaseServiceObjective')]",

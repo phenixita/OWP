@@ -1,64 +1,83 @@
 trigger:
   branches:
-    include:
-      - master
+      include:
+        - master
   paths:
-    include:
-      - src/*
-      - infra/*
-    
+      include:
+        - src/*
 
-pool:
-  vmImage: 'ubuntu-latest'
 
 variables:
   buildConfiguration: 'Release'
 
-steps:
-- task: GitVersion@5
-  inputs:
-    runtime: 'core'
-    configFilePath: 'gitversion.yml'
 
-- task: DotNetCoreCLI@2
-  displayName: Restore packages
-  inputs:
-    command: 'restore'
-    projects: '**/*.csproj'
-    feedsToUse: 'select'
+jobs:
+  - job: Database
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+    - task: MSBuild@1
+      displayName: Database DACPAC build
+      inputs:
+        solution: 'src/OwpPortal.Database/OwpPortal.Database.sqlproj'
+        msbuildArguments: '/p:OutDir=$(Build.ArtifactStagingDirectory)'
+    - task: PublishBuildArtifacts@1
+      displayName: Publish binaries
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
 
-- task: DotNetCoreCLI@2
-  displayName: Build source code
+  - job: Binaries
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: GitVersion@5
+      inputs:
+        runtime: 'core'
+        configFilePath: 'gitversion.yml'
 
-  inputs:
-    command: 'build'
-    projects: '**/*.csproj'
-    arguments: '--configuration $(BuildConfiguration) /p:AssemblyVersion=$(GitVersion.SemVer)'
+    - task: DotNetCoreCLI@2
+      displayName: Restore packages
+      inputs:
+        command: 'restore'
+        projects: '**/*.csproj'
+        feedsToUse: 'select'
 
-- task: DotNetCoreCLI@2
-  displayName: Unit testing
 
-  enabled: false
-  inputs:
-    command: 'test'
+    - task: DotNetCoreCLI@2
+      displayName: Build source code
 
-- task: DotNetCoreCLI@2
-  displayName: Publish ASP.Net Core WebApp
-  inputs:
-    command: 'publish'
-    publishWebProjects: true
-    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-    
-- task: PublishBuildArtifacts@1
-  displayName: Publish binaries
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+      inputs:
+        command: 'build'
+        projects: '**/*.csproj'
+        arguments: '--configuration $(BuildConfiguration) /p:AssemblyVersion=$(GitVersion.SemVer)'
 
-- task: PublishBuildArtifacts@1
-  displayName: Publish IaC
-  inputs:
-    PathtoPublish: 'infra/OWP-Portal-Deployment/OWP-Portal-Deployment'
-    ArtifactName: 'drop-IaC'
-    publishLocation: 'Container'
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'test'
+        projects: 'src/OwpPortal.UnitTests/OwpPortal.UnitTests.csproj'
+        testRunTitle: 'Unit Testing' 
+
+    - task: DotNetCoreCLI@2
+      displayName: Publish ASP.Net Core WebApp
+      inputs:
+        command: 'publish'
+        publishWebProjects: true
+        arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+
+
+      
+    - task: PublishBuildArtifacts@1
+      displayName: Publish binaries
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+
+    - task: PublishBuildArtifacts@1
+      displayName: Publish IaC
+      inputs:
+        PathtoPublish: 'infra/OWP-Portal-Deployment/OWP-Portal-Deployment'
+        ArtifactName: 'drop-IaC'
+        publishLocation: 'Container'

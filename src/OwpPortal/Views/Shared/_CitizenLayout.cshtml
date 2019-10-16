@@ -10,31 +10,26 @@
 </head>
 <body>
     <header>
-    </header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="/">Office of Public Works</a>
 
-    @if (ViewData.TryGetValue("IsCitizenHome", out object isCitizenHomeObj) && isCitizenHomeObj is bool isCitizenHome && isCitizenHome)
-    {
-        <div class="jumbotron jumbotron-fluid citizen-home">
-            <div class="container">
-                <h1 class="display-4">OWP Citizen Portal</h1>
-                <p class="lead">Welcome to the Citizen Portal for the Office of Public Works</p>
-                <form asp-action="Search" method="get">
-                    <div class="form-actions">
-                        <p>
-                            Looking for a previous issue ? <input type="text" name="searchText" />
-                            <input type="submit" value="Search" class="btn btn-light" />
-                        </p>
-                    </div>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    
+                </ul>
+                <form asp-action="Search" method="get" class="form-inline my-2 my-lg-0" id="trackingNumberSearchForm">
+                    <label for="searchText" class="navbar-text mr-2">Searching for an existing issue?</label>
+                    <input name="searchText" id="searchText" class="form-control mr-sm-2" type="search" placeholder="Tracking Number" aria-label="Search" autocomplete="off">
+                    <input type="submit" value="Search" class="btn btn-outline-success my-2 my-sm-0" />
                 </form>
             </div>
-        </div>
-    }
+        </nav>
+    </header>
 
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+     @RenderBody()
 
     <footer class="border-top footer text-muted">
         <div class="container">
@@ -43,11 +38,11 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/TechManagerSite.js" asp-append-version="true"></script>
     <script src="https://kit.fontawesome.com/73ec8572a9.js" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/TechManagerSite.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

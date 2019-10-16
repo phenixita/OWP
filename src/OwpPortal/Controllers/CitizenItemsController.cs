@@ -136,6 +136,7 @@ namespace owp_web.Controllers
             return View(workItem);
         }
 
+
         // POST: CitizenItems/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -145,6 +146,20 @@ namespace owp_web.Controllers
             _context.WorkItem.Remove(workItem);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        // GET: CitizenItems/Search?searchText=22
+        public async Task<IActionResult> Search(string searchText)
+        {
+            ViewData["currentSearch"] = searchText;
+
+            if(!string.IsNullOrEmpty(searchText))
+            {
+                var workItem = await _context.WorkItem.FirstOrDefaultAsync(w => searchText.Equals(w.WorkItemId.ToString()));
+                return View(workItem);
+            }
+
+            return View(null);
         }
 
         private bool WorkItemExists(long id)
