@@ -9,7 +9,7 @@ using Xunit;
 
 namespace OwpPortal.UITests
 {
-    public class IssuesCreation : BaseTest
+    public class WorkItems : BaseTest
     {
         [Fact]
         public void CanOpenMainPage()
@@ -64,24 +64,31 @@ namespace OwpPortal.UITests
             // Arrange
             driver.Manage().Window.Maximize();
             driver.Url = url + "workitems/index";
-            CommonHelper.DoAuthentication(driver);         
-           
+            CommonHelper.DoAuthentication(driver);
+
         }
 
         [Theory]
-        [InlineData(4)]
-        public void CanSearchForCreatedItem(int workItemId)
+        [InlineData(3)]
+        public void CanSearchForWorkItemById(int workItemId)
         {
             // Arrange
             driver.Manage().Window.Maximize();
-            driver.Url = url + "workitems/index";
-            CommonHelper.DoAuthentication(driver);
-      
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(4));
-            
-            var searchField = wait.Until(driver => driver.FindElement(By.XPath($".//*[@class='{SearchItemFeatureSelectors.Search_Class}'and @type='search']")));
-
+            driver.Url = url + "CitizenItems";
+            var searchField = driver.FindElement(By.Id(SearchItemFeatureSelectors.SearachField_Id));
             searchField.SendKeys(workItemId.ToString());
+
+            var searchBtn = driver.FindElement(By.XPath($".//*[@value='{SearchItemFeatureSelectors.SearchButton_Value}']"));
+            searchBtn.Click();
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(4));
+
+            var workItemIdDisplay = wait.Until(driver => driver.FindElement(By.Id("workItemId")));
+
+            Assert.Equal(workItemIdDisplay.Text, workItemId.ToString());
+
+            driver.Close();
+            driver.Dispose();
+
 
         }
     }

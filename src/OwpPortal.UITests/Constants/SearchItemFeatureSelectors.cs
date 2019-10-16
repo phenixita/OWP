@@ -6,6 +6,7 @@ namespace OwpPortal.UITests.Constants
 {
     public static class SearchItemFeatureSelectors
     {
-        public const string Search_Class = "form-control form-control-sm";
+        public const string SearachField_Id = "searchText";
+        public const string SearchButton_Value = "Search";
     }
 }
