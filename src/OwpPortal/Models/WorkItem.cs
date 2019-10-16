@@ -33,6 +33,9 @@ namespace owp_web.Models
         [Display(Name = "Assigned To")]
         public Worker AssignedTo { get; set; }
 
+        [Display(Name = "Email address of worker")]
+        public string AssignedToEmail { get; set; }
+
         [Display(Name = "Address of issue")]
         public string Address { get; set; }
     }
