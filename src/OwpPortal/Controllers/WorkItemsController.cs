@@ -10,7 +10,7 @@ using owp_web.Models;
 
 namespace owp_web.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "DeliveryLeader")]
     public class WorkItemsController : Controller
     {
         private readonly OwpContext _context;
