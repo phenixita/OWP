@@ -8,6 +8,9 @@
     "skuCapacity": {
       "value": 1
     },
+    "sqlserverName": {
+      "value": "owp"
+    },
     "sqlAdministratorLogin": {
       "value": "owp"
     },
