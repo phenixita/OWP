@@ -1,5 +1,12 @@
 trigger:
-- master
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - src/*
+      - infra/*
+    
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -43,9 +50,15 @@ steps:
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     
 - task: PublishBuildArtifacts@1
-  displayName: Publish build artifacts
-
+  displayName: Publish binaries
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
+    publishLocation: 'Container'
+
+- task: PublishBuildArtifacts@1
+  displayName: Publish IaC
+  inputs:
+    PathtoPublish: 'infra/OWP-Portal-Deployment/OWP-Portal-Deployment'
+    ArtifactName: 'drop-IaC'
     publishLocation: 'Container'

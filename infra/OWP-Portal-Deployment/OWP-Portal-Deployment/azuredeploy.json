@@ -86,11 +86,47 @@
       },
       "resources": [
         {
-          "name": "[parameters('databaseName')]",
+          "name": "[concat(parameters('databaseName'), '-dev')]",
           "type": "databases",
           "location": "[parameters('location')]",
           "tags": {
             "displayName": "Database"
+          },
+          "apiVersion": "2015-01-01",
+          "dependsOn": [
+            "[variables('sqlserverName')]"
+          ],
+          "properties": {
+            "edition": "[parameters('sqlDatabaseServiceObjective')]",
+            "collation": "SQL_Latin1_General_CP1_CI_AS",
+            "maxSizeBytes": "1073741824",
+            "requestedServiceObjectiveName": "[parameters('sqlDatabaseServiceObjective')]"
+          }
+        },
+        {
+          "name": "[concat(parameters('databaseName'), '-test')]",
+          "type": "databases",
+          "location": "[parameters('location')]",
+          "tags": {
+            "displayName": "Database"
+          },
+          "apiVersion": "2015-01-01",
+          "dependsOn": [
+            "[variables('sqlserverName')]"
+          ],
+          "properties": {
+            "edition": "[parameters('sqlDatabaseServiceObjective')]",
+            "collation": "SQL_Latin1_General_CP1_CI_AS",
+            "maxSizeBytes": "1073741824",
+            "requestedServiceObjectiveName": "[parameters('sqlDatabaseServiceObjective')]"
+          }
+        },
+        {
+          "name": "[concat(parameters('databaseName'), '-production')]",
+          "type": "databases",
+          "location": "[parameters('location')]",
+          "tags": {
+            "displayName": "Production Database"
           },
           "apiVersion": "2015-01-01",
           "dependsOn": [
@@ -163,6 +199,54 @@
               "value": "[concat('Data Source=tcp:', reference(concat('Microsoft.Sql/servers/', variables('sqlserverName'))).fullyQualifiedDomainName, ',1433;Initial Catalog=', parameters('databaseName'), ';User Id=', parameters('sqlAdministratorLogin'), '@', reference(concat('Microsoft.Sql/servers/', variables('sqlserverName'))).fullyQualifiedDomainName, ';Password=', parameters('sqlAdministratorLoginPassword'), ';')]",
               "type": "SQLAzure"
             }
+          }
+        },
+        {
+          "apiVersion": "2016-08-01",
+          "type": "Microsoft.Web/sites/slots",
+          "name": "[concat(parameters('webSiteName'), '/', 'dev')]",
+          "kind": "app",
+          "location": "[parameters('location')]",
+          "properties": {
+            "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]"
+          },
+          "dependsOn": [
+            "[parameters('webSiteName')]"
+          ],
+          "tags": {
+            "displayName": "DEV Web App Slot"
+          }
+        },
+        {
+          "apiVersion": "2016-08-01",
+          "type": "Microsoft.Web/sites/slots",
+          "name": "[concat(parameters('webSiteName'), '/', 'test')]",
+          "kind": "app",
+          "location": "[parameters('location')]",
+          "properties": {
+            "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]"
+          },
+          "dependsOn": [
+            "[parameters('webSiteName')]"
+          ],
+          "tags": {
+            "displayName": "TEST Web App Slots"
+          }
+        },
+        {
+          "apiVersion": "2016-08-01",
+          "type": "Microsoft.Web/sites/slots",
+          "name": "[concat(parameters('webSiteName'), '/', 'production')]",
+          "kind": "app",
+          "location": "[parameters('location')]",
+          "properties": {
+            "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]"
+          },
+          "dependsOn": [
+            "[parameters('webSiteName')]"
+          ],
+          "tags": {
+            "displayName": "PRODUCTION Web App Slots"
           }
         }
       ]
