@@ -1,5 +1,12 @@
 trigger:
-- master
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - src/*
+      - infra/*
+    
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -8,6 +15,11 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- task: GitVersion@5
+  inputs:
+    runtime: 'core'
+    configFilePath: 'gitversion.yml'
+
 - task: DotNetCoreCLI@2
   displayName: Restore packages
   inputs:
@@ -21,7 +33,7 @@ steps:
   inputs:
     command: 'build'
     projects: '**/*.csproj'
-    arguments: '--configuration $(BuildConfiguration)'
+    arguments: '--configuration $(BuildConfiguration) /p:AssemblyVersion=$(GitVersion.SemVer)'
 
 - task: DotNetCoreCLI@2
   displayName: Unit testing
@@ -38,9 +50,15 @@ steps:
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     
 - task: PublishBuildArtifacts@1
-  displayName: Publish build artifacts
-
+  displayName: Publish binaries
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
+    publishLocation: 'Container'
+
+- task: PublishBuildArtifacts@1
+  displayName: Publish IaC
+  inputs:
+    PathtoPublish: 'infra/OWP-Portal-Deployment/OWP-Portal-Deployment'
+    ArtifactName: 'drop-IaC'
     publishLocation: 'Container'

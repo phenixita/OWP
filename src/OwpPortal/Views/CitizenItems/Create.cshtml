@@ -1,0 +1,100 @@
+﻿@model owp_web.Models.WorkItemViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    ViewData["IsCitizenHome"] = true;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h5>Here you can notify us of issues that you may have with any infrastructure maintained by the Office Of Public Works</h5>
+
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-row xd-lg-none">
+                <span class="h6">Please specify the type of issue:</span>
+            </div>
+
+            <fieldset class="container form-group">
+                <div class="row">
+                    <legend class="col-form-label col-lg-2 pt-0 d-none d-lg-block"></legend>
+
+                    <div class="col-sm-10">
+                        <div class="form-group">
+                            <input asp-for="WorkItem.WorkItemType" class="form-check-input" type="radio" value="1" checked />
+                            <label asp-for="WorkItem.WorkItemType" class="form-check-label">Problem with the asphalt road surface, such as a pothole or cracking</label>
+                        </div>
+
+                        <div class="form-group">
+                            <input asp-for="WorkItem.WorkItemType" class="form-check-input" type="radio" value="2" />
+                            <label asp-for="WorkItem.WorkItemType" class="form-check-label">Problem with broken paving or unevenness</label>
+                        </div>
+
+                        <div class="form-group">
+                            <input asp-for="WorkItem.WorkItemType" class="form-check-input" type="radio" value="3" />
+                            <label asp-for="WorkItem.WorkItemType" class="form-check-label">Problem with a bridge</label>
+                        </div>
+
+                        <div class="form-group">
+                            <input asp-for="WorkItem.WorkItemType" class="form-check-input" type="radio" value="4" />
+                            <label asp-for="WorkItem.WorkItemType" class="form-check-label">Street cleanliness - requiring sweeping</label>
+                        </div>
+
+                        <div class="form-group">
+                            <input asp-for="WorkItem.WorkItemType" class="form-check-input" type="radio" value="5" />
+                            <label asp-for="WorkItem.WorkItemType" class="form-check-label">A fault with traffic signalling or lighting</label>
+                        </div>
+
+                        <div class="form-group">
+                            <input asp-for="WorkItem.WorkItemType" class="form-check-input" type="radio" value="6" />
+                            <label asp-for="WorkItem.WorkItemType" class="form-check-label">A fault with road markings/line painting</label>
+                        </div>
+
+                        <div class="form-group">
+                            <input asp-for="WorkItem.WorkItemType" class="form-check-input" type="radio" value="6" />
+                            <label asp-for="WorkItem.WorkItemType" class="form-check-label">A fault with road markings/line painting</label>
+                        </div>
+
+                        <div class="form-group">
+                            <input asp-for="WorkItem.WorkItemType" class="form-check-input" type="radio" value="7" />
+                            <label asp-for="WorkItem.WorkItemType" class="form-check-label">Road inspection required</label>
+                        </div>
+
+                        <div class="form-group">
+                            <input asp-for="WorkItem.WorkItemType" class="form-check-input" type="radio" value="8" />
+                            <label asp-for="WorkItem.WorkItemType" class="form-check-label">A fault with road surface water management</label>
+                        </div>
+
+
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="form-group">
+                <label asp-for="WorkItem.Address" class="control-label h6">Please specify the address or location of fault or click 'Use current location':</label>
+                <div class="input-group">
+                    <input asp-for="WorkItem.Address" class="form-control" autocomplete="off" />
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" type="button" id="useCurrentLocation" onclick="getCurrentLocation()">Use current location</button>
+                    </div>
+                    <span asp-validation-for="WorkItem.Address" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="WorkItem.Description" class="control-label h6">Please briefly describe the fault:</label>
+                <textarea asp-for="WorkItem.Description" class="form-control" autocomplete="off"></textarea>
+                <span asp-validation-for="WorkItem.Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+

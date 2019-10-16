@@ -70,7 +70,7 @@ namespace owp_web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=CitizenItems}/{action=Create}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

@@ -1,7 +1,7 @@
-﻿@model owp_web.Models.WorkItem
+﻿@model owp_web.Models.WorkItemViewModel
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -19,31 +19,26 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="WorkItemId" />
+            <input type="hidden" asp-for="WorkItem.WorkItemId" />
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <label asp-for="WorkItem.Description" class="control-label"></label>
+                <input asp-for="WorkItem.Description" class="form-control" />
+                <span asp-validation-for="WorkItem.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="WorkItemType" class="control-label"></label>
-                <select asp-for="WorkItemType" class="form-control"></select>
-                <span asp-validation-for="WorkItemType" class="text-danger"></span>
+                <label asp-for="WorkItem.Address" class="control-label"></label>
+                <input asp-for="WorkItem.Address" class="form-control" />
+                <span asp-validation-for="WorkItem.Address" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CreatedOn" class="control-label"></label>
-                <input asp-for="CreatedOn" class="form-control" />
-                <span asp-validation-for="CreatedOn" class="text-danger"></span>
+                <label asp-for="WorkItem.WorkItemType" class="control-label"></label>
+                <select asp-for="WorkItem.WorkItemType" class="form-control" asp-items="Model.WorkItemTypes"></select>
+                <span asp-validation-for="WorkItem.WorkItemType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LastChangedOn" class="control-label"></label>
-                <input asp-for="LastChangedOn" class="form-control" />
-                <span asp-validation-for="LastChangedOn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <select asp-for="Status" class="form-control"></select>
-                <span asp-validation-for="Status" class="text-danger"></span>
+                <label asp-for="WorkItem.Status" class="control-label"></label>
+                <select asp-for="WorkItem.Status" class="form-control" asp-items="Model.WorkItemStatuses"></select>
+                <span asp-validation-for="WorkItem.Status" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
