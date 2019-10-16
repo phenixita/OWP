@@ -12,7 +12,7 @@
     <header>
     </header>
 
-    @if (ViewData.TryGetValue("IsCitizenHome", out object isCitizenHomeObj) && isCitizenHomeObj is bool isCitizenHome &&  isCitizenHome)
+    @if (ViewData.TryGetValue("IsCitizenHome", out object isCitizenHomeObj) && isCitizenHomeObj is bool isCitizenHome && isCitizenHome)
     {
         <div class="jumbotron jumbotron-fluid citizen-home">
             <div class="container">
@@ -36,6 +36,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/TechManagerSite.js" asp-append-version="true"></script>
     <script src="https://kit.fontawesome.com/73ec8572a9.js" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>

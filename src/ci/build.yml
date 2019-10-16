@@ -1,5 +1,11 @@
 trigger:
-- master
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - src/*
+    
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -20,6 +26,7 @@ steps:
     projects: '**/*.csproj'
     feedsToUse: 'select'
 
+
 - task: DotNetCoreCLI@2
   displayName: Build source code
 
@@ -29,11 +36,10 @@ steps:
     arguments: '--configuration $(BuildConfiguration) /p:AssemblyVersion=$(GitVersion.SemVer)'
 
 - task: DotNetCoreCLI@2
-  displayName: Unit testing
-
-  enabled: false
   inputs:
     command: 'test'
+    projects: 'src/OwpPortal.UnitTests/OwpPortal.UnitTests.csproj'
+    testRunTitle: 'Unit Testing' 
 
 - task: DotNetCoreCLI@2
   displayName: Publish ASP.Net Core WebApp
@@ -43,9 +49,15 @@ steps:
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     
 - task: PublishBuildArtifacts@1
-  displayName: Publish build artifacts
-
+  displayName: Publish binaries
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
+    publishLocation: 'Container'
+
+- task: PublishBuildArtifacts@1
+  displayName: Publish IaC
+  inputs:
+    PathtoPublish: 'infra/OWP-Portal-Deployment/OWP-Portal-Deployment'
+    ArtifactName: 'drop-IaC'
     publishLocation: 'Container'

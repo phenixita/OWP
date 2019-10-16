@@ -75,3 +75,7 @@ body {
     color: white;
     text-shadow: 1px 1px 1px black;
 }
+
+.record-updated-metrics {
+    font-size: 0.8rem;
+}

@@ -8,20 +8,23 @@
     "skuCapacity": {
       "value": 1
     },
+    "sqlserverName": {
+      "value": "owp"
+    },
     "sqlAdministratorLogin": {
-      "value": "owpadmin"
+      "value": "owp"
     },
     "sqlAdministratorLoginPassword": {
-      "value": "O#W%P&123456$3cr37!"
+      "value": "@Aa123456"
     },
     "databaseName": {
-      "value": "owp-portal-db"
+      "value": "owp"
     },
     "sqlDatabaseServiceObjective": {
       "value": "Standard"
     },
     "webSiteName": {
-      "value": "owp-portal"
+      "value": "owp"
     }
 
   }

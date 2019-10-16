@@ -5,16 +5,16 @@ namespace owp_web.Models
     public enum WorkItemStatus
     {
 
-        [Display(Name = "Created")]
-        Created,
+        [Display(Name = "New")]
+        New,
 
         [Display(Name = "Assigned")]
         Assigned,
 
-        [Display(Name = "Resolved")]
+        [Display(Name = "Re-Assigned")]
         Resolved,
 
-        [Display(Name = "Closed")]
-        Closed
+        [Display(Name = "Done")]
+        Done
     }
 }
