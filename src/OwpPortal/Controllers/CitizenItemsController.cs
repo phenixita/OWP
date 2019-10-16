@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using owp_web.Data;
 using owp_web.Models;
 
 namespace owp_web.Controllers
@@ -13,9 +14,9 @@ namespace owp_web.Controllers
     [AllowAnonymous]
     public class CitizenItemsController : Controller
     {
-        private readonly OwpContext _context;
+        private readonly IOwpContext _context;
 
-        public CitizenItemsController(OwpContext context)
+        public CitizenItemsController(IOwpContext context)
         {
             _context = context;
         }
