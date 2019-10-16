@@ -1,11 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace owp_web.Models
 {
+    [NotMapped]
     public class Worker
     {
-        [Key]
-        public long WorkerId { get; set; }
-        public string FullName { get; set; }
+        public string AssignmentId { get; set; }
+        public string PrincipalDisplayName { get; set; }
+        public Guid? PrincipalId { get; set; }
     }
 }

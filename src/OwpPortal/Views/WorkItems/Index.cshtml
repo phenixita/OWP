@@ -40,7 +40,7 @@
                     @Html.DisplayNameFor(model => model.Address)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.AssignedToEmail)
+                    @Html.DisplayNameFor(model => model.AssignedTo)
                 </th>
                 <th></th>
             </tr>
@@ -71,7 +71,7 @@
                         @Html.DisplayFor(modelItem => item.Address)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.AssignedToEmail)
+                        @Html.DisplayFor(modelItem => item.AssignedTo.PrincipalDisplayName)
                     </td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.WorkItemId"><i class="fas fa-edit"></i></a>

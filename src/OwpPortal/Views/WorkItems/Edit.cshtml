@@ -41,10 +41,15 @@
                 <span asp-validation-for="WorkItem.Status" class="text-danger"></span>
             </div>
 
+            @{
+                List<Worker> workers = await Model.GetWorkersListAsync();
+                SelectList AssignedToList = new SelectList(workers, "AssignmentId", "PrincipalDisplayName", Model.WorkItem.AssignedTo);
+            }
+
             <div class="form-group">
-                <label asp-for="WorkItem.AssignedToEmail" class="control-label"></label>
-                <input asp-for="WorkItem.AssignedToEmail" class="form-control" placeholder="Example test@myemail.com" />
-                <span asp-validation-for="WorkItem.AssignedToEmail" class="text-danger"></span>
+                <label asp-for="WorkItem.AssignedTo" class="control-label"></label>
+                <select asp-for="WorkItem.AssignmentId" class="form-control" asp-items="AssignedToList"></select>
+                <span asp-validation-for="WorkItem.AssignedTo" class="text-danger"></span>
             </div>
 
             <div class="form-group">
