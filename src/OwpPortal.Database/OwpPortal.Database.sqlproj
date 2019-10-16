@@ -62,7 +62,6 @@
     <Folder Include="dbo\Tables\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\Worker.sql" />
     <Build Include="dbo\Tables\WorkItem.sql" />
   </ItemGroup>
 </Project>

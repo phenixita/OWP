@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using owp_web.Models;
+using owp_web.Helpers;
+using Microsoft.Extensions.Options;
 
 namespace owp_web.Controllers
 {
@@ -80,7 +82,7 @@ namespace owp_web.Controllers
                 return NotFound();
             }
 
-            var viewModel = new WorkItemViewModel ( workItem );
+            var viewModel = new WorkItemViewModel (workItem);
             return View(viewModel);
         }
 
@@ -89,7 +91,7 @@ namespace owp_web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address,AssignedToEmail")] WorkItem workItem)
+        public async Task<IActionResult> Edit(long id, [Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address,AssignmentId")] WorkItem workItem)
         {
             if (id != workItem.WorkItemId)
             {
