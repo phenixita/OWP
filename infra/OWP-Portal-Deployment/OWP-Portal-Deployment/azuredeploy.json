@@ -86,11 +86,47 @@
       },
       "resources": [
         {
-          "name": "[parameters('databaseName')]",
+          "name": "[concat(parameters('databaseName'), '-dev')]",
           "type": "databases",
           "location": "[parameters('location')]",
           "tags": {
             "displayName": "Database"
+          },
+          "apiVersion": "2015-01-01",
+          "dependsOn": [
+            "[variables('sqlserverName')]"
+          ],
+          "properties": {
+            "edition": "[parameters('sqlDatabaseServiceObjective')]",
+            "collation": "SQL_Latin1_General_CP1_CI_AS",
+            "maxSizeBytes": "1073741824",
+            "requestedServiceObjectiveName": "[parameters('sqlDatabaseServiceObjective')]"
+          }
+        },
+        {
+          "name": "[concat(parameters('databaseName'), '-test')]",
+          "type": "databases",
+          "location": "[parameters('location')]",
+          "tags": {
+            "displayName": "Database"
+          },
+          "apiVersion": "2015-01-01",
+          "dependsOn": [
+            "[variables('sqlserverName')]"
+          ],
+          "properties": {
+            "edition": "[parameters('sqlDatabaseServiceObjective')]",
+            "collation": "SQL_Latin1_General_CP1_CI_AS",
+            "maxSizeBytes": "1073741824",
+            "requestedServiceObjectiveName": "[parameters('sqlDatabaseServiceObjective')]"
+          }
+        },
+        {
+          "name": "[concat(parameters('databaseName'), '-production')]",
+          "type": "databases",
+          "location": "[parameters('location')]",
+          "tags": {
+            "displayName": "Production Database"
           },
           "apiVersion": "2015-01-01",
           "dependsOn": [
