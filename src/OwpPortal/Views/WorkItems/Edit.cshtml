@@ -40,10 +40,37 @@
                 <select asp-for="WorkItem.Status" class="form-control" asp-items="Html.GetEnumSelectList(typeof(WorkItemStatus))"></select>
                 <span asp-validation-for="WorkItem.Status" class="text-danger"></span>
             </div>
+
+            <div class="form-group">
+                <label asp-for="WorkItem.AssignedToEmail" class="control-label"></label>
+                <input asp-for="WorkItem.AssignedToEmail" class="form-control" placeholder="Example test@myemail.com" />
+                <span asp-validation-for="WorkItem.AssignedToEmail" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
+    </div>
+</div>
+
+ <hr/>
+
+
+<div class="row  float-right">
+    <div class="record-updated-metrics">
+        <span class="col-sm-2 font-weight-bold">
+            @Html.DisplayNameFor(model => model.WorkItem.CreatedOn)
+        </span>
+        <span class="col-sm-2">
+            @Html.DisplayFor(model => model.WorkItem.CreatedOn)
+        </span>
+        <span class="col-sm-2 font-weight-bold">
+            @Html.DisplayNameFor(model => model.WorkItem.LastChangedOn)
+        </span>
+        <span class="col-sm-2">
+            @Html.DisplayFor(model => model.WorkItem.LastChangedOn)
+        </span>
     </div>
 </div>
 

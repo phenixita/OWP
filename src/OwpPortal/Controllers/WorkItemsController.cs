@@ -89,7 +89,7 @@ namespace owp_web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address")] WorkItem workItem)
+        public async Task<IActionResult> Edit(long id, [Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address,AssignedToEmail")] WorkItem workItem)
         {
             if (id != workItem.WorkItemId)
             {

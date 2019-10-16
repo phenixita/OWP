@@ -11,7 +11,7 @@
     <header>
     </header>
 
-    @if (ViewData.TryGetValue("IsCitizenHome", out object isCitizenHomeObj) && isCitizenHomeObj is bool isCitizenHome &&  isCitizenHome)
+    @if (ViewData.TryGetValue("IsCitizenHome", out object isCitizenHomeObj) && isCitizenHomeObj is bool isCitizenHome && isCitizenHome)
     {
         <div class="jumbotron jumbotron-fluid citizen-home">
             <div class="container">
@@ -28,13 +28,14 @@
     </div>
 
     <footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2019 - Office of Public Works - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> <a asp-area="" asp-controller="CitizenItems" asp-action="Create">Home</a>
-            </div>
+        <div class="container">
+            &copy; 2019 - Office of Public Works - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> <a asp-area="" asp-controller="CitizenItems" asp-action="Create">Home</a>
+        </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/TechManagerSite.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
