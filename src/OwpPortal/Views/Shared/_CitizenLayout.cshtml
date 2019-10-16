@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - owp_web</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="/">Office of Public Works</a>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    
+                </ul>
+                <form asp-action="Search" method="get" class="form-inline my-2 my-lg-0" id="trackingNumberSearchForm">
+                    <label for="searchText" class="navbar-text mr-2">Searching for an existing issue?</label>
+                    <input name="searchText" id="searchText" class="form-control mr-sm-2" type="search" placeholder="Tracking Number" aria-label="Search" autocomplete="off">
+                    <input type="submit" value="Search" class="btn btn-outline-success my-2 my-sm-0" />
+                </form>
+            </div>
+        </nav>
+    </header>
+
+     @RenderBody()
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2019 - Office of Public Works - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> <a asp-area="" asp-controller="CitizenItems" asp-action="Create">Home</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/TechManagerSite.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/73ec8572a9.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
