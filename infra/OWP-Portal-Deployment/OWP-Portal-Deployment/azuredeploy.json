@@ -98,9 +98,6 @@
             "displayName": "Database"
           },
           "apiVersion": "2015-01-01",
-          "dependsOn": [
-            "[parameters('sqlserverName')]"
-          ],
           "properties": {
             "edition": "[parameters('sqlDatabaseServiceObjective')]",
             "collation": "SQL_Latin1_General_CP1_CI_AS",
