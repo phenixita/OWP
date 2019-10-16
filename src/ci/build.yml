@@ -47,6 +47,8 @@ steps:
     command: 'publish'
     publishWebProjects: true
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+
+
     
 - task: PublishBuildArtifacts@1
   displayName: Publish binaries

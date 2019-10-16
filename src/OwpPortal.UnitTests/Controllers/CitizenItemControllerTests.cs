@@ -3,7 +3,7 @@ using Xunit;
 
 namespace OwpPortal.UnitTests
 {
-    public class UnitTest1
+    public class CitizenItemControllerTests
     {
         [Fact]
         public void Test1()
