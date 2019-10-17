@@ -128,7 +128,7 @@ namespace owp_web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(workItem);
+            return View(new WorkItemViewModel(workItem));
         }
 
         // GET: CitizenItems/Delete/5

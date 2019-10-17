@@ -10,6 +10,7 @@
     [Latitude] DECIMAL(30, 14) NULL, 
     [Longitude] DECIMAL(30, 14) NULL, 
     [Image] IMAGE NULL, 
+	[WorkItemPriority]	INT	NULL ,
     CONSTRAINT [PK_WorkItem] PRIMARY KEY CLUSTERED ([WorkItemId] ASC)
 );
 
