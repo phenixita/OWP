@@ -79,3 +79,8 @@ body {
 .record-updated-metrics {
     font-size: 0.8rem;
 }
+
+
+#summaryCardNoContent {
+    height:100%;
+}

@@ -25,11 +25,16 @@
                 <input asp-for="WorkItem.Description" class="form-control" />
                 <span asp-validation-for="WorkItem.Description" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="WorkItem.Address" class="control-label"></label>
                 <input asp-for="WorkItem.Address" class="form-control" />
                 <span asp-validation-for="WorkItem.Address" class="text-danger"></span>
             </div>
+
+            <input type="hidden" asp-for="WorkItem.Latitude" class="form-control" />
+            <input type="hidden" asp-for="WorkItem.Longitude" class="form-control" />
+
             <div class="form-group">
                 <label asp-for="WorkItem.WorkItemType" class="control-label"></label>
                 <select asp-for="WorkItem.WorkItemType" class="form-control" asp-items="Html.GetEnumSelectList(typeof(WorkItemTypes))"></select>
@@ -64,6 +69,11 @@
 
 <div class="row  float-right">
     <div class="record-updated-metrics">
+        <span class="col-sm-2 font-weight-bold">Coordinates</span>
+        <span class="col-sm-2">
+            @Html.DisplayFor(model => model.WorkItem.Latitude), @Html.DisplayFor(model => model.WorkItem.Longitude)
+        </span>
+
         <span class="col-sm-2 font-weight-bold">
             @Html.DisplayNameFor(model => model.WorkItem.CreatedOn)
         </span>
