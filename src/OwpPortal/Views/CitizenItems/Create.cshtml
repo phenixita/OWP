@@ -21,7 +21,7 @@
         <hr />
         <div class="row">
             <div class="col-md-8">
-                <form asp-action="Create">
+                <form asp-action="Create" accept="image/*">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="form-row">
@@ -44,7 +44,7 @@
                                     <a href="#" class="form-group list-group-item list-group-item-action" data-toggle="list" value="2" onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 2;">
                                         Problem with broken paving or unevenness
                                     </a>
-                                    <a href="#" class="form-group list-group-item list-group-item-action" data-toggle="list" value="3"  onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 3;">
+                                    <a href="#" class="form-group list-group-item list-group-item-action" data-toggle="list" value="3" onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 3;">
                                         Problem with a bridge
                                     </a>
                                     <a href="#" class="form-group list-group-item list-group-item-action" data-toggle="list" value="4">
@@ -74,6 +74,19 @@
                         <label asp-for="WorkItem.Address" class="control-label h6">Please specify the address or location of fault or click 'Use current location':</label>
                         <div class="input-group">
                             <input asp-for="WorkItem.Address" class="form-control" autocomplete="off" />
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" type="button" id="useCurrentLocation" onclick="getCurrentLocation()">Use current location</button>
+                            </div>
+                            <span asp-validation-for="WorkItem.Address" class="text-danger"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label asp-for="WorkItem.Image" class="control-label h6">Please select your image : </label>
+                        <div class="input-group">
+                            <input asp-for="WorkItem.Image" type="file" accept="image/*" class="form-control" capture/>
+                           
                             <div class="input-group-append">
                                 <button class="btn btn-secondary" type="button" id="useCurrentLocation" onclick="getCurrentLocation()">Use current location</button>
                             </div>
