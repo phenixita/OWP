@@ -50,7 +50,7 @@ namespace owp_web.Helpers
             return Workers;
         }
 
-        public async Task<Worker> GetWorkerByPrincipalIdAsync(string assignmentId)
+        public async Task<Worker> GetWorkerByAssignmentIdAsync(string assignmentId)
         {
             AppRoleAssignment _assignment = await _graphServiceClient.ServicePrincipals["4454926f-6463-4e95-a416-48d6d8bf86a6"].AppRoleAssignments[assignmentId].Request().GetAsync();
 
@@ -60,6 +60,25 @@ namespace owp_web.Helpers
                 PrincipalDisplayName = _assignment.PrincipalDisplayName,
                 PrincipalId = _assignment.PrincipalId
             };
+        }
+
+        public async Task SendEmailByPrincipalIdAsync(Guid? principalId, Message message)
+        {
+            List<Recipient> recipientList = new List<Recipient>();
+
+            User user = await _graphServiceClient.Users[principalId.ToString()].Request().GetAsync();
+
+            recipientList.Add(new Recipient
+            {
+                EmailAddress = new EmailAddress
+                {
+                    Address = user.Mail
+                }
+            });
+
+            message.ToRecipients = recipientList;
+
+            await _graphServiceClient.Users["8716bb10-935f-4ae0-a4f0-0313994fd41e"].SendMail(message).Request().PostAsync();
         }
     }
 }
