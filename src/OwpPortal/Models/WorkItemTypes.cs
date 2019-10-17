@@ -4,7 +4,9 @@ namespace owp_web.Models
 {
     public enum WorkItemTypes
     {
+        [Display(Name="Unspecified")]
         Unspecified = 0,
+
         [Display(Name= "Asphalt Maintenance")]
         AsphaltMaintenance,
 

@@ -13,7 +13,9 @@ namespace owp_web.Helpers
         public static IEnumerable<SelectListItem> ToList<TEnum, TCast>(bool useDisplayName, string SelectedValue)
         {
             Array enumArray = Enum.GetValues(typeof(TEnum));
-            List<SelectListItem> selectListValues = new List<SelectListItem>();
+            List<SelectListItem> selectListValues = new List<SelectListItem> { 
+                new SelectListItem { Value = string.Empty, Text = string.Empty, Selected = true } 
+            };
             foreach (var val in enumArray)
             {
                 selectListValues.Add(new SelectListItem()

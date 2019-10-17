@@ -65,7 +65,7 @@
                     <input class="form-control" type="text" placeholder="Search @Html.DisplayNameFor(model => model.LastChangedOn)" />
                 </th>
                 <th>
-                    <select class="form-control" asp-items="new SelectList((new[] {string.Empty}).Concat(Enum.GetNames(typeof(WorkItemStatus))))"></select>
+                    <select class="form-control" asp-items="EnumHelper.ToList<WorkItemStatus, WorkItemStatus>(true, string.Empty)"></select>
                 </th>
                 <th>
                     <input class="form-control" type="text" placeholder="Search @Html.DisplayNameFor(model => model.Address)" />
@@ -74,7 +74,7 @@
                     <input class="form-control" type="text" placeholder="Search @Html.DisplayNameFor(model => model.AssignedTo)" />
                 </th>
                 <th>
-                    <select class="form-control" asp-items="new SelectList((new[] {string.Empty}).Concat(Enum.GetNames(typeof(WorkItemPriority))))"></select>
+                    <select class="form-control" asp-items="EnumHelper.ToList<WorkItemPriority, WorkItemPriority>(true, string.Empty)"></select>
                 </th>
                 <th>
 

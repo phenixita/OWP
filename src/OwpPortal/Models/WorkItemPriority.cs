@@ -8,13 +8,13 @@ namespace owp_web.Models
 {
     public enum WorkItemPriority
     {
-        [Display(Name = "Low")]
+        [Display(Name = "0 - Low")]
         Low = 0,
-        [Display(Name = "Normal")]
+        [Display(Name = "1 - Normal")]
         Normal = 1,
-        [Display(Name = "High")]
+        [Display(Name = "2 - High")]
         High = 2,
-        [Display(Name = "Critical")]
+        [Display(Name = "3 - Critical")]
         Critical = 3
     }
 }
