@@ -128,7 +128,7 @@ namespace owp_web.Controllers
                             {
                                 Body = new ItemBody
                                 {
-                                    Content = $"Hi {workItem.AssignedTo.PrincipalDisplayName}! \r\n\r\n<br><br>The Issue #{workItem.WorkItemId} has been assigned to you.",
+                                    Content = $"Hi {workItem.AssignedTo.PrincipalDisplayName}! \r\n\r\n<br><br>The Issue <a href=\"https://owp.azurewebsites.net/worker/edit/{workItem.WorkItemId}\">#{workItem.WorkItemId}</a> has been assigned to you.",
                                     ContentType = BodyType.Html,
                                 },
                                 Subject = $"New Issue #{workItem.WorkItemId} has been assigned to you!"
@@ -141,7 +141,7 @@ namespace owp_web.Controllers
                             {
                                 Body = new ItemBody
                                 {
-                                    Content = $"Hi {workItem.AssignedTo.PrincipalDisplayName}! \r\n\r\n<br><br>The Issue #{workItem.WorkItemId} has been REassigned to you.",
+                                    Content = $"Hi {workItem.AssignedTo.PrincipalDisplayName}! \r\n\r\n<br><br>The Issue <a href=\"https://owp.azurewebsites.net/worker/edit/{workItem.WorkItemId}\">#{workItem.WorkItemId}</a> has been REassigned to you.",
                                     ContentType = BodyType.Html,
                                 },
                                 Subject = $"New Issue #{workItem.WorkItemId} has been REassigned to you!"
