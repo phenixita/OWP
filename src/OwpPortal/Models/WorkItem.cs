@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,6 +11,8 @@ namespace owp_web.Models
 {
     public class WorkItem
     {
+        public static ConcurrentDictionary<string, Worker> workerCache = new ConcurrentDictionary<string, Worker>();
+
         [Display(Name = "Tracking number")]
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -37,7 +40,14 @@ namespace owp_web.Models
         {
             get
             {
-                return (new GraphAPI()).GetWorkerByPrincipalIdAsync(AssignmentId).Result;
+                if (AssignmentId == null)
+                {
+                    return null;
+                }
+
+                return workerCache.GetOrAdd(AssignmentId, (s) => { 
+                    return new GraphAPI().GetWorkerByPrincipalIdAsync(s).Result; 
+                } );
             }
             set
             {
