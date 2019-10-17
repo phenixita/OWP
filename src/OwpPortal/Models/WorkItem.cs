@@ -80,10 +80,10 @@ namespace owp_web.Models
             }
         }
 
-        [Display(Name = "Image of issue")]
-        public byte[] Image { get; set; }
-
         [Display(Name = "Priority")]
         public WorkItemPriority? WorkItemPriority { get; set; }
+
+        [Display(Name = "Image of issue")]
+        public string ImageUrl { get; set; }
     }
 }

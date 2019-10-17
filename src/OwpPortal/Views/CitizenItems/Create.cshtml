@@ -82,22 +82,28 @@
                     </div>
 
                     <div>
-                        <label asp-for="WorkItem.Image" class="control-label h6">Please take a picture of the issue to help us assess more quickly.</label>
+                        <label asp-for="WorkItem.ImageUrl" class="control-label h6">Please take a picture of the issue to help us assess more quickly.</label>
                     </div>
 
                     <div class="input-group mb-3">
                         <div class="custom-file">
-                            <input asp-for="WorkItem.Image" name="image" type="file" class="custom-file-input" accept="image/*">
+                            <input id="WorkItem_Image" name="image" type="file" class="custom-file-input" accept="image/*">
                             <label class="custom-file-label" for="inputGroupFile02" id="fileLoaded">Please upload a photo of the issue</label>
+                            <input type="hidden" asp-for="WorkItem.ImageUrl" />
                         </div>
                     </div>
 
                     <div class="form-row">
-                        <div class="col-sm-3">
-                            <img width="300" id="imgpreview" hidden />
+                        <div class="col-sm-6">
+                            <img class="img-fluid" id="imgpreview" hidden />
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="w3-border">
+                                <div class="w3-green" id="imgLoader" style="height:16px;width:0%;visibility:hidden"></div>
+                            </div>
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label asp-for="WorkItem.Description" class="control-label h6">Please briefly describe the fault:</label>
                         <textarea asp-for="WorkItem.Description" class="form-control" autocomplete="off"></textarea>
@@ -113,4 +119,10 @@
     </main>
 </div>
 
-
+<script type="text/javascript">
+    var blobParams = {
+        blobUri: 'https://owpybartea.blob.core.windows.net/owp-dev',
+        containerName : "owp-dev",
+        sasToken: '?sv=2019-02-02&ss=b&srt=sco&sp=rwdlac&se=2019-10-31T01:42:40Z&st=2019-10-17T16:42:40Z&spr=https&sig=xpVmXSLyo6EnZ%2FsfjVOg9TIgOII%2BtPw3ynf6TKC0TQA%3D'
+    };
+</script>
