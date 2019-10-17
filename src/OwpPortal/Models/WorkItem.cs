@@ -54,6 +54,9 @@ namespace owp_web.Models
 
         public decimal? @Longitude { get; set; }
 
+        [Display(Name = "Image of issue")]
+        public byte[] Image { get; set; }
+
         [Display(Name = "Priority")]
         public WorkItemPriority WorkItemPriority { get; set; }
     }

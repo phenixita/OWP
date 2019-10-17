@@ -15,7 +15,7 @@
     <p>
         <a asp-action="Create">Create New</a>
     </p>
-    <table class="table" id="workitems">
+    <table class="table" id="workitems" width="100%">
         <thead>
             <tr>
                 <th>
@@ -47,6 +47,35 @@
                 </th>
                 <th></th>
             </tr>
+                    <tr>
+            <th>
+                <input style="max-width:50px" type="text" placeholder="Search @Html.DisplayNameFor(model => model.WorkItemId)" />
+            </th>
+            <th>
+                <input style="max-width:50px" type="text" placeholder="Search @Html.DisplayNameFor(model => model.Description)" />
+            </th>
+            <th>
+                <input style="max-width:50px" type="text" placeholder="Search @Html.DisplayNameFor(model => model.WorkItemType)" />
+            </th>
+            <th>
+                <input style="max-width:50px" type="text" placeholder="Search @Html.DisplayNameFor(model => model.CreatedOn)" />
+            </th>
+            <th>
+                <input style="max-width:50px" type="text" placeholder="Search @Html.DisplayNameFor(model => model.LastChangedOn)" />
+            </th>
+            <th>
+                <input style="max-width:50px" type="text" placeholder="Search @Html.DisplayNameFor(model => model.Status)" />
+            </th>
+            <th>
+                <input style="max-width:50px" type="text" placeholder="Search @Html.DisplayNameFor(model => model.Address)" />
+            </th>
+            <th>
+                <input style="max-width:50px" type="text" placeholder="Search @Html.DisplayNameFor(model => model.AssignedTo)" />
+            </th>
+            <th>
+
+            </th>
+        </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
