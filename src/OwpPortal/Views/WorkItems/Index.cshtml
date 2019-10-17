@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<owp_web.Models.WorkItem>
 
+@using owp_web.Helpers
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -55,7 +56,7 @@
                     <input class="form-control" type="text" placeholder="Search @Html.DisplayNameFor(model => model.Description)" />
                 </th>
                 <th>
-                    <input class="form-control" type="text" placeholder="Search @Html.DisplayNameFor(model => model.WorkItemType)" />
+                    <select class="form-control" asp-items="EnumHelper.ToList<WorkItemTypes, WorkItemTypes>(true, string.Empty)"></select>
                 </th>
                 <th>
                     <input class="form-control" type="text" placeholder="Search @Html.DisplayNameFor(model => model.CreatedOn)" />
@@ -64,7 +65,7 @@
                     <input class="form-control" type="text" placeholder="Search @Html.DisplayNameFor(model => model.LastChangedOn)" />
                 </th>
                 <th>
-                    <input class="form-control" type="text" placeholder="Search @Html.DisplayNameFor(model => model.Status)" />
+                    <select class="form-control" asp-items="new SelectList((new[] {string.Empty}).Concat(Enum.GetNames(typeof(WorkItemStatus))))"></select>
                 </th>
                 <th>
                     <input class="form-control" type="text" placeholder="Search @Html.DisplayNameFor(model => model.Address)" />
@@ -73,7 +74,7 @@
                     <input class="form-control" type="text" placeholder="Search @Html.DisplayNameFor(model => model.AssignedTo)" />
                 </th>
                 <th>
-                    <input class="form-control" type="text" placeholder="Search @Html.DisplayNameFor(model => model.WorkItemPriority)" />
+                    <select class="form-control" asp-items="new SelectList((new[] {string.Empty}).Concat(Enum.GetNames(typeof(WorkItemPriority))))"></select>
                 </th>
                 <th>
 
