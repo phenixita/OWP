@@ -70,7 +70,7 @@
                         </div>
                     </fieldset>
 
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label asp-for="WorkItem.Address" class="control-label h6">Please specify the address or location of fault or click 'Use current location':</label>
                         <div class="input-group">
                             <input asp-for="WorkItem.Address" class="form-control" autocomplete="off" />
@@ -81,13 +81,18 @@
                         </div>
                     </div>
 
-
-                    <div class="form-group">
-                        <label asp-for="WorkItem.Image" class="control-label h6">Please select your image : </label>
-                        <input asp-for="WorkItem.Image" type="file" accept="image/*" class="form-control file-path-wrapper" />
+                    <div>
+                        <label asp-for="WorkItem.Image" class="control-label h6">Please take a picture of the issue to help us assess more quickly.</label>
                     </div>
 
-                    <div class="form-group">
+                    <div class="input-group mb-3">
+                        <div class="custom-file">
+                            <input asp-for="WorkItem.Image" type="file" class="custom-file-input" accept="image/*">
+                            <label class="custom-file-label" for="inputGroupFile02">Please upload a photo of the issue</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
                         <label asp-for="WorkItem.Description" class="control-label h6">Please briefly describe the fault:</label>
                         <textarea asp-for="WorkItem.Description" class="form-control" autocomplete="off"></textarea>
                         <span asp-validation-for="WorkItem.Description" class="text-danger"></span>
