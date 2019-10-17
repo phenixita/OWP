@@ -15,6 +15,22 @@
         fixedHeader: true,
         dom: 'tlp'
     });
+
+    if (document.getElementById("image") != null && document.getElementById("image") != "undefined") {
+        document.getElementById("image").onchange = function () {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                // get loaded data and render thumbnail.
+                document.getElementById("imgpreview").src = e.target.result;
+                document.getElementById('imgpreview').hidden = false;
+            };
+
+            // read the image file as a data URL.
+            reader.readAsDataURL(this.files[0]);
+        };
+    }
+
 });
 
 async function getWorkItems() {
@@ -56,15 +72,22 @@ async function loadMapScenario() {
         }
     };
 
+    const colorPinMap = ['gray', 'blue', 'orange', 'red'];
+
     for (let i = 0; i < items.length; i++) {
         const item = items[i];
         if (item && item.longitude) {
             let pushpin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(item.latitude, item.longitude), null);
-            pushpin.setOptions({ enableHoverStyle: true, enableClickedStyle: false });
+
+            const pinColor = item.workItemPriority ? colorPinMap[item.workItemPriority] : 'purple';
+
+            pushpin.setOptions({ enableHoverStyle: true, enableClickedStyle: false, color: pinColor });
             Microsoft.Maps.Events.addHandler(pushpin, 'click', () => {
 
                 $('#summaryCardNoContent').hide();
                 $('#summaryCard').show();
+
+                $('#priorityGlyph')[0].style = 'color:' + pinColor;
 
                 clearAndReplace(summaryDescriptionValueEle, item.description);
                 clearAndReplace(summaryStatusValueEle, item.statusName);

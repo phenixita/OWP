@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -56,10 +58,20 @@ namespace owp_web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address,Latitude,Longitude,WorkItemPriority")] WorkItem workItem)
+        public async Task<IActionResult> Create([Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address,Latitude,Longitude")] WorkItem workItem, IFormFile image)
         {
             if (ModelState.IsValid)
             {
+
+                if (image != null)
+                {
+                    using (var ms = new MemoryStream())
+                    {
+                        image.CopyTo(ms);
+                        workItem.Image = ms.ToArray();
+                    }
+                }
+
                 _context.Add(workItem);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Edit), new { Id = workItem.WorkItemId });
@@ -89,7 +101,7 @@ namespace owp_web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address,WorkItemPriority")] WorkItem workItem)
+        public async Task<IActionResult> Edit(long id, [Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address")] WorkItem workItem)
         {
             if (id != workItem.WorkItemId)
             {
@@ -116,7 +128,7 @@ namespace owp_web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(workItem);
+            return View(new WorkItemViewModel(workItem));
         }
 
         // GET: CitizenItems/Delete/5
@@ -154,7 +166,7 @@ namespace owp_web.Controllers
         {
             ViewData["currentSearch"] = searchText;
 
-            if(!string.IsNullOrEmpty(searchText))
+            if (!string.IsNullOrEmpty(searchText))
             {
                 var workItem = await _context.WorkItem.FirstOrDefaultAsync(w => searchText.Equals(w.WorkItemId.ToString()));
                 return View(workItem);
