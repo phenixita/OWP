@@ -12,7 +12,8 @@
 
     var table = $('#workitems').DataTable({
         orderCellsTop: true,
-        fixedHeader: true
+        fixedHeader: true,
+        dom: 'tlp'
     });
 });
 
