@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using owp_web.Models;
 using owp_web.Helpers;
 using Microsoft.Extensions.Options;
+using Microsoft.Graph;
 
 namespace owp_web.Controllers
 {
@@ -16,6 +17,7 @@ namespace owp_web.Controllers
     public class WorkItemsController : Controller
     {
         private readonly OwpContext _context;
+        private GraphAPI _api = new GraphAPI();
 
         public WorkItemsController(OwpContext context)
         {
@@ -93,6 +95,8 @@ namespace owp_web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(long id, [Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address,AssignmentId")] WorkItem workItem)
         {
+            Message message;
+
             if (id != workItem.WorkItemId)
             {
                 return NotFound();
@@ -103,6 +107,49 @@ namespace owp_web.Controllers
                 try
                 {
                     _context.Update(workItem);
+
+                    var changedEntity = _context.ChangeTracker
+                       .Entries()
+                       .Where(x => x.State == EntityState.Modified)
+                       .FirstOrDefault();
+
+                    WorkItem originalWorkItem = (WorkItem)changedEntity.GetDatabaseValues().ToObject();
+
+                    var assignmentProperty = changedEntity
+                       .Properties
+                       .Where(x => x.Metadata.Name == "AssignmentId")
+                       .FirstOrDefault();
+
+                    if (assignmentProperty.IsModified)
+                    {
+                        if(string.IsNullOrEmpty(originalWorkItem.AssignmentId))
+                        {
+                            message = new Message
+                            {
+                                Body = new ItemBody
+                                {
+                                    Content = $"Hi {workItem.AssignedTo.PrincipalDisplayName}! \r\n\r\n<br><br>The Issue #{workItem.WorkItemId} has been assigned to you.",
+                                    ContentType = BodyType.Html,
+                                },
+                                Subject = $"New Issue #{workItem.WorkItemId} has been assigned to you!"
+                            };
+                        }
+                        else
+                        {
+                            message = new Message
+                            {
+                                Body = new ItemBody
+                                {
+                                    Content = $"Hi {workItem.AssignedTo.PrincipalDisplayName}! \r\n\r\n<br><br>The Issue #{workItem.WorkItemId} has been REassigned to you.",
+                                    ContentType = BodyType.Html,
+                                },
+                                Subject = $"New Issue #{workItem.WorkItemId} has been REassigned to you!"
+                            };
+                        }
+
+                        await _api.SendEmailByPrincipalIdAsync(workItem.AssignedTo.PrincipalId, message);
+                    }
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
