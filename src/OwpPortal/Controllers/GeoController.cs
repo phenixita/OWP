@@ -22,9 +22,9 @@ namespace owp_web.Controllers
 
         // GET: api/Geo
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<WorkItem>>> GetWorkItem()
+        public async Task<ActionResult<IEnumerable<WorkItemListViewModel>>> GetWorkItem()
         {
-            return await _context.WorkItem.ToListAsync();
+            return await _context.WorkItemList.Where(wi=>wi.Status!=WorkItemStatus.Done).ToListAsync();
         }
 
         // GET: api/Geo/5
