@@ -2,34 +2,39 @@
 
 @{
     ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_CitizenLayout.cshtml";
 }
 
-<h1>Edit</h1>
 
-<h4>WorkItem</h4>
-<hr />
-<div class="row">
-    <div class="alert alert-success" role="alert">
-        Thankyou for reporting this fault.  For your details, the tracking number is <span>@Model.WorkItem.WorkItemId</span>
-    </div>
 
-    @*<div class="col-md-4">
+<div class="container">
+    <main role="main" class="pb-3">
 
-            <form asp-action="Edit">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="WorkItemId" />
-                <div class="form-group">
-                    <label asp-for="Description" class="control-label"></label>
-                    <input asp-for="Description" class="form-control" />
-                    <span asp-validation-for="Description" class="text-danger"></span>
-                </div>
+        <h4>WorkItem</h4>
+        <hr />
+        <div class="row">
+            <div class="alert alert-success" role="alert">
+                Thankyou for reporting this fault.  For your details, the tracking number is <span>@Model.WorkItem.WorkItemId</span>
+            </div>
 
-            </form>
-        </div>*@
+            @*<div class="col-md-4">
+
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="WorkItemId" />
+                        <div class="form-group">
+                            <label asp-for="Description" class="control-label"></label>
+                            <input asp-for="Description" class="form-control" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                    </form>
+                </div>*@
+        </div>
+
+        <div>
+            <a asp-action="Create">Back</a>
+        </div>
+
+    </main>
 </div>
-
-<div>
-    <a asp-action="Create">Back</a>
-</div>
-
