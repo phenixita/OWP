@@ -37,7 +37,7 @@ namespace owp_web.Models
         {
             get
             {
-                return (new GraphAPI()).GetWorkerByPrincipalIdAsync(AssignmentId).Result;
+                return (new GraphAPI()).GetWorkerByAssignmentIdAsync(AssignmentId).Result;
             }
             set
             {
