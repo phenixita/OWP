@@ -42,42 +42,48 @@
                 <th>
                     @Html.DisplayNameFor(model => model.AssignedTo)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkItemPriority)
+                </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.WorkItemId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.WorkItemType)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CreatedOn)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LastChangedOn)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Status)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Address)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AssignedTo.PrincipalDisplayName)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.WorkItemId"><i class="fas fa-edit"></i></a>
-                        <a asp-action="Delete" asp-route-id="@item.WorkItemId"><i class="fas fa-trash-alt"></i></a>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WorkItemId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WorkItemType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedOn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastChangedOn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssignedTo.PrincipalDisplayName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WorkItemPriority)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.WorkItemId"><i class="fas fa-edit"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.WorkItemId"><i class="fas fa-trash-alt"></i></a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

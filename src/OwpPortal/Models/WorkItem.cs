@@ -15,7 +15,7 @@ namespace owp_web.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long WorkItemId { get; set; }
 
-        [Display(Name="Description")]
+        [Display(Name = "Description")]
         public string Description { get; set; }
 
         [Display(Name = "Work Item Type")]
@@ -33,13 +33,13 @@ namespace owp_web.Models
 
         [NotMapped]
         [Display(Name = "Assigned To")]
-        public Worker AssignedTo 
-        { 
+        public Worker AssignedTo
+        {
             get
             {
                 return (new GraphAPI()).GetWorkerByPrincipalIdAsync(AssignmentId).Result;
             }
-            set 
+            set
             {
                 AssignmentId = value.AssignmentId;
             }
@@ -49,9 +49,12 @@ namespace owp_web.Models
 
         [Display(Name = "Address of issue")]
         public string Address { get; set; }
-        
+
         public decimal? Latitude { get; set; }
 
         public decimal? @Longitude { get; set; }
+
+        [Display(Name = "Priority")]
+        public WorkItemPriority WorkItemPriority { get; set; }
     }
 }
