@@ -81,7 +81,7 @@ namespace OwpPortal.UITests
 
             var searchBtn = driver.FindElement(By.XPath($".//*[@value='{SearchItemFeatureSelectors.SearchButton_Value}']"));
             searchBtn.Click();
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(4));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
 
             var workItemIdDisplay = wait.Until(driver => driver.FindElement(By.Id("workItemId")));
 
