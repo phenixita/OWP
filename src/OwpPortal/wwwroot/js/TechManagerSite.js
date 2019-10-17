@@ -15,6 +15,22 @@
         fixedHeader: true,
         dom: 'tlp'
     });
+
+    if (document.getElementById("image") != null && document.getElementById("image") != "undefined") {
+        document.getElementById("image").onchange = function () {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                // get loaded data and render thumbnail.
+                document.getElementById("imgpreview").src = e.target.result;
+                document.getElementById('imgpreview').hidden = false;
+            };
+
+            // read the image file as a data URL.
+            reader.readAsDataURL(this.files[0]);
+        };
+    }
+
 });
 
 async function getWorkItems() {
