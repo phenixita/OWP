@@ -33,7 +33,7 @@ namespace owp_web.Models
 
         [NotMapped]
         [Display(Name = "Assigned To")]
-        public Worker AssignedTo 
+        public Worker AssignedTo  
         { 
             get
             {
@@ -53,5 +53,21 @@ namespace owp_web.Models
         public decimal? Latitude { get; set; }
 
         public decimal? @Longitude { get; set; }
+
+        public string StatusName
+        {
+            get
+            {
+                return this.Status.ToName();
+            }
+        }
+
+        public string TypeName
+        {
+            get
+            {
+                return this.WorkItemType.ToName();
+            }
+        }
     }
 }
