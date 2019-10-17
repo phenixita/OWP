@@ -57,7 +57,7 @@ namespace owp_web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address")] WorkItem workItem)
+        public async Task<IActionResult> Create([Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address,WorkItemPriority")] WorkItem workItem)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace owp_web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address,AssignmentId,Latitude,Longitude")] WorkItem workItem)
+        public async Task<IActionResult> Edit(long id, [Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address,AssignmentId,Latitude,Longitude,WorkItemPriority")] WorkItem workItem)
         {
             if (id != workItem.WorkItemId)
             {
@@ -118,7 +118,7 @@ namespace owp_web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(workItem);
+            return View(new WorkItemViewModel(workItem));
         }
 
         // GET: WorkItems/Delete/5
