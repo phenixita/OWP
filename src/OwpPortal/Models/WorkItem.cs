@@ -58,6 +58,6 @@ namespace owp_web.Models
         public byte[] Image { get; set; }
 
         [Display(Name = "Priority")]
-        public WorkItemPriority WorkItemPriority { get; set; }
+        public WorkItemPriority? WorkItemPriority { get; set; }
     }
 }

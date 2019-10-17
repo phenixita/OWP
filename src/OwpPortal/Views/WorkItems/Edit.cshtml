@@ -53,6 +53,13 @@
             </div>
 
             <div class="form-group">
+                <label asp-for="WorkItem.WorkItemPriority" class="control-label h6">Priority</label>
+                <select asp-for="WorkItem.WorkItemPriority" class="form-control" asp-items="Html.GetEnumSelectList(typeof(WorkItemPriority))">
+                    <option selected="selected" value="">-- Select a priority --</option>
+                </select>
+            </div>
+
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
