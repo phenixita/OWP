@@ -54,6 +54,22 @@ namespace owp_web.Models
 
         public decimal? @Longitude { get; set; }
 
+        public string StatusName
+        {
+            get
+            {
+                return this.Status.ToName();
+            }
+        }
+
+        public string TypeName
+        {
+            get
+            {
+                return this.WorkItemType.ToName();
+            }
+        }
+
         [Display(Name = "Image of issue")]
         public byte[] Image { get; set; }
 
