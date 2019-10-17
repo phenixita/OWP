@@ -3,8 +3,9 @@
 
 // Write your JavaScript code.
 
-function getCurrentLocation()
-{
+
+
+function getCurrentLocation() {
     if (navigator.geolocation) {
 
         const addrEle = document.getElementById('WorkItem_Address');
@@ -12,7 +13,7 @@ function getCurrentLocation()
 
         const latEle = document.getElementById('WorkItem_Latitude');
         const longEle = document.getElementById('WorkItem_Longitude');
-        
+
         navigator.geolocation.getCurrentPosition(async (geoPos) => {
             const lat = geoPos.coords.latitude;
             const long = geoPos.coords.longitude;
