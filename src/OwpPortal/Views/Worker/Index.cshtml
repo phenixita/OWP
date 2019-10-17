@@ -5,9 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>@User.Claims.FirstOrDefault(c => c.Type == "name")?.Value</h1>
-
-<h3>All My Issues</h3>
+<h3>All my work items</h3>
 
 <p>
     <a asp-action="Create">Create New Issue</a>

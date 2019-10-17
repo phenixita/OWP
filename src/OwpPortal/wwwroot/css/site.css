@@ -125,3 +125,8 @@ body {
 .opwlogo:before {
     color:white;
 } 
+
+.logged-on-user, .fa.logged-on-user {
+    font-weight:normal;
+    font-size: 1rem;
+}
