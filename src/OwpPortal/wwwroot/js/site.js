@@ -54,3 +54,23 @@ async function lookupLocation(lat, long) {
 function errorPosition(position) {
     alert('unable to determine your current location')
 }
+
+$(document).ready(function () {
+
+    let imgElement = document.getElementById("WorkItem_Image");
+    if (imgElement) {
+        imgElement.onchange = function () {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                // get loaded data and render thumbnail.
+                document.getElementById("imgpreview").src = e.target.result;
+                document.getElementById('imgpreview').hidden = false;
+            };
+
+            // read the image file as a data URL.
+            reader.readAsDataURL(this.files[0]);
+            document.getElementById('fileLoaded').innerText = this.files[0].name;
+        };
+    }
+});

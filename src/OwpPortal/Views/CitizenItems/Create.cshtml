@@ -81,17 +81,23 @@
                         </div>
                     </div>
 
+                    <div>
+                        <label asp-for="WorkItem.Image" class="control-label h6">Please take a picture of the issue to help us assess more quickly.</label>
+                    </div>
 
-                    <div class="form-group">
-                        <label class="control-label h6">Please select your image : </label>
-                        <div class="input-group">
-                            <input id="image" name="image" type="file" accept="image/*" class="form-control" capture />
-                        </div>
-                        <div class="col-sm-3">
-                            <img width="300" height="300" id="imgpreview" hidden/>
+                    <div class="input-group mb-3">
+                        <div class="custom-file">
+                            <input asp-for="WorkItem.Image" name="image" type="file" class="custom-file-input" accept="image/*">
+                            <label class="custom-file-label" for="inputGroupFile02" id="fileLoaded">Please upload a photo of the issue</label>
                         </div>
                     </div>
 
+                    <div class="form-row">
+                        <div class="col-sm-3">
+                            <img width="300" id="imgpreview" hidden />
+                        </div>
+                    </div>
+                    
                     <div class="form-group">
                         <label asp-for="WorkItem.Description" class="control-label h6">Please briefly describe the fault:</label>
                         <textarea asp-for="WorkItem.Description" class="form-control" autocomplete="off"></textarea>
