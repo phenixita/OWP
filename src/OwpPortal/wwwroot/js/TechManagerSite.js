@@ -12,8 +12,25 @@
 
     var table = $('#workitems').DataTable({
         orderCellsTop: true,
-        fixedHeader: true
+        fixedHeader: true,
+        dom: 'tlp'
     });
+
+    if (document.getElementById("image") != null && document.getElementById("image") != "undefined") {
+        document.getElementById("image").onchange = function () {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                // get loaded data and render thumbnail.
+                document.getElementById("imgpreview").src = e.target.result;
+                document.getElementById('imgpreview').hidden = false;
+            };
+
+            // read the image file as a data URL.
+            reader.readAsDataURL(this.files[0]);
+        };
+    }
+
 });
 
 async function getWorkItems() {
@@ -26,4 +43,66 @@ async function getWorkItems() {
             }
         });
     });
+}
+
+async function loadMapScenario() {
+    let map = new Microsoft.Maps.Map(document.getElementById('issueMap'),
+        {
+            /* No need to set credentials if already passed in URL */
+            center: new Microsoft.Maps.Location(51.4617734, -0.9274358),
+            zoom: 12
+        });
+
+    var items = await getWorkItems();
+
+    const summaryDescriptionValueEle = document.getElementById("SummaryDescriptionValue");
+    const summaryStatusValueEle = document.getElementById("SummaryStatusValue");
+    const summaryTypeEle = document.getElementById("SummaryTypeValue");
+    const summaryAssignedToEle = document.getElementById("SummaryAssigngedToValue");
+    const summaryWidValueEle = document.getElementById("SummaryWidValue");
+    const summaryAddressValueEle = document.getElementById("SummaryAddressValue");
+
+    const editLinkEle = document.getElementById("editLink");
+
+
+    const clearAndReplace = (ele, value) => {
+        ele.innerText = "";
+        if (value) {
+            ele.innerText = value;
+        }
+    };
+
+    const colorPinMap = ['gray', 'blue', 'orange', 'red'];
+
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        if (item && item.longitude) {
+            let pushpin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(item.latitude, item.longitude), null);
+
+            const pinColor = item.workItemPriority ? colorPinMap[item.workItemPriority] : 'purple';
+
+            pushpin.setOptions({ enableHoverStyle: true, enableClickedStyle: false, color: pinColor });
+            Microsoft.Maps.Events.addHandler(pushpin, 'click', () => {
+
+                $('#summaryCardNoContent').hide();
+                $('#summaryCard').show();
+
+                $('#priorityGlyph')[0].style = 'color:' + pinColor;
+
+                clearAndReplace(summaryDescriptionValueEle, item.description);
+                clearAndReplace(summaryStatusValueEle, item.statusName);
+                clearAndReplace(summaryTypeEle, item.typeName);
+                clearAndReplace(summaryWidValueEle, item.workItemId);
+                clearAndReplace(summaryAddressValueEle, item.address);
+
+                summaryStatusValueEle.innerText = item.statusName;
+                if (item.assignedTo) {
+                    summaryAssignedToEle.innerText = item.assignedTo.principalDisplayName;
+                }
+
+                editLinkEle.href = "/Workitems/Edit/" + item.workItemId;
+            });
+            map.entities.push(pushpin);
+        }
+    }
 }
