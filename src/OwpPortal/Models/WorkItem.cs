@@ -69,5 +69,11 @@ namespace owp_web.Models
                 return this.WorkItemType.ToName();
             }
         }
+
+        [Display(Name = "Image of issue")]
+        public byte[] Image { get; set; }
+
+        [Display(Name = "Priority")]
+        public WorkItemPriority WorkItemPriority { get; set; }
     }
 }
