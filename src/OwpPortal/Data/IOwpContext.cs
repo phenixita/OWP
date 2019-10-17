@@ -11,5 +11,7 @@ namespace owp_web.Data
     public interface IOwpContext : IDbContext
     {
         DbSet<WorkItem> WorkItem { get; set; }
+
+        IQueryable<WorkItemListViewModel>WorkItemList{get;}
     }
 }

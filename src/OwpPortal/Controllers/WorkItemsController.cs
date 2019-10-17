@@ -27,7 +27,7 @@ namespace owp_web.Controllers
         // GET: WorkItems
         public async Task<IActionResult> Index()
         {
-            return View(await _context.WorkItem.ToListAsync());
+            return View(await _context.WorkItemList.Where(wi=>wi.Status!=WorkItemStatus.Done).ToListAsync());
         }
 
         // GET: WorkItems/Details/5
@@ -133,8 +133,9 @@ namespace owp_web.Controllers
                                 },
                                 Subject = $"New Issue #{workItem.WorkItemId} has been assigned to you!"
                             };
+                            await _api.SendEmailByPrincipalIdAsync(workItem.AssignedTo.PrincipalId, message);
                         }
-                        else
+                        else if(originalWorkItem.AssignmentId != workItem.AssignmentId)
                         {
                             message = new Message
                             {
@@ -145,9 +146,8 @@ namespace owp_web.Controllers
                                 },
                                 Subject = $"New Issue #{workItem.WorkItemId} has been REassigned to you!"
                             };
+                            await _api.SendEmailByPrincipalIdAsync(workItem.AssignedTo.PrincipalId, message);
                         }
-
-                        await _api.SendEmailByPrincipalIdAsync(workItem.AssignedTo.PrincipalId, message);
                     }
 
                     await _context.SaveChangesAsync();
