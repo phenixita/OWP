@@ -53,5 +53,8 @@ namespace owp_web.Models
         public decimal? Latitude { get; set; }
 
         public decimal? @Longitude { get; set; }
+
+        [Display(Name = "Image of issue")]
+        public byte[] Image { get; set; }
     }
 }
