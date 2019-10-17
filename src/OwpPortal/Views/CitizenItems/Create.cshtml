@@ -21,7 +21,7 @@
         <hr />
         <div class="row">
             <div class="col-md-8">
-                <form asp-action="Create">
+                <form asp-action="Create" accept="image/*">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="form-row">
@@ -38,28 +38,28 @@
 
                             <div class="col-md-12 no-gutters">
                                 <div class="list-group align-content-md-start">
-                                    <a href="#" class="form-group list-group-item list-group-item-action active" id="WorkItemType1" data-toggle="list" value="1" onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 1;">
+                                    <a href="#" class="form-group list-group-item list-group-item-action active" data-toggle="list" value="1" onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 1;">
                                         Problem with the asphalt road surface, such as a pothole or cracking
                                     </a>
-                                    <a href="#" class="form-group list-group-item list-group-item-action" id="WorkItemType2" data-toggle="list" value="2" onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 2;">
+                                    <a href="#" class="form-group list-group-item list-group-item-action" data-toggle="list" value="2" onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 2;">
                                         Problem with broken paving or unevenness
                                     </a>
-                                    <a href="#" class="form-group list-group-item list-group-item-action" id="WorkItemType3" data-toggle="list" value="3"  onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 3;">
+                                    <a href="#" class="form-group list-group-item list-group-item-action" data-toggle="list" value="3" onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 3;">
                                         Problem with a bridge
                                     </a>
-                                    <a href="#" class="form-group list-group-item list-group-item-action" id="WorkItemType4" data-toggle="list" value="4" onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 4;">
+                                    <a href="#" class="form-group list-group-item list-group-item-action" data-toggle="list" value="4">
                                         Street cleanliness - requiring sweeping
                                     </a>
-                                    <a href="#" class="form-group list-group-item list-group-item-action" id="WorkItemType5" data-toggle="list" value="5" onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 5;">
+                                    <a href="#" class="form-group list-group-item list-group-item-action" data-toggle="list" value="5">
                                         A fault with traffic signalling or lighting
                                     </a>
-                                    <a href="#" class="form-group list-group-item list-group-item-action" id="WorkItemType6" data-toggle="list" value="6" onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 6;">
+                                    <a href="#" class="form-group list-group-item list-group-item-action" data-toggle="list" value="6">
                                         A fault with road markings/line painting
                                     </a>
-                                    <a href="#" class="form-group list-group-item list-group-item-action" id="WorkItemType7" data-toggle="list" value="7" onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 7;">
+                                    <a href="#" class="form-group list-group-item list-group-item-action" data-toggle="list" value="7">
                                         Road inspection required
                                     </a>
-                                    <a href="#" class="form-group list-group-item list-group-item-action" id="WorkItemType8" data-toggle="list" value="8" onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 8;">
+                                    <a href="#" class="form-group list-group-item list-group-item-action" data-toggle="list" value="8">
                                         A fault with road surface water management
                                     </a>
                                 </div>
@@ -81,10 +81,28 @@
                         </div>
                     </div>
 
+
+                    <div class="form-group">
+                        <label asp-for="WorkItem.Image" class="control-label h6">Please select your image : </label>
+                        <div class="input-group">
+                            <input asp-for="WorkItem.Image" type="file" accept="image/*" class="form-control" capture/>
+                           
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" type="button" id="useCurrentLocation" onclick="getCurrentLocation()">Use current location</button>
+                            </div>
+                            <span asp-validation-for="WorkItem.Address" class="text-danger"></span>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label asp-for="WorkItem.Description" class="control-label h6">Please briefly describe the fault:</label>
                         <textarea asp-for="WorkItem.Description" class="form-control" autocomplete="off"></textarea>
                         <span asp-validation-for="WorkItem.Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="WorkItem.WorkItemPriority" class="control-label h6">Please select the priority</label>
+                        <select asp-for="WorkItem.WorkItemPriority" class="form-control" asp-items="Html.GetEnumSelectList(typeof(WorkItemPriority))"></select>
                     </div>
 
                     <div class="form-group">
