@@ -27,7 +27,7 @@ namespace owp_web.Controllers
         // GET: WorkItems
         public async Task<IActionResult> Index()
         {
-            return View(await _context.WorkItem.Where(wi=>wi.Status!=WorkItemStatus.Done).Select(wi => new WorkItemListViewModel(){Address=wi.Address, AssignedTo=wi.AssignedTo, AssignmentId=wi.AssignmentId, CreatedOn=wi.CreatedOn, Description=wi.Description, LastChangedOn=wi.LastChangedOn, Latitude=wi.Latitude, Longitude=wi.Longitude, Status=wi.Status, StatusName=wi.StatusName, TypeName=wi.TypeName, WorkItemId=wi.WorkItemId, WorkItemPriority=wi.WorkItemPriority, WorkItemType=wi.WorkItemType}).ToListAsync());
+            return View(await _context.WorkItemList.Where(wi=>wi.Status!=WorkItemStatus.Done).ToListAsync());
         }
 
         // GET: WorkItems/Details/5
