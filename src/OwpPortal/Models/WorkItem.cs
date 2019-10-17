@@ -46,7 +46,7 @@ namespace owp_web.Models
                 }
 
                 return workerCache.GetOrAdd(AssignmentId, (s) => { 
-                    return new GraphAPI().GetWorkerByPrincipalIdAsync(s).Result; 
+                    return new GraphAPI().GetWorkerByAssignmentIdAsync(s).Result; 
                 } );
             }
             set
