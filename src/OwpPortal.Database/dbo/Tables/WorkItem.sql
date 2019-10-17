@@ -5,21 +5,14 @@
     [CreatedOn]          DATETIME2 (7)  CONSTRAINT [DF_WorkItem_CreatedOn] DEFAULT (getdate()) NOT NULL,
     [LastChangedOn]      DATETIME2 (7)  CONSTRAINT [DF_WorkItem_LastChangedOn] DEFAULT (getdate()) NOT NULL,
     [Status]             INT            NOT NULL,
-    [AssignedToWorkerId] BIGINT         NULL,
+    [AssignmentId]		 NVARCHAR (MAX) NULL,
     [Address]            NVARCHAR (MAX) NULL,
-    [AssignedToEmail]    NVARCHAR (255) NULL,
-    CONSTRAINT [PK_WorkItem] PRIMARY KEY CLUSTERED ([WorkItemId] ASC),
-    CONSTRAINT [FK_WorkItem_Worker_AssignedToWorkerId] FOREIGN KEY ([AssignedToWorkerId]) REFERENCES [dbo].[Worker] ([WorkerId])
+    [Latitude] DECIMAL(30, 14) NULL, 
+    [Longitude] DECIMAL(30, 14) NULL, 
+    CONSTRAINT [PK_WorkItem] PRIMARY KEY CLUSTERED ([WorkItemId] ASC)
 );
 
-
 GO
-CREATE NONCLUSTERED INDEX [IX_WorkItem_AssignedToWorkerId]
-    ON [dbo].[WorkItem]([AssignedToWorkerId] ASC);
-
-
-GO
-
 
 CREATE TRIGGER tgr_modlastchanged
 ON WorkItem

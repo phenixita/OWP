@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using owp_web.Helpers;
 
 namespace owp_web.Models
 {
@@ -30,13 +31,27 @@ namespace owp_web.Models
 
         public WorkItemStatus Status { get; set; }
 
+        [NotMapped]
         [Display(Name = "Assigned To")]
-        public Worker AssignedTo { get; set; }
+        public Worker AssignedTo 
+        { 
+            get
+            {
+                return (new GraphAPI()).GetWorkerByPrincipalIdAsync(AssignmentId).Result;
+            }
+            set 
+            {
+                AssignmentId = value.AssignmentId;
+            }
+        }
 
-        [Display(Name = "Email address of worker")]
-        public string AssignedToEmail { get; set; }
+        public string AssignmentId { get; set; }
 
         [Display(Name = "Address of issue")]
         public string Address { get; set; }
+        
+        public decimal? Latitude { get; set; }
+
+        public decimal? @Longitude { get; set; }
     }
 }

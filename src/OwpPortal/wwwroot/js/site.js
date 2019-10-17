@@ -10,9 +10,15 @@ function getCurrentLocation()
         const addrEle = document.getElementById('WorkItem_Address');
         addrEle.placeholder = "Fetching location...";
 
+        const latEle = document.getElementById('WorkItem_Latitude');
+        const longEle = document.getElementById('WorkItem_Longitude');
+        
         navigator.geolocation.getCurrentPosition(async (geoPos) => {
             const lat = geoPos.coords.latitude;
             const long = geoPos.coords.longitude;
+
+            latEle.value = lat;
+            longEle.value = long;
 
             const data = await lookupLocation(lat, long);
 
@@ -29,7 +35,6 @@ function getCurrentLocation()
         alert('Location not available');
     }
 }
-
 
 async function lookupLocation(lat, long) {
     return new Promise((resolve, reject) => {

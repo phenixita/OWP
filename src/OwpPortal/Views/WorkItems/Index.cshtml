@@ -12,39 +12,39 @@
     <title>Index</title>
 </head>
 <body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table" id="workitems" style="width:100%">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.WorkItemId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WorkItemType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedOn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastChangedOn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AssignedToEmail)
-            </th>
-            <th></th>
-        </tr>
-        <tr>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table" id="workitems" width="100%">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkItemId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkItemType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedOn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastChangedOn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AssignedTo)
+                </th>
+                <th></th>
+            </tr>
+                    <tr>
             <th>
                 <input style="max-width:50px" type="text" placeholder="Search @Html.DisplayNameFor(model => model.WorkItemId)" />
             </th>
@@ -73,42 +73,69 @@
 
             </th>
         </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WorkItemId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WorkItemType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedOn)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastChangedOn)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AssignedToEmail)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.WorkItemId"><i class="fas fa-edit"></i></a>
-                    <a asp-action="Delete" asp-route-id="@item.WorkItemId"><i class="fas fa-trash-alt"></i></a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WorkItemId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WorkItemType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedOn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastChangedOn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AssignedTo.PrincipalDisplayName)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.WorkItemId"><i class="fas fa-edit"></i></a>
+                        <a asp-action="Delete" asp-route-id="@item.WorkItemId"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div id='myMap' style='width: auto; height: 50vh;'></div>
 </body>
 </html>
+
+<script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=AhzXPtrjsvIyqZezEQdu9f- yPHPncwyVhlQ2 - gchufOGsO - HN1iYQLTCHZZlP859'></script>
+<script>
+    
+    var map;
+    async function loadMapScenario() {
+        map = new Microsoft.Maps.Map(document.getElementById('myMap'),
+         {
+            /* No need to set credentials if already passed in URL */
+            center: new Microsoft.Maps.Location(51.4617734, -0.9274358),
+            zoom: 12
+          });
+
+        var items = await getWorkItems();
+
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].latitude && items[i].longitude) {
+                map.entities.push(new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(items[i].latitude, items[i].longitude), null));
+            }
+        } 
+    }
+
+    setTimeout(() => { loadMapScenario(); }, 3000);
+    
+</script>
