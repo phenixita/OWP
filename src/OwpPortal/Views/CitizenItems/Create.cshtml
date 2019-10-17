@@ -24,59 +24,48 @@
                 <form asp-action="Create">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                    <div class="form-row xd-lg-none">
+                    <div class="form-row">
                         <span class="h6">Please specify the type of issue:</span>
                     </div>
 
                     <fieldset class="container form-group">
-                        <div class="row">
+                        <div class="row no-gutters">
                             <legend class="col-form-label col-lg-2 pt-0 d-none d-lg-block"></legend>
 
                             <input asp-for="WorkItem.Latitude" type="hidden" />
                             <input asp-for="WorkItem.Longitude" type="hidden" />
+                            <input asp-for="WorkItem.WorkItemType" type="hidden" value="1" />
 
-                            <div class="col-sm-10">
-                                <div class="form-group">
-                                    <input asp-for="WorkItem.WorkItemType" class="form-check-input" type="radio" value="1" checked />
-                                    <label asp-for="WorkItem.WorkItemType" class="form-check-label">Problem with the asphalt road surface, such as a pothole or cracking</label>
+                            <div class="col-md-12 no-gutters">
+                                <div class="list-group align-content-md-start">
+                                    <a href="#" class="form-group list-group-item list-group-item-action active" data-toggle="list" value="1" onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 1;">
+                                        Problem with the asphalt road surface, such as a pothole or cracking
+                                    </a>
+                                    <a href="#" class="form-group list-group-item list-group-item-action" data-toggle="list" value="2" onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 2;">
+                                        Problem with broken paving or unevenness
+                                    </a>
+                                    <a href="#" class="form-group list-group-item list-group-item-action" data-toggle="list" value="3"  onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 3;">
+                                        Problem with a bridge
+                                    </a>
+                                    <a href="#" class="form-group list-group-item list-group-item-action" data-toggle="list" value="4">
+                                        Street cleanliness - requiring sweeping
+                                    </a>
+                                    <a href="#" class="form-group list-group-item list-group-item-action" data-toggle="list" value="5">
+                                        A fault with traffic signalling or lighting
+                                    </a>
+                                    <a href="#" class="form-group list-group-item list-group-item-action" data-toggle="list" value="6">
+                                        A fault with road markings/line painting
+                                    </a>
+                                    <a href="#" class="form-group list-group-item list-group-item-action" data-toggle="list" value="7">
+                                        Road inspection required
+                                    </a>
+                                    <a href="#" class="form-group list-group-item list-group-item-action" data-toggle="list" value="8">
+                                        A fault with road surface water management
+                                    </a>
                                 </div>
-
-                                <div class="form-group">
-                                    <input asp-for="WorkItem.WorkItemType" class="form-check-input" type="radio" value="2" id="workitemType2" />
-                                    <label asp-for="WorkItem.WorkItemType" class="form-check-label" for="workitemType2">Problem with broken paving or unevenness</label>
+                                <div class="col-5">
+                                    &nbsp;
                                 </div>
-
-                                <div class="form-group">
-                                    <input asp-for="WorkItem.WorkItemType" class="form-check-input" type="radio" value="3" id="workitemType3" />
-                                    <label asp-for="WorkItem.WorkItemType" class="form-check-label" for="workitemType3">Problem with a bridge</label>
-                                </div>
-
-                                <div class="form-group">
-                                    <input asp-for="WorkItem.WorkItemType" class="form-check-input" type="radio" value="4" id="workitemType4" />
-                                    <label asp-for="WorkItem.WorkItemType" class="form-check-label" for="workitemType4">Street cleanliness - requiring sweeping</label>
-                                </div>
-
-                                <div class="form-group">
-                                    <input asp-for="WorkItem.WorkItemType" class="form-check-input" type="radio" value="5" id="workitemType5" />
-                                    <label asp-for="WorkItem.WorkItemType" class="form-check-label" for="workitemType5">A fault with traffic signalling or lighting</label>
-                                </div>
-
-                                <div class="form-group">
-                                    <input asp-for="WorkItem.WorkItemType" class="form-check-input" type="radio" value="6" id="workitemType6" />
-                                    <label asp-for="WorkItem.WorkItemType" class="form-check-label" for="workitemType6">A fault with road markings/line painting</label>
-                                </div>
-
-                                <div class="form-group">
-                                    <input asp-for="WorkItem.WorkItemType" class="form-check-input" type="radio" value="7" id="workitemType7" />
-                                    <label asp-for="WorkItem.WorkItemType" class="form-check-label" for="workitemType7">Road inspection required</label>
-                                </div>
-
-                                <div class="form-group">
-                                    <input asp-for="WorkItem.WorkItemType" class="form-check-input" type="radio" value="8" id="workitemType8" />
-                                    <label asp-for="WorkItem.WorkItemType" class="form-check-label" for="workitemType8">A fault with road surface water management</label>
-                                </div>
-
-
                             </div>
                         </div>
                     </fieldset>
