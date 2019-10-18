@@ -60,12 +60,13 @@ $(document).ready(function () {
     let imgElement = document.getElementById("WorkItem_Image");
     if (imgElement) {
         imgElement.onchange = function () {
+            $('#submitButton').attr('disabled', 'disabled');
+            $('#imgLoader').parent().show();
+
             var reader = new FileReader();
 
             reader.onload = function (e) {
                 // get loaded data and render thumbnail.
-                $('#submitButton').attr('disabled', 'disabled');
-                $('#imgLoader').parent().show();
                 document.getElementById("imgpreview").src = e.target.result;
                 document.getElementById('imgpreview').hidden = false;
                 $('#imgpreview').css('opacity', 0.5);
