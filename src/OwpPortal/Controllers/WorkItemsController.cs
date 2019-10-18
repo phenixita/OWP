@@ -27,7 +27,7 @@ namespace owp_web.Controllers
         // GET: WorkItems
         public async Task<IActionResult> Index()
         {
-            return View(await _context.WorkItemList.Where(wi=>wi.Status!=WorkItemStatus.Done).ToListAsync());
+            return View(await _context.WorkItemList.ToListAsync());
         }
 
         // GET: WorkItems/Details/5
