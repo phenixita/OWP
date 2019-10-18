@@ -65,7 +65,7 @@ async function loadMapScenario() {
             let pushpin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(item.latitude, item.longitude), null);
             pushpin.workItemId = item.workItemId;
 
-            const pinColor = item.workItemPriority ? colorPinMap[item.workItemPriority] : 'purple';
+            const pinColor = typeof item.workItemPriority != 'undefined' ? colorPinMap[item.workItemPriority] : 'purple';
 
             pushpin.setOptions({ enableHoverStyle: true, enableClickedStyle: false, color: pinColor });
             Microsoft.Maps.Events.addHandler(pushpin, 'click', (e) => {
