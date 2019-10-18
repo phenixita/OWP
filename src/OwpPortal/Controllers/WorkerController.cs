@@ -31,7 +31,7 @@ namespace owp_web.Controllers
             var allWorkers = await new GraphAPI().GetWorkersListAsync();
 
             var currentWorker = allWorkers.FirstOrDefault(w => w.PrincipalId.ToString() == objectIdentifier);
-
+            var cs = _context.Database.GetDbConnection();
             var currentWorkItems = await _context.WorkItem
                 .Where(wi => wi.AssignmentId == currentWorker.AssignmentId)
                 .ToListAsync();

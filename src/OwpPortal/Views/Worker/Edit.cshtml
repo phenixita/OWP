@@ -12,6 +12,11 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="WorkItemId" />
+            
+            <div class="form-group">
+                <label asp-for="WorkItemPriority" class="control-label"></label>
+                <input asp-for="WorkItemPriority" class="form-control" disabled="disabled" />
+            </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" disabled="disabled" />

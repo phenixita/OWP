@@ -5,13 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>@User.Claims.FirstOrDefault(c => c.Type == "name")?.Value</h1>
+<h3>All My Issues</h3>
 
-<h3>All My assigned Issues</h3>
-
-<p>
+@*<p>
     <a asp-action="Create">Create New Issue</a>
-</p>
+</p>*@
 <table class="table">
     <thead class="thead-light">
         <tr>
@@ -21,6 +19,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkItemPriority)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CreatedOn)
@@ -44,6 +45,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
+            <td data-pri="@Html.DisplayFor(modelItem => item.WorkItemPriority)">
+                @Html.DisplayFor(modelItem => item.WorkItemPriority)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreatedOn)
             </td>
@@ -54,7 +58,7 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.WorkItemId">Edit</a>
+                <a asp-action="Edit" asp-route-id="@item.WorkItemId"><i class="fas fa-edit"></i></a>
             </td>
         </tr>
 }
