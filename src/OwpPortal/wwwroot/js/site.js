@@ -105,7 +105,7 @@ function uploadImage(file) {
             // Upload blob failed
         } else {
             // Upload successfully
-            $('#WorkItem_ImageUrl').val(blobParams.blobUri + "/" + blobParams.containerName +"/" + fileName);
+            $('#WorkItem_ImageUrl').val(blobParams.blobUri + blobParams.containerName +"/" + fileName);
             $('#imgpreview').css('opacity', 1);
         }
         $('#imgLoader').parent().hide();
