@@ -4,7 +4,7 @@
   "parameters": {
     "skuName": {
       "type": "string",
-      "defaultValue": "F1",
+      "defaultValue": "S1",
       "allowedValues": [
         "F1",
         "D1",
@@ -33,18 +33,21 @@
     },
     "sqlAdministratorLogin": {
       "type": "string",
+      "defaultvalue": "owpadmin",
       "metadata": {
         "description": "The admin user of the SQL Server"
       }
     },
     "sqlServerName": {
       "type": "string",
+      "defaultvalue": "owpsqlserver",
       "metadata": {
         "description": "The name of the SQL Server instance"
       }
     },
     "sqlAdministratorLoginPassword": {
       "type": "securestring",
+      "defaultvalue": "#3))0W0r)6!",
       "metadata": {
         "description": "The password of the admin user of the SQL Server"
       }
@@ -70,12 +73,119 @@
     "webSiteName": {
       "type": "string",
       "defaultvalue": "owp-portal"
+    },
+    "storageaccountName": {
+      "type": "string",
+      "defaultvalue": "owpstorageaccount"
     }
   },
   "variables": {
     "hostingPlanName": "[concat('hostingplan', uniqueString(resourceGroup().id))]"
   },
   "resources": [
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2019-04-01",
+      "name": "[parameters('storageaccountName')]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "Standard_RAGRS",
+        "tier": "Standard"
+      },
+      "kind": "StorageV2",
+      "properties": {
+        "networkAcls": {
+          "bypass": "AzureServices",
+          "virtualNetworkRules": [],
+          "ipRules": [],
+          "defaultAction": "Allow"
+        },
+        "supportsHttpsTrafficOnly": true,
+        "encryption": {
+          "services": {
+            "file": {
+              "enabled": true
+            },
+            "blob": {
+              "enabled": true
+            }
+          },
+          "keySource": "Microsoft.Storage"
+        },
+        "accessTier": "Hot"
+      }
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts/blobServices",
+      "apiVersion": "2019-04-01",
+      "name": "[concat(parameters('storageaccountName'), '/default')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageaccountName'))]"
+      ],
+      "properties": {
+        "cors": {
+          "corsRules": [
+            {
+              "allowedOrigins": [
+                "*"
+              ],
+              "allowedMethods": [
+                "PUT",
+                "GET",
+                "OPTIONS",
+                "POST"
+              ],
+              "maxAgeInSeconds": 0,
+              "exposedHeaders": [
+                "*"
+              ],
+              "allowedHeaders": [
+                "*"
+              ]
+            }
+          ]
+        },
+        "deleteRetentionPolicy": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+      "apiVersion": "2019-04-01",
+      "name": "[concat(parameters('storageaccountName'), '/default/dev')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageaccountName'), 'default')]",
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageaccountName'))]"
+      ],
+      "properties": {
+        "publicAccess": "None"
+      }
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+      "apiVersion": "2019-04-01",
+      "name": "[concat(parameters('storageaccountName'), '/default/test')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageaccountName'), 'default')]",
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageaccountName'))]"
+      ],
+      "properties": {
+        "publicAccess": "None"
+      }
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+      "apiVersion": "2019-04-01",
+      "name": "[concat(parameters('storageaccountName'), '/default/prod')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageaccountName'), 'default')]",
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageaccountName'))]"
+      ],
+      "properties": {
+        "publicAccess": "None"
+      }
+    },
     {
       "name": "[parameters('sqlserverName')]",
       "type": "Microsoft.Sql/servers",
@@ -483,6 +593,10 @@
     "sqlSvrFqdn": {
       "type": "string",
       "value": "[reference(concat('Microsoft.Sql/servers/', parameters('sqlserverName'))).fullyQualifiedDomainName]"
+    },
+    "storageAccountKey": {
+      "type": "string",
+      "value": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageaccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value]"
     }
   }
 }
