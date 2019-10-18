@@ -7,13 +7,13 @@
 
 <h1>@User.Claims.FirstOrDefault(c => c.Type == "name")?.Value</h1>
 
-<h3>All My Issues</h3>
+<h3>All My assigned Issues</h3>
 
 <p>
     <a asp-action="Create">Create New Issue</a>
 </p>
 <table class="table">
-    <thead>
+    <thead class="thead-light">
         <tr>
 
             <th>
@@ -34,7 +34,7 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="table-light table-hover">
         @foreach (var item in Model) {
         <tr>
 
