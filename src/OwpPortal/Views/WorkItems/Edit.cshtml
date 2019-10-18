@@ -13,95 +13,101 @@
 </head>
 <body>
 
-<h4>WorkItem</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="WorkItem.WorkItemId" />
-            <div class="form-group">
-                <label asp-for="WorkItem.Description" class="control-label"></label>
-                <input asp-for="WorkItem.Description" class="form-control" />
-                <span asp-validation-for="WorkItem.Description" class="text-danger"></span>
-            </div>
+    <h2 class="mt-3">Edit Work Item @Model.WorkItem.WorkItemId</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="WorkItem.WorkItemId" />
+                <div class="form-group">
+                    <label asp-for="WorkItem.Description" class="control-label"></label>
+                    <input asp-for="WorkItem.Description" class="form-control" />
+                    <span asp-validation-for="WorkItem.Description" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="WorkItem.Address" class="control-label"></label>
-                <input asp-for="WorkItem.Address" class="form-control" />
-                <span asp-validation-for="WorkItem.Address" class="text-danger"></span>
-            </div>
+                <div class="form-group">
+                    <label asp-for="WorkItem.Address" class="control-label"></label>
+                    <input asp-for="WorkItem.Address" class="form-control" />
+                    <span asp-validation-for="WorkItem.Address" class="text-danger"></span>
+                </div>
 
-            <input type="hidden" asp-for="WorkItem.Latitude" class="form-control" />
-            <input type="hidden" asp-for="WorkItem.Longitude" class="form-control" />
+                <input type="hidden" asp-for="WorkItem.Latitude" class="form-control" />
+                <input type="hidden" asp-for="WorkItem.Longitude" class="form-control" />
 
-            <div class="form-group">
-                <label asp-for="WorkItem.WorkItemType" class="control-label"></label>
-                <select asp-for="WorkItem.WorkItemType" class="form-control" asp-items="Html.GetEnumSelectList(typeof(WorkItemTypes))"></select>
-                <span asp-validation-for="WorkItem.WorkItemType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="WorkItem.Status" class="control-label"></label>
-                <select asp-for="WorkItem.Status" class="form-control" asp-items="Html.GetEnumSelectList(typeof(WorkItemStatus))"></select>
-                <span asp-validation-for="WorkItem.Status" class="text-danger"></span>
-            </div>
+                <div class="form-group">
+                    <label asp-for="WorkItem.WorkItemType" class="control-label"></label>
+                    <select asp-for="WorkItem.WorkItemType" class="form-control" asp-items="Html.GetEnumSelectList(typeof(WorkItemTypes))"></select>
+                    <span asp-validation-for="WorkItem.WorkItemType" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="WorkItem.Status" class="control-label"></label>
+                    <select asp-for="WorkItem.Status" class="form-control" asp-items="Html.GetEnumSelectList(typeof(WorkItemStatus))"></select>
+                    <span asp-validation-for="WorkItem.Status" class="text-danger"></span>
+                </div>
 
-            @{
-                List<Worker> workers = await Model.GetWorkersListAsync();
-                SelectList AssignedToList = new SelectList(workers, "AssignmentId", "PrincipalDisplayName", Model.WorkItem.AssignedTo);
-            }
+                @if (!string.IsNullOrEmpty(Model.WorkItem.ImageUrl))
+                {
+                    <div class="form-group">
+                        <label asp-for="WorkItem.ImageUrl" class="control-label"></label>
+                        <img src="@Model.WorkItem.ImageUrl" class="img-fluid" />
+                        <input type="hidden" asp-for="WorkItem.ImageUrl" />
+                    </div>
+                }
 
-            <div class="form-group">
-                <label asp-for="WorkItem.AssignedTo" class="control-label"></label>
-                <select asp-for="WorkItem.AssignmentId" class="form-control" asp-items="AssignedToList"></select>
-                <span asp-validation-for="WorkItem.AssignedTo" class="text-danger"></span>
-            </div>
+                @{
+                    List<Worker> workers = await Model.GetWorkersListAsync();
+                    SelectList AssignedToList = new SelectList(workers, "AssignmentId", "PrincipalDisplayName", Model.WorkItem.AssignedTo);
+                }
 
-            <div class="form-group">
-                <label asp-for="WorkItem.WorkItemPriority" class="control-label h6">Priority</label>
-                <select asp-for="WorkItem.WorkItemPriority" class="form-control" asp-items="Html.GetEnumSelectList(typeof(WorkItemPriority))">
-                    <option selected="selected" value="">-- Select a priority --</option>
-                </select>
-            </div>
+                <div class="form-group">
+                    <label asp-for="WorkItem.AssignedTo" class="control-label"></label>
+                    <select asp-for="WorkItem.AssignmentId" class="form-control" asp-items="AssignedToList"></select>
+                    <span asp-validation-for="WorkItem.AssignedTo" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="form-group">
+                    <label asp-for="WorkItem.WorkItemPriority" class="control-label h6">Priority</label>
+                    <select asp-for="WorkItem.WorkItemPriority" class="form-control" asp-items="Html.GetEnumSelectList(typeof(WorkItemPriority))">
+                        <option selected="selected" value="">-- Select a priority --</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <a role="button" class="btn btn-secondary" asp-action="Index">Back to List</a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
- <hr/>
+    <hr />
 
 
-<div class="row  float-right">
-    <div class="record-updated-metrics">
-        <span class="col-sm-2 font-weight-bold">Coordinates</span>
-        <span class="col-sm-2">
-            @Html.DisplayFor(model => model.WorkItem.Latitude), @Html.DisplayFor(model => model.WorkItem.Longitude)
-        </span>
+    <div class="row  float-right">
+        <div class="record-updated-metrics">
+            <span class="col-sm-2 font-weight-bold">Coordinates</span>
+            <span class="col-sm-2">
+                @Html.DisplayFor(model => model.WorkItem.Latitude), @Html.DisplayFor(model => model.WorkItem.Longitude)
+            </span>
 
-        <span class="col-sm-2 font-weight-bold">
-            @Html.DisplayNameFor(model => model.WorkItem.CreatedOn)
-        </span>
-        <span class="col-sm-2">
-            @Html.DisplayFor(model => model.WorkItem.CreatedOn)
-        </span>
-        <span class="col-sm-2 font-weight-bold">
-            @Html.DisplayNameFor(model => model.WorkItem.LastChangedOn)
-        </span>
-        <span class="col-sm-2">
-            @Html.DisplayFor(model => model.WorkItem.LastChangedOn)
-        </span>
+            <span class="col-sm-2 font-weight-bold">
+                @Html.DisplayNameFor(model => model.WorkItem.CreatedOn)
+            </span>
+            <span class="col-sm-2">
+                @Html.DisplayFor(model => model.WorkItem.CreatedOn)
+            </span>
+            <span class="col-sm-2 font-weight-bold">
+                @Html.DisplayNameFor(model => model.WorkItem.LastChangedOn)
+            </span>
+            <span class="col-sm-2">
+                @Html.DisplayFor(model => model.WorkItem.LastChangedOn)
+            </span>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
 </body>
 </html>

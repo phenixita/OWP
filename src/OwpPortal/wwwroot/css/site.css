@@ -84,3 +84,49 @@ body {
 #summaryCardNoContent {
     height:100%;
 }
+
+.dataTables_wrapper {
+    font-size:0.8rem;
+}
+
+.dataTables_wrapper .form-control {
+    font-size:0.8rem;
+}
+
+[data-pri]:before {
+    font-family: "Font Awesome 5 Pro";
+    content: "\f111";
+    display: inline-block;
+    font-weight: 900;
+    color: purple;
+}
+
+
+[data-pri~="0"]:before {
+    color: gray;
+}
+
+[data-pri~="1"]:before {
+    color: blue;
+}
+
+[data-pri~="2"]:before {
+    color: orange;
+}
+
+[data-pri~="3"]:before {
+    color: red;
+}
+
+.opwlogo {
+    padding-right:0.25rem;
+}
+
+.opwlogo:before {
+    color:white;
+} 
+
+.logged-on-user, .fa.logged-on-user {
+    font-weight:normal;
+    font-size: 1rem;
+}

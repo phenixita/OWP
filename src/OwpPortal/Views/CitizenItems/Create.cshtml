@@ -8,7 +8,7 @@
 
 <div class="jumbotron jumbotron-fluid citizen-home">
     <div class="container">
-        <h1 class="display-4">OWP Citizen Portal</h1>
+        <h1 class="display-4">OPW Citizen Portal</h1>
         <p class="lead">Welcome to the Citizen Portal for the Office of Public Works</p>
     </div>
 </div>
@@ -16,10 +16,14 @@
 <div class="container">
     <main role="main" class="pb-3">
 
-        <h5>Here you can notify us of issues that you may have with any infrastructure maintained by the Office Of Public Works</h5>
-
-        <hr />
         <div class="row">
+            <div class="col-md-8">
+                <h5>Here you can notify us of issues that you may have with any infrastructure maintained by the Office Of Public Works</h5>
+                <hr />
+            </div>
+        </div>
+        
+        <div class="row" aria-label="Entry form">
             <div class="col-md-8">
                 <form asp-action="Create" enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -38,10 +42,10 @@
 
                             <div class="col-md-12 no-gutters">
                                 <div class="list-group align-content-md-start">
-                                    <a href="#" class="form-group list-group-item list-group-item-action active" data-toggle="list" id="WorkItemType1" value="1" onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 1;">
+                                    <a href="#" class="form-group list-group-item list-group-item-action active" data-toggle="list" id="WorkItemType1" value="1" onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 1;" aria-label="Problem with the asphalt road surface">
                                         Problem with the asphalt road surface, such as a pothole or cracking
                                     </a>
-                                    <a href="#" class="form-group list-group-item list-group-item-action" data-toggle="list" id="WorkItemType2" value="2" onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 2;">
+                                    <a href="#" class="form-group list-group-item list-group-item-action" data-toggle="list" id="WorkItemType2" value="2" onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 2;" aria-label="Problem with broken paving or unevenness">
                                         Problem with broken paving or unevenness
                                     </a>
                                     <a href="#" class="form-group list-group-item list-group-item-action" data-toggle="list" id="WorkItemType3" value="3" onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 3;">
@@ -82,22 +86,28 @@
                     </div>
 
                     <div>
-                        <label asp-for="WorkItem.Image" class="control-label h6">Please take a picture of the issue to help us assess more quickly.</label>
+                        <label asp-for="WorkItem.ImageUrl" class="control-label h6">Please take a picture of the issue to help us assess more quickly.</label>
                     </div>
 
                     <div class="input-group mb-3">
                         <div class="custom-file">
-                            <input asp-for="WorkItem.Image" name="image" type="file" class="custom-file-input" accept="image/*">
+                            <input id="WorkItem_Image" name="image" type="file" class="custom-file-input" accept="image/*">
                             <label class="custom-file-label" for="inputGroupFile02" id="fileLoaded">Please upload a photo of the issue</label>
+                            <input type="hidden" asp-for="WorkItem.ImageUrl" />
                         </div>
                     </div>
 
                     <div class="form-row">
-                        <div class="col-sm-3">
-                            <img width="300" id="imgpreview" hidden />
+                        <div class="col-sm-6">
+                            <img class="img-fluid" id="imgpreview" style="display:none;" />
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="w3-border" style="display:none;">
+                                <div class="w3-green" id="imgLoader" style="height:16px;width:0%;"></div>
+                            </div>
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label asp-for="WorkItem.Description" class="control-label h6">Please briefly describe the fault:</label>
                         <textarea asp-for="WorkItem.Description" class="form-control" autocomplete="off"></textarea>
@@ -105,7 +115,7 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-primary" />
+                        <input type="submit" value="Create" class="btn btn-primary" id="submitButton"/>
                     </div>
                 </form>
             </div>
@@ -113,4 +123,10 @@
     </main>
 </div>
 
-
+<script type="text/javascript">
+    var blobParams = {
+        blobUri: 'https://owpybartea.blob.core.windows.net/owp-dev',
+        containerName : "owp-dev",
+        sasToken: '?sv=2019-02-02&ss=b&srt=sco&sp=rwdlac&se=2019-10-31T01:42:40Z&st=2019-10-17T16:42:40Z&spr=https&sig=xpVmXSLyo6EnZ%2FsfjVOg9TIgOII%2BtPw3ynf6TKC0TQA%3D'
+    };
+</script>

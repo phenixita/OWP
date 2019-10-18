@@ -27,7 +27,7 @@ namespace owp_web.Controllers
         // GET: WorkItems
         public async Task<IActionResult> Index()
         {
-            return View(await _context.WorkItem.ToListAsync());
+            return View(await _context.WorkItemList.Where(wi=>wi.Status!=WorkItemStatus.Done).ToListAsync());
         }
 
         // GET: WorkItems/Details/5
@@ -93,7 +93,7 @@ namespace owp_web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address,AssignmentId,Latitude,Longitude,WorkItemPriority")] WorkItem workItem)
+        public async Task<IActionResult> Edit(long id, [Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address,AssignmentId,Latitude,Longitude,WorkItemPriority,ImageUrl")] WorkItem workItem)
         {
             Message message;
 
@@ -128,26 +128,26 @@ namespace owp_web.Controllers
                             {
                                 Body = new ItemBody
                                 {
-                                    Content = $"Hi {workItem.AssignedTo.PrincipalDisplayName}! \r\n\r\n<br><br>The Issue #{workItem.WorkItemId} has been assigned to you.",
+                                    Content = $"Hi {workItem.AssignedTo.PrincipalDisplayName}! \r\n\r\n<br><br>The Issue <a href=\"https://owp.azurewebsites.net/worker/edit/{workItem.WorkItemId}\">#{workItem.WorkItemId}</a> has been assigned to you.",
                                     ContentType = BodyType.Html,
                                 },
                                 Subject = $"New Issue #{workItem.WorkItemId} has been assigned to you!"
                             };
+                            await _api.SendEmailByPrincipalIdAsync(workItem.AssignedTo.PrincipalId, message);
                         }
-                        else
+                        else if(originalWorkItem.AssignmentId != workItem.AssignmentId)
                         {
                             message = new Message
                             {
                                 Body = new ItemBody
                                 {
-                                    Content = $"Hi {workItem.AssignedTo.PrincipalDisplayName}! \r\n\r\n<br><br>The Issue #{workItem.WorkItemId} has been REassigned to you.",
+                                    Content = $"Hi {workItem.AssignedTo.PrincipalDisplayName}! \r\n\r\n<br><br>The Issue <a href=\"https://owp.azurewebsites.net/worker/edit/{workItem.WorkItemId}\">#{workItem.WorkItemId}</a> has been REassigned to you.",
                                     ContentType = BodyType.Html,
                                 },
                                 Subject = $"New Issue #{workItem.WorkItemId} has been REassigned to you!"
                             };
+                            await _api.SendEmailByPrincipalIdAsync(workItem.AssignedTo.PrincipalId, message);
                         }
-
-                        await _api.SendEmailByPrincipalIdAsync(workItem.AssignedTo.PrincipalId, message);
                     }
 
                     await _context.SaveChangesAsync();

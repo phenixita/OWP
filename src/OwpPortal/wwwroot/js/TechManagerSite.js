@@ -29,8 +29,10 @@ async function getWorkItems() {
     });
 }
 
+var map;
+
 async function loadMapScenario() {
-    let map = new Microsoft.Maps.Map(document.getElementById('issueMap'),
+    map = new Microsoft.Maps.Map(document.getElementById('issueMap'),
         {
             /* No need to set credentials if already passed in URL */
             center: new Microsoft.Maps.Location(51.4617734, -0.9274358),
@@ -47,8 +49,7 @@ async function loadMapScenario() {
     const summaryAddressValueEle = document.getElementById("SummaryAddressValue");
 
     const editLinkEle = document.getElementById("editLink");
-
-
+    
     const clearAndReplace = (ele, value) => {
         ele.innerText = "";
         if (value) {
@@ -62,11 +63,13 @@ async function loadMapScenario() {
         const item = items[i];
         if (item && item.longitude) {
             let pushpin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(item.latitude, item.longitude), null);
+            pushpin.workItemId = item.workItemId;
 
-            const pinColor = item.workItemPriority ? colorPinMap[item.workItemPriority] : 'purple';
+            const pinColor = typeof item.workItemPriority != 'undefined' ? colorPinMap[item.workItemPriority] : 'purple';
 
             pushpin.setOptions({ enableHoverStyle: true, enableClickedStyle: false, color: pinColor });
-            Microsoft.Maps.Events.addHandler(pushpin, 'click', () => {
+            Microsoft.Maps.Events.addHandler(pushpin, 'click', (e) => {
+                console.log(e.target);
 
                 $('#summaryCardNoContent').hide();
                 $('#summaryCard').show();
@@ -87,6 +90,22 @@ async function loadMapScenario() {
                 editLinkEle.href = "/Workitems/Edit/" + item.workItemId;
             });
             map.entities.push(pushpin);
+        }
+    }
+}
+
+function mapShow(lat, long, wid) {
+    document.getElementById('issueMap').scrollIntoView();
+    map.setView({
+        center: new Microsoft.Maps.Location(lat, long),
+        zoom:15
+    });
+
+    const entities = map.entities.getPrimitives();
+
+    for (let i = 0; i < entities.length; i++) {
+        if (entities[i].workItemId === wid) {
+            Microsoft.Maps.Events.invoke(entities[i], 'click', '');
         }
     }
 }

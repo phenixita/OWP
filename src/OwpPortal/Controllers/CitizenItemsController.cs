@@ -58,20 +58,10 @@ namespace owp_web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address,Latitude,Longitude")] WorkItem workItem, IFormFile image)
+        public async Task<IActionResult> Create([Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address,Latitude,Longitude,ImageUrl")] WorkItem workItem)
         {
             if (ModelState.IsValid)
             {
-
-                if (image != null)
-                {
-                    using (var ms = new MemoryStream())
-                    {
-                        image.CopyTo(ms);
-                        workItem.Image = ms.ToArray();
-                    }
-                }
-
                 _context.Add(workItem);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Edit), new { Id = workItem.WorkItemId });

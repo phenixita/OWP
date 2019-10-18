@@ -6,14 +6,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using owp_web.Helpers;
 using owp_web.Models;
 
 namespace owp_web.Controllers
 {
-    // [AllowAnonymous]
-    //[Authorize]
     [Authorize(Roles = "Worker")]
-    //[Authorize(Roles = "worker")]
     public class WorkerController : Controller
     {
         private readonly OwpContext _context;
@@ -26,9 +24,19 @@ namespace owp_web.Controllers
         // GET: Worker
         public async Task<IActionResult> Index()
         {
-            //User.Identity.Name
-              
-            return View(await _context.WorkItem.ToListAsync());
+            var objectIdentifier = User?.Claims
+                ?.FirstOrDefault(c => c.Type == "http://schemas.microsoft.com/identity/claims/objectidentifier")
+                ?.Value;
+
+            var allWorkers = await new GraphAPI().GetWorkersListAsync();
+
+            var currentWorker = allWorkers.FirstOrDefault(w => w.PrincipalId.ToString() == objectIdentifier);
+
+            var currentWorkItems = await _context.WorkItem
+                .Where(wi => wi.AssignmentId == currentWorker.AssignmentId)
+                .ToListAsync();
+
+            return View(currentWorkItems);
         }
 
         // GET: Worker/Details/5
@@ -60,7 +68,7 @@ namespace owp_web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,AssignmentId,Address,Latitude,Longitude,Image")] WorkItem workItem)
+        public async Task<IActionResult> Create([Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,AssignmentId,Address,Latitude,Longitude,ImageUrl")] WorkItem workItem)
         {
             if (ModelState.IsValid)
             {

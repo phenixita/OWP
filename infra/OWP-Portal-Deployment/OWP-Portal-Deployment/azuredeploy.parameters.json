@@ -25,7 +25,9 @@
     },
     "webSiteName": {
       "value": "owp"
+    },
+    "storageaccountName": {
+      "value": "owpstorageaccount"
     }
-
   }
 }
