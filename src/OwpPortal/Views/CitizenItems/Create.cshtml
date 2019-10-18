@@ -115,7 +115,13 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-primary" id="submitButton"/>
+                        <label asp-for="WorkItem.Email" class="control-label h6">Your Email for notification:</label>
+                        <input asp-for="WorkItem.Email" class="form-control" autocomplete="off">
+                        <span asp-validation-for="WorkItem.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" id="submitButton" />
                     </div>
                 </form>
             </div>

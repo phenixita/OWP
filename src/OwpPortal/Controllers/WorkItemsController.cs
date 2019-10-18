@@ -93,7 +93,7 @@ namespace owp_web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address,AssignmentId,Latitude,Longitude,WorkItemPriority,ImageUrl")] WorkItem workItem)
+        public async Task<IActionResult> Edit(long id, [Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address,AssignmentId,Latitude,Longitude,WorkItemPriority,ImageUrl,Email")] WorkItem workItem)
         {
             if (id != workItem.WorkItemId)
             {
@@ -145,15 +145,34 @@ namespace owp_web.Controllers
                             workItem.Status = WorkItemStatus.Resolved;
                         }
 
-                        if (originalWorkItem.Status != workItem.Status)
-                        {
-                            _context.Update(workItem);
-                        }
-
-                        if (!string.IsNullOrEmpty(message.Body.ToString()) && !string.IsNullOrEmpty(message.Subject))
+                        if (message != null && message.Body != null && !string.IsNullOrEmpty(message.Body.ToString()) && message.Subject != null && !string.IsNullOrEmpty(message.Subject))
                         {
                             await _api.SendEmailByPrincipalIdAsync(workItem.AssignedTo.PrincipalId, message);
-                        }   
+                        }
+
+                        if (originalWorkItem.Status != workItem.Status)
+                        {
+                            if(workItem.Status == WorkItemStatus.Done && !string.IsNullOrEmpty(workItem.Email))
+                            {
+                                message = new Message
+                                { 
+                                    Body = new ItemBody
+                                    {
+                                        Content = $"{workItem.WorkItemId} solved!",
+                                        ContentType = BodyType.Text
+                                    },
+                                    Subject = $"{workItem.WorkItemId} solved!"
+                                };
+
+                                EmailAddress emailAddress = new EmailAddress { Address = workItem.Email };
+
+                                await _api.SendEmailByEmailAsync(emailAddress, message);
+
+                                workItem.Email = null;
+                            }
+
+                            _context.Update(workItem);
+                        }
                     }
 
                     await _context.SaveChangesAsync();

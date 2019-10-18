@@ -58,7 +58,7 @@ namespace owp_web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address,Latitude,Longitude,ImageUrl")] WorkItem workItem)
+        public async Task<IActionResult> Create([Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address,Latitude,Longitude,ImageUrl,Email")] WorkItem workItem)
         {
             if (ModelState.IsValid)
             {

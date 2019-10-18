@@ -85,5 +85,9 @@ namespace owp_web.Models
 
         [Display(Name = "Image of issue")]
         public string ImageUrl { get; set; }
+
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
     }
 }

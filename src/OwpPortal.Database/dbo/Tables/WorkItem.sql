@@ -11,6 +11,7 @@
     [Longitude] DECIMAL(30, 14) NULL, 
 	[WorkItemPriority]	INT	NULL ,
     [ImageUrl] NVARCHAR(MAX) NULL, 
+	[Email] NVARCHAR(MAX) NULL,
     CONSTRAINT [PK_WorkItem] PRIMARY KEY CLUSTERED ([WorkItemId] ASC)
 );
 
