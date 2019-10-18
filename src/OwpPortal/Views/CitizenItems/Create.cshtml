@@ -8,7 +8,7 @@
 
 <div class="jumbotron jumbotron-fluid citizen-home">
     <div class="container">
-        <h1 class="display-4">OWP Citizen Portal</h1>
+        <h1 class="display-4">OPW Citizen Portal</h1>
         <p class="lead">Welcome to the Citizen Portal for the Office of Public Works</p>
     </div>
 </div>
@@ -23,7 +23,7 @@
             </div>
         </div>
         
-        <div class="row">
+        <div class="row" aria-label="Entry form">
             <div class="col-md-8">
                 <form asp-action="Create" enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -42,10 +42,10 @@
 
                             <div class="col-md-12 no-gutters">
                                 <div class="list-group align-content-md-start">
-                                    <a href="#" class="form-group list-group-item list-group-item-action active" data-toggle="list" id="WorkItemType1" value="1" onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 1;">
+                                    <a href="#" class="form-group list-group-item list-group-item-action active" data-toggle="list" id="WorkItemType1" value="1" onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 1;" aria-label="Problem with the asphalt road surface">
                                         Problem with the asphalt road surface, such as a pothole or cracking
                                     </a>
-                                    <a href="#" class="form-group list-group-item list-group-item-action" data-toggle="list" id="WorkItemType2" value="2" onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 2;">
+                                    <a href="#" class="form-group list-group-item list-group-item-action" data-toggle="list" id="WorkItemType2" value="2" onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 2;" aria-label="Problem with broken paving or unevenness">
                                         Problem with broken paving or unevenness
                                     </a>
                                     <a href="#" class="form-group list-group-item list-group-item-action" data-toggle="list" id="WorkItemType3" value="3" onclick="javascript: document.getElementById('WorkItem_WorkItemType').value = 3;">
