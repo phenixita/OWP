@@ -1,4 +1,7 @@
 ﻿@model owp_web.Models.WorkItemViewModel
+@using System.Web
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
 
 @{
     ViewData["Title"] = "Create";
@@ -22,7 +25,7 @@
                 <hr />
             </div>
         </div>
-        
+
         <div class="row" aria-label="Entry form">
             <div class="col-md-8">
                 <form asp-action="Create" enctype="multipart/form-data">
@@ -115,7 +118,13 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-primary" id="submitButton"/>
+                        <label asp-for="WorkItem.Email" class="control-label h6">Your Email for notification:</label>
+                        <input asp-for="WorkItem.Email" class="form-control" autocomplete="off">
+                        <span asp-validation-for="WorkItem.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" id="submitButton" />
                     </div>
                 </form>
             </div>
@@ -125,8 +134,8 @@
 
 <script type="text/javascript">
     var blobParams = {
-        blobUri: 'https://owpybartea.blob.core.windows.net/owp-dev',
-        containerName : "owp-dev",
-        sasToken: '?sv=2019-02-02&ss=b&srt=sco&sp=rwdlac&se=2019-10-31T01:42:40Z&st=2019-10-17T16:42:40Z&spr=https&sig=xpVmXSLyo6EnZ%2FsfjVOg9TIgOII%2BtPw3ynf6TKC0TQA%3D'
+        blobUri: '@Html.Raw(@Configuration["BlobStorage:blobUri"])',
+        containerName : '@Html.Raw(@Configuration["BlobStorage:containerName"])',
+        sasToken: '@Html.Raw(Configuration["BlobStorage:sasToken"])'
     };
 </script>
