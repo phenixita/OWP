@@ -27,7 +27,7 @@
       "value": "owp"
     },
     "storageaccountName": {
-      "value": "owpstorage"
+      "value": "owpstorageaccount"
     }
   }
 }
