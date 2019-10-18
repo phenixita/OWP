@@ -29,7 +29,7 @@
     [Address],
     [Latitude], 
     [Longitude], 
-    [Image], 
+    [ImageUrl], 
 	Case [WorkItemPriority]
 		when 0 then 'Low'
 		when 1 then 'Normal'
