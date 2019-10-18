@@ -64,9 +64,11 @@ $(document).ready(function () {
 
             reader.onload = function (e) {
                 // get loaded data and render thumbnail.
-                $('#imgLoader').show();
+                $('#submitButton').attr('disabled', 'disabled');
+                $('#imgLoader').parent().show();
                 document.getElementById("imgpreview").src = e.target.result;
                 document.getElementById('imgpreview').hidden = false;
+                $('#imgpreview').css('opacity', 0.5);
             };
 
             // read the image file as a data URL.
@@ -78,7 +80,6 @@ $(document).ready(function () {
         };
     }
 });
-
 
 function uuidv4() {
     return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
@@ -104,8 +105,10 @@ function uploadImage(file) {
         } else {
             // Upload successfully
             $('#WorkItem_ImageUrl').val(blobParams.blobUri + "/" + blobParams.containerName +"/" + fileName);
-            $('#imgLoader').hide();
+            $('#imgpreview').css('opacity', 1);
         }
+        $('#imgLoader').parent().hide();
+        $('#submitButton').removeAttr('disabled');
     });
 
     speedSummary.on('progress', function () {
