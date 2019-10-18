@@ -164,7 +164,7 @@ namespace owp_web.Controllers
                                     Subject = $"{workItem.WorkItemId} solved!"
                                 };
 
-                                EmailAddress emailAddress = new EmailAddress { Address = workItem.Email };
+                                EmailAddress emailAddress = new EmailAddress { Address = workItem.Email.Trim() };
 
                                 await _api.SendEmailByEmailAsync(emailAddress, message);
 
