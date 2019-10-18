@@ -95,8 +95,6 @@ namespace owp_web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(long id, [Bind("WorkItemId,Description,WorkItemType,CreatedOn,LastChangedOn,Status,Address,AssignmentId,Latitude,Longitude,WorkItemPriority,ImageUrl")] WorkItem workItem)
         {
-            Message message;
-
             if (id != workItem.WorkItemId)
             {
                 return NotFound();
@@ -122,32 +120,40 @@ namespace owp_web.Controllers
 
                     if (assignmentProperty.IsModified)
                     {
-                        if(string.IsNullOrEmpty(originalWorkItem.AssignmentId))
+                        Message message = new Message();
+
+                        if (string.IsNullOrEmpty(originalWorkItem.AssignmentId))
                         {
-                            message = new Message
+                            message.Body = new ItemBody
                             {
-                                Body = new ItemBody
-                                {
-                                    Content = $"Hi {workItem.AssignedTo.PrincipalDisplayName}! \r\n\r\n<br><br>The Issue <a href=\"https://owp.azurewebsites.net/worker/edit/{workItem.WorkItemId}\">#{workItem.WorkItemId}</a> has been assigned to you.",
-                                    ContentType = BodyType.Html,
-                                },
-                                Subject = $"New Issue #{workItem.WorkItemId} has been assigned to you!"
+                                Content = $"Hi {workItem.AssignedTo.PrincipalDisplayName}! \r\n\r\n<br><br>The Issue <a href=\"https://owp.azurewebsites.net/worker/edit/{workItem.WorkItemId}\">#{workItem.WorkItemId}</a> has been assigned to you.",
+                                ContentType = BodyType.Html
                             };
-                            await _api.SendEmailByPrincipalIdAsync(workItem.AssignedTo.PrincipalId, message);
+                            message.Subject = $"New Issue #{workItem.WorkItemId} has been assigned to you!";
+
+                            workItem.Status = WorkItemStatus.Assigned;
                         }
                         else if(originalWorkItem.AssignmentId != workItem.AssignmentId)
                         {
-                            message = new Message
+                            message.Body = new ItemBody
                             {
-                                Body = new ItemBody
-                                {
-                                    Content = $"Hi {workItem.AssignedTo.PrincipalDisplayName}! \r\n\r\n<br><br>The Issue <a href=\"https://owp.azurewebsites.net/worker/edit/{workItem.WorkItemId}\">#{workItem.WorkItemId}</a> has been REassigned to you.",
-                                    ContentType = BodyType.Html,
-                                },
-                                Subject = $"New Issue #{workItem.WorkItemId} has been REassigned to you!"
+                                Content = $"Hi {workItem.AssignedTo.PrincipalDisplayName}! \r\n\r\n<br><br>The Issue <a href=\"https://owp.azurewebsites.net/worker/edit/{workItem.WorkItemId}\">#{workItem.WorkItemId}</a> has been REassigned to you.",
+                                ContentType = BodyType.Html
                             };
-                            await _api.SendEmailByPrincipalIdAsync(workItem.AssignedTo.PrincipalId, message);
+                            message.Subject = $"New Issue #{workItem.WorkItemId} has been REassigned to you!";
+
+                            workItem.Status = WorkItemStatus.Resolved;
                         }
+
+                        if (originalWorkItem.Status != workItem.Status)
+                        {
+                            _context.Update(workItem);
+                        }
+
+                        if (!string.IsNullOrEmpty(message.Body.ToString()) && !string.IsNullOrEmpty(message.Subject))
+                        {
+                            await _api.SendEmailByPrincipalIdAsync(workItem.AssignedTo.PrincipalId, message);
+                        }   
                     }
 
                     await _context.SaveChangesAsync();
