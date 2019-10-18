@@ -102,7 +102,14 @@
                         @Html.DisplayFor(modelItem => item.Status)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Address)
+                        @if (item.Latitude != null && item.Longitude != null)
+                        {
+                            <a class="mapLink" href="javascript:mapShow(@item.Latitude, @item.Longitude, @item.WorkItemId);">@Html.DisplayFor(modelItem => item.Address)</a>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.Address)
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.AssignedTo.PrincipalDisplayName)
