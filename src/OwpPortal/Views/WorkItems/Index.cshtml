@@ -14,8 +14,8 @@
     </div>
 
     <div class="row">
-        <table class="table col-12" id="workitems" width="100%">
-            <thead>
+        <table class="table col-12 " id="workitems" width="100%">
+            <thead class="thead-light">
                 <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.WorkItemId)
@@ -79,7 +79,7 @@
                     </th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-striped table-hover">
                 @foreach (var item in Model)
                 {
                 <tr>
