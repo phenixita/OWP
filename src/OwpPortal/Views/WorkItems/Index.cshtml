@@ -5,121 +5,139 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
+    <h2 class="mt-3">Work Items</h2>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-    <table class="table" id="workitems" width="100%">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.WorkItemId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.WorkItemType)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CreatedOn)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LastChangedOn)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Status)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Address)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AssignedTo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.WorkItemPriority)
-                </th>
-                <th></th>
-            </tr>
-            <tr>
-                <th>
-                    <input class="form-control" type="text" placeholder="Search @Html.DisplayNameFor(model => model.WorkItemId)" />
-                </th>
-                <th>
-                    <input class="form-control" type="text" placeholder="Search @Html.DisplayNameFor(model => model.Description)" />
-                </th>
-                <th>
-                    <select class="form-control" asp-items="EnumHelper.ToList<WorkItemTypes, WorkItemTypes>(true, string.Empty)"></select>
-                </th>
-                <th>
-                    <input class="form-control" type="text" placeholder="Search @Html.DisplayNameFor(model => model.CreatedOn)" />
-                </th>
-                <th>
-                    <input class="form-control" type="text" placeholder="Search @Html.DisplayNameFor(model => model.LastChangedOn)" />
-                </th>
-                <th>
-                    <select class="form-control" asp-items="EnumHelper.ToList<WorkItemStatus, WorkItemStatus>(true, string.Empty)"></select>
-                </th>
-                <th>
-                    <input class="form-control" type="text" placeholder="Search @Html.DisplayNameFor(model => model.Address)" />
-                </th>
-                <th>
-                    <input class="form-control" type="text" placeholder="Search @Html.DisplayNameFor(model => model.AssignedTo)" />
-                </th>
-                <th>
-                    <select class="form-control" asp-items="EnumHelper.ToList<WorkItemPriority, WorkItemPriority>(true, string.Empty)"></select>
-                </th>
-                <th>
+    <div class="row justify-content-end">
+        <div class="col-2">
+            <a href="/WorkItems" role="button" class="btn btn-primary float-right mb-3">Create New</a>
+        </div>
+    </div>
 
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WorkItemId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WorkItemType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedOn)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastChangedOn)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AssignedTo.PrincipalDisplayName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WorkItemPriority)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.WorkItemId"><i class="fas fa-edit"></i></a>
-                    <a asp-action="Delete" asp-route-id="@item.WorkItemId"><i class="fas fa-trash-alt"></i></a>
-                </td>
-            </tr>
-            }
-        </tbody>
-    </table>
+    <div class="row">
+        <table class="table col-12 " id="workitems" width="100%">
+            <thead class="thead-light">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.WorkItemId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.WorkItemType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedOn)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastChangedOn)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AssignedTo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.WorkItemPriority)
+                    </th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th>
+                        <input class="form-control p-1" type="text" placeholder="Search @Html.DisplayNameFor(model => model.WorkItemId)" />
+                    </th>
+                    <th>
+                        <input class="form-control p-1" type="text" placeholder="Search @Html.DisplayNameFor(model => model.Description)" />
+                    </th>
+                    <th>
+                        <select class="form-control p-1" asp-items="EnumHelper.ToList<WorkItemTypes, WorkItemTypes>(true, string.Empty)"></select>
+                    </th>
+                    <th>
+                        <input class="form-control p-1" type="text" placeholder="Search @Html.DisplayNameFor(model => model.CreatedOn)" />
+                    </th>
+                    <th>
+                        <input class="form-control p-1" type="text" placeholder="Search @Html.DisplayNameFor(model => model.LastChangedOn)" />
+                    </th>
+                    <th>
+                        <select class="form-control p-1" asp-items="EnumHelper.ToList<WorkItemStatus, WorkItemStatus>(true, string.Empty)"></select>
+                    </th>
+                    <th>
+                        <input class="form-control p-1" type="text" placeholder="Search @Html.DisplayNameFor(model => model.Address)" />
+                    </th>
+                    <th>
+                        <input class="form-control p-1" type="text" placeholder="Search @Html.DisplayNameFor(model => model.AssignedTo)" />
+                    </th>
+                    <th>
+                        <select class="form-control p-1" asp-items="EnumHelper.ToList<WorkItemPriority, WorkItemPriority>(true, string.Empty)"></select>
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="table-striped table-hover">
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WorkItemId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WorkItemType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedOn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastChangedOn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @if (item.Latitude != null && item.Longitude != null)
+                        {
+                            <a class="mapLink" href="javascript:mapShow(@item.Latitude, @item.Longitude, @item.WorkItemId);">@Html.DisplayFor(modelItem => item.Address)</a>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.Address)
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AssignedTo.PrincipalDisplayName)
+                    </td>
+                    <td data-pri="@Html.DisplayFor(modelItem => item.WorkItemPriority)">
+                        @Html.DisplayFor(modelItem => item.WorkItemPriority)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.WorkItemId"><i class="fas fa-edit"></i></a>
+                        <a asp-action="Delete" asp-route-id="@item.WorkItemId"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <hr/>
+
+    <div class="row">
+        <div class="col-8 font-weight-light font-italic">
+            <span id="priorityGlyph" class="fa fa-bullseye" style="color:purple"> </span> <span>Unprioritised</span>&nbsp;
+            <span id="priorityGlyph" class="fa fa-bullseye" style="color:grey"> </span> <span>Low</span>&nbsp;
+            <span id="priorityGlyph" class="fa fa-bullseye" style="color:blue"> </span> <span>Medium</span>&nbsp;
+            <span id="priorityGlyph" class="fa fa-bullseye" style="color:orange"> </span> <span>High</span>&nbsp;
+            <span id="priorityGlyph" class="fa fa-bullseye" style="color:red"> </span> <span>Critical</span>&nbsp;
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-8">
@@ -157,9 +175,6 @@
             </div>
         </div>
     </div>
-    
-</body>
-</html>
 
 <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=AhzXPtrjsvIyqZezEQdu9f- yPHPncwyVhlQ2 - gchufOGsO - HN1iYQLTCHZZlP859'></script>
 <script>

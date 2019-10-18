@@ -10,25 +10,17 @@
 </head>
 <body>
     <header>
-    </header>
-
-    @if (ViewData.TryGetValue("IsCitizenHome", out object isCitizenHomeObj) && isCitizenHomeObj is bool isCitizenHome && isCitizenHome)
-    {
-        <div class="jumbotron jumbotron-fluid citizen-home">
-            <div class="container">
-                <h1 class="display-4">OWP Citizen Portal</h1>
-                <p class="lead">Welcome to the Citizen Portal for the Office of Public Works</p>
-                <form asp-action="Search" method="get">
-                    <div class="form-actions">
-                        <p>
-                            Looking for a previous issue ? <input type="text" name="searchText" />
-                            <input type="submit" value="Search" class="btn btn-light" />
-                        </p>
-                    </div>
-                </form>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="/WorkItems/Index"><i class="fa fal fa-tools opwlogo" aria-hidden="true"></i>Office of Public Works - Administration</a>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+            <div class="navbar-brand logged-on-user">
+                <i class="fa fal fa-user logged-on-user"></i>&nbsp;@User.Claims.FirstOrDefault(c => c.Type == "name")?.Value
             </div>
-        </div>
-    }
+        </nav>
+    </header>
 
     <div class="container">
         <main role="main" class="pb-3">
