@@ -14,8 +14,8 @@
     </div>
 
     <div class="row">
-        <table class="table col-12" id="workitems" width="100%">
-            <thead>
+        <table class="table col-12 " id="workitems" width="100%">
+            <thead class="thead-light">
                 <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.WorkItemId)
@@ -79,7 +79,7 @@
                     </th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-striped table-hover">
                 @foreach (var item in Model)
                 {
                 <tr>
@@ -102,7 +102,14 @@
                         @Html.DisplayFor(modelItem => item.Status)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Address)
+                        @if (item.Latitude != null && item.Longitude != null)
+                        {
+                            <a class="mapLink" href="javascript:mapShow(@item.Latitude, @item.Longitude, @item.WorkItemId);">@Html.DisplayFor(modelItem => item.Address)</a>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.Address)
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.AssignedTo.PrincipalDisplayName)
@@ -124,11 +131,11 @@
 
     <div class="row">
         <div class="col-8 font-weight-light font-italic">
-            <span id="priorityGlyph" class="fa fa-bullseye" style="color:purple"> </span> <span>Unprioritised</span>&nbsp;
-            <span id="priorityGlyph" class="fa fa-bullseye" style="color:grey"> </span> <span>Low</span>&nbsp;
-            <span id="priorityGlyph" class="fa fa-bullseye" style="color:blue"> </span> <span>Medium</span>&nbsp;
-            <span id="priorityGlyph" class="fa fa-bullseye" style="color:orange"> </span> <span>High</span>&nbsp;
-            <span id="priorityGlyph" class="fa fa-bullseye" style="color:red"> </span> <span>Critical</span>&nbsp;
+            <span class="fa fa-bullseye" style="color:purple"> </span> <span>Unprioritised</span>&nbsp;
+            <span class="fa fa-bullseye" style="color:grey"> </span> <span>Low</span>&nbsp;
+            <span class="fa fa-bullseye" style="color:blue"> </span> <span>Medium</span>&nbsp;
+            <span class="fa fa-bullseye" style="color:orange"> </span> <span>High</span>&nbsp;
+            <span class="fa fa-bullseye" style="color:red"> </span> <span>Critical</span>&nbsp;
         </div>
     </div>
 

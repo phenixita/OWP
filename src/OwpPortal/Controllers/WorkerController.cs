@@ -11,10 +11,7 @@ using owp_web.Models;
 
 namespace owp_web.Controllers
 {
-    // [AllowAnonymous]
-    //[Authorize]
     [Authorize(Roles = "Worker")]
-    //[Authorize(Roles = "worker")]
     public class WorkerController : Controller
     {
         private readonly OwpContext _context;
@@ -27,9 +24,6 @@ namespace owp_web.Controllers
         // GET: Worker
         public async Task<IActionResult> Index()
         {
-            //var workerName = User.Identity.Name;
-            //ViewBag["CurrentWorkerName"] = workerName;
-
             var objectIdentifier = User?.Claims
                 ?.FirstOrDefault(c => c.Type == "http://schemas.microsoft.com/identity/claims/objectidentifier")
                 ?.Value;

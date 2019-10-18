@@ -14,7 +14,11 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="/"><i class="fa fal fa-tools opwlogo" aria-hidden="true"></i>Office of Public Works - Administration</a>
+            <a class="navbar-brand" href="/WorkItems/Index"><i class="fa fal fa-tools opwlogo" aria-hidden="true"></i>Office of Public Works - Administration</a>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+            <div class="navbar-brand logged-on-user">
+                <i class="fa fal fa-user logged-on-user"></i>&nbsp;@User.Claims.FirstOrDefault(c => c.Type == "name")?.Value
+            </div>
         </nav>
     </header>
 
