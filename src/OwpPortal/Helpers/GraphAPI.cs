@@ -80,5 +80,19 @@ namespace owp_web.Helpers
 
             await _graphServiceClient.Users["8716bb10-935f-4ae0-a4f0-0313994fd41e"].SendMail(message).Request().PostAsync();
         }
+
+        public async Task SendEmailByEmailAsync(EmailAddress emailAddress, Message message)
+        {
+            List<Recipient> recipientList = new List<Recipient>();
+
+            recipientList.Add(new Recipient
+            {
+                EmailAddress = emailAddress
+            });
+
+            message.ToRecipients = recipientList;
+
+            await _graphServiceClient.Users["8716bb10-935f-4ae0-a4f0-0313994fd41e"].SendMail(message).Request().PostAsync();
+        }
     }
 }

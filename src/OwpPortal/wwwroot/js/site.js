@@ -60,16 +60,16 @@ $(document).ready(function () {
     let imgElement = document.getElementById("WorkItem_Image");
     if (imgElement) {
         imgElement.onchange = function () {
+            $("#imgpreview").hide();
             $('#submitButton').attr('disabled', 'disabled');
-            $('#imgLoader').parent().show();
+            $('#imgLoader').css('width', '0%').parent().show();
 
             var reader = new FileReader();
 
             reader.onload = function (e) {
                 // get loaded data and render thumbnail.
                 document.getElementById("imgpreview").src = e.target.result;
-                document.getElementById('imgpreview').hidden = false;
-                $('#imgpreview').css('opacity', 0.5);
+                $("#imgpreview").show().css('opacity', 0.5);
             };
 
             // read the image file as a data URL.
