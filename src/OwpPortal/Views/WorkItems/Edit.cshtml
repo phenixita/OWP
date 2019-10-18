@@ -32,6 +32,12 @@
                     <span asp-validation-for="WorkItem.Address" class="text-danger"></span>
                 </div>
 
+                <div class="form-group">
+                    <label asp-for="WorkItem.Email" class="control-label"></label>
+                    <input asp-for="WorkItem.Email" class="form-control" />
+                    <span asp-validation-for="WorkItem.Email" class="text-danger"></span>
+                </div>
+
                 <input type="hidden" asp-for="WorkItem.Latitude" class="form-control" />
                 <input type="hidden" asp-for="WorkItem.Longitude" class="form-control" />
 
