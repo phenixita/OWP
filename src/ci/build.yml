@@ -47,11 +47,14 @@ jobs:
 
     - task: DotNetCoreCLI@2
       displayName: Build source code
-
       inputs:
         command: 'build'
         projects: '**/*.csproj'
         arguments: '--configuration $(BuildConfiguration) /p:AssemblyVersion=$(GitVersion.SemVer)'
+
+    - task: WhiteSource Bolt@19
+      inputs:
+        cwd: 'src'
 
     - task: DotNetCoreCLI@2
       inputs:
@@ -106,9 +109,7 @@ jobs:
         projects: '**/OwpPortal.UITests.csproj'
         arguments: '--output $(Build.ArtifactStagingDirectory)'
 
-    - task: WhiteSource Bolt@19
-      inputs:
-        cwd: 'src'
+    
 
     - task: PublishBuildArtifacts@1
       displayName: Publish UI tests
