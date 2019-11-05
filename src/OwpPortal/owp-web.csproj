@@ -5,6 +5,7 @@
     <UserSecretsId>aspnet-owp_web-42774202-C140-45C2-B7E9-E89E5AC38A46</UserSecretsId>
     <WebProject_DirectoryAccessLevelKey>0</WebProject_DirectoryAccessLevelKey>
     <RootNamespace>owp_web</RootNamespace>
+    <ProjectGuid>80aca49a-012c-447d-84f2-9272ad9d25bd</ProjectGuid>
   </PropertyGroup>
 
 
