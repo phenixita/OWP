@@ -17,6 +17,7 @@ jobs:
       vmImage: windows-latest
     steps:
     - task: AzSKARMTemplateChecker@4
+      enabled: false
       inputs:
         ARMTemplateFilePath: 'infra/OWP-Portal-Deployment/OWP-Portal-Deployment/azuredeploy.json'
         ARMTemplateParameterFilePath: 'infra/OWP-Portal-Deployment/OWP-Portal-Deployment/azuredeploy.parametersjson'
@@ -39,8 +40,17 @@ jobs:
 
   - job: Binaries
     pool:
-      vmImage: 'ubuntu-latest'
+      vmImage: 'windows-latest'
     steps:
+    - task: SonarQubePrepare@4
+      inputs:
+        SonarQube: 'myAzureSonarQube'
+        scannerMode: 'MSBuild'
+        projectKey: 'OPW-Imagination'
+        projectName: 'OPW-Imagination'
+        projectVersion: '$(Build.BuildId)'
+
+
     - task: GitVersion@5
       inputs:
         runtime: 'core'
@@ -60,6 +70,10 @@ jobs:
         command: 'build'
         projects: '**/*.csproj'
         arguments: '--configuration $(BuildConfiguration) /p:AssemblyVersion=$(GitVersion.SemVer)'
+
+
+
+    - task: SonarQubeAnalyze@4
 
     - task: WhiteSource Bolt@19
       inputs:
