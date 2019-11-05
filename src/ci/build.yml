@@ -18,8 +18,8 @@ jobs:
     steps:
     - task: AzSKARMTemplateChecker@4
       inputs:
-        ARMTemplateFilePath: 'infra/OWP-Portal-Deployment/OWP-Portal-Deployment'
-        ARMTemplateParameterFilePath: 'infra/OWP-Portal-Deployment/OWP-Portal-Deployment'
+        ARMTemplateFilePath: 'infra/OWP-Portal-Deployment/OWP-Portal-Deployment/azuredeploy.json'
+        ARMTemplateParameterFilePath: 'infra/OWP-Portal-Deployment/OWP-Portal-Deployment/azuredeploy.parametersjson'
 
   - job: Database
     pool:
