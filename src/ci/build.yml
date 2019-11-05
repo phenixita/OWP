@@ -69,7 +69,10 @@ jobs:
         publishWebProjects: true
         arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
 
-
+    - task: AzSKARMTemplateChecker@4
+      inputs:
+        ARMTemplateFilePath: 'infra/OWP-Portal-Deployment/OWP-Portal-Deployment'
+        ARMTemplateParameterFilePath: 'infra/OWP-Portal-Deployment/OWP-Portal-Deployment'
       
     - task: PublishBuildArtifacts@1
       displayName: Publish binaries
