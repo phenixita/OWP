@@ -106,6 +106,10 @@ jobs:
         projects: '**/OwpPortal.UITests.csproj'
         arguments: '--output $(Build.ArtifactStagingDirectory)'
 
+    - task: WhiteSource Bolt@19
+      inputs:
+        cwd: 'src'
+
     - task: PublishBuildArtifacts@1
       displayName: Publish UI tests
       inputs:
