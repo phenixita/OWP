@@ -43,6 +43,7 @@ jobs:
       vmImage: 'windows-latest'
     steps:
     - task: SonarQubePrepare@4
+      enabled: false
       inputs:
         SonarQube: 'myAzureSonarQube'
         scannerMode: 'MSBuild'
@@ -74,6 +75,7 @@ jobs:
 
 
     - task: SonarQubeAnalyze@4
+      enabled: false
 
     - task: WhiteSource Bolt@19
       inputs:
