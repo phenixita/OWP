@@ -42,7 +42,7 @@ jobs:
 
   - job: Binaries
     pool:
-      vmImage: 'windows-latest'
+      name: : 'MyLenovoP1'
     steps:
     - task: SonarQubePrepare@4
       enabled: false
