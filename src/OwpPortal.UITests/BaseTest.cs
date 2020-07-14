@@ -1,6 +1,8 @@
 using Microsoft.Extensions.Configuration;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Edge;
+using OpenQA.Selenium.Firefox;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -20,8 +22,12 @@ namespace OwpPortal.UITests
             var configuration = new ConfigurationBuilder().
                 AddJsonFile("appsettings.json")
                 .Build();
+             
 
-            driver = new ChromeDriver();
+            var options = new FirefoxOptions() { AcceptInsecureCertificates = true };
+            driver = new FirefoxDriver(options);
+            
+
             url = configuration["WebSiteUrl"];
         }
     }
