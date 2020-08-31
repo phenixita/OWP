@@ -13,3 +13,16 @@ steps:
   inputs:
     targetDirectory: '$(Build.SourcesDirectory)'
     targetFiles: 'f|**\*.json;-|.gdn\**;'
+
+- task: SdtReport@1
+  inputs:
+    AllTools: true
+    BinSkimBreakOn: 'WarningAbove'
+    CodesignValidationBreakOn: 'WarningAbove'
+    FxCopBreakOn: 'ErrorAbove'
+    ModernCopBreakOn: 'WarningAbove'
+    PoliCheckBreakOn: 'Severity4Above'
+    RoslynAnalyzersBreakOn: 'WarningAbove'
+    SemmleBreakOn: 'WarningAbove'
+    TSLintBreakOn: 'WarningAbove'
+    ToolLogsNotFoundAction: 'Standard'
