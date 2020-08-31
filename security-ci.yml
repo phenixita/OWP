@@ -42,7 +42,6 @@ steps:
 - task: PublishSecurityAnalysisLogs@2
   inputs:
     ArtifactName: 'CodeAnalysisLogs'
-    ArtifactType: 'FilePath'
-    TargetPath: 'c:\temp\'
+    ArtifactType: 'Container'
     AllTools: true
     ToolLogsNotFoundAction: 'Standard'
