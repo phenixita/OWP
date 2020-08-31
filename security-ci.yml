@@ -1,7 +1,10 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+# Tips
+
+# Always check the Continue on error option of secure development build tasks.
+# To run analysis after your build, keep the secure development build tasks after the publish build artifacts step of your build. So, your build can finish and post results before running analysis.
+# Secure Development build tasks will fail if the tool fails to complete successfully but will NOT fail if/when the tool completes successfully and identifies issues in the code.
+# You can configure your build to break when a tool identifies issues in the code; see Post Analysis below.
+# One exception is the Antimalware task, which will fail if the tool completes and finds malware.
 
 trigger: none
 
@@ -10,11 +13,13 @@ pool:
 
 steps:
 - task: Armory@2
+  continueOnError: true
   inputs:
     targetDirectory: '$(Build.SourcesDirectory)'
     targetFiles: 'f|**\*.json;-|.gdn\**;'
 
 - task: SdtReport@1
+  continueOnError: true
   inputs:
     AllTools: true
     BinSkimBreakOn: 'WarningAbove'
