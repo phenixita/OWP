@@ -9,7 +9,7 @@
 trigger: none
 
 pool:
-  vmImage: 'windows-latest'
+  name: MyLenovoP1
 
 steps:
 # ---------------------------------  Build
@@ -42,6 +42,7 @@ steps:
 - task: PublishSecurityAnalysisLogs@2
   inputs:
     ArtifactName: 'CodeAnalysisLogs'
-    ArtifactType: 'Container'
+    ArtifactType: 'FilePath'
+    TargetPath: 'c:\temp\'
     AllTools: true
     ToolLogsNotFoundAction: 'Standard'
