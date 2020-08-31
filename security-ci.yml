@@ -33,6 +33,13 @@ steps:
     projects: '**/*.csproj'
     arguments: '--configuration $(BuildConfiguration) /p:AssemblyVersion=$(GitVersion.SemVer)'
 
+- task: DotNetCoreCLI@2
+  displayName: Publish ASP.Net Core WebApp
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+
 # ---------------------------------  Publish build artifact(s)
 
 # ---------------------------------  Analysis 
