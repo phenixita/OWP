@@ -46,8 +46,9 @@ steps:
     targetFiles: 'f|**\*.json;-|.gdn\**;'
 
 - task: BinSkim@3
+  continueOnError: true
   inputs:
-    InputType: 'Basic' #to avoid composition of CLI command
+    InputType: 'Basic'
     Function: 'analyze'
     AnalyzeTarget: '$(Build.ArtifactStagingDirectory)\*.dll;$(Build.ArtifactStagingDirectory)\*.exe'
 
