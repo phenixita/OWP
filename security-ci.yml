@@ -32,14 +32,8 @@ steps:
   inputs:
     command: 'build'
     projects: '**/*.csproj'
-    arguments: '--configuration Debug /p:AssemblyVersion=$(GitVersion.SemVer)'
+    arguments: '--configuration Debug /p:AssemblyVersion=$(GitVersion.SemVer) --output $(Build.ArtifactStagingDirectory)'
 
-- task: DotNetCoreCLI@2
-  displayName: Publish ASP.Net Core WebApp
-  inputs:
-    command: 'publish'
-    publishWebProjects: true
-    arguments: '--configuration Debug --output $(Build.ArtifactStagingDirectory)'
 
 # ---------------------------------  Publish build artifact(s)
 
