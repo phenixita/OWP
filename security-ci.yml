@@ -3,12 +3,13 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- master
+trigger: none
 
 pool:
   vmImage: 'windows-latest'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: Armory@2
+  inputs:
+    targetDirectory: '$(Build.SourcesDirectory)'
+    targetFiles: 'f|**\*.json;-|.gdn\**;'
