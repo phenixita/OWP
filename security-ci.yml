@@ -8,6 +8,7 @@
 
 trigger: none
 
+
 pool:
   name: MyLenovoP1
 
@@ -31,7 +32,7 @@ steps:
   inputs:
     command: 'build'
     projects: '**/*.csproj'
-    arguments: '--configuration $(BuildConfiguration) /p:AssemblyVersion=$(GitVersion.SemVer)'
+    arguments: '--configuration Debug /p:AssemblyVersion=$(GitVersion.SemVer)'
 
 - task: DotNetCoreCLI@2
   displayName: Publish ASP.Net Core WebApp
