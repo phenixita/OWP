@@ -50,7 +50,7 @@ steps:
   inputs:
     InputType: 'Basic'
     Function: 'analyze'
-    AnalyzeTarget: '$(Build.ArtifactStagingDirectory)\owp*.dll;$(Build.ArtifactStagingDirectory)\*.exe'
+    AnalyzeTarget: '$(Build.ArtifactStagingDirectory)\owp*.dll'
 
 
 
