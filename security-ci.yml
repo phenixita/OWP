@@ -12,12 +12,19 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
+# ---------------------------------  Build
+
+# ---------------------------------  Publish build artifact(s)
+
+# ---------------------------------  Analysis 
+
 - task: Armory@2
   continueOnError: true
   inputs:
     targetDirectory: '$(Build.SourcesDirectory)'
     targetFiles: 'f|**\*.json;-|.gdn\**;'
 
+# ---------------------------------  Publishing MSCA reports/logs
 - task: SdtReport@1
   continueOnError: true
   inputs:
