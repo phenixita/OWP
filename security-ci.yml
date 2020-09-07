@@ -44,7 +44,7 @@ steps:
     userProvideBuildInfo: 'msBuildInfo'
     msBuildVersion: '16.0'
     msBuildArchitecture: 'x86'
-    msBuildCommandline: 'dotnet build .\src\OwpPortal\owp-web.csproj'
+    msBuildCommandline: '"C:\Program Files\dotnet\dotnet.exe" build .\src\OwpPortal\owp-web.csproj'
 
 - task: CredScan@2
   continueOnError: true
