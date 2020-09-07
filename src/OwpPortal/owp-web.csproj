@@ -6,7 +6,7 @@
     <WebProject_DirectoryAccessLevelKey>0</WebProject_DirectoryAccessLevelKey>
     <RootNamespace>owp_web</RootNamespace>
     <ProjectGuid>80aca49a-012c-447d-84f2-9272ad9d25bd</ProjectGuid>
-    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
   </PropertyGroup>
 
 
