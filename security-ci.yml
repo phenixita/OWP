@@ -39,6 +39,12 @@ steps:
 
 # ---------------------------------  Analysis 
 
+- task: CredScan@2
+  continueOnError: true
+  inputs:
+    toolMajorVersion: 'V2'
+    outputFormat: 'sarif'
+
 - task: Armory@2
   continueOnError: true
   inputs:
@@ -52,7 +58,7 @@ steps:
     Function: 'analyze'
     AnalyzeTarget: '$(Build.ArtifactStagingDirectory)\owp*.dll'
 
-
+# Provare le baseline!
 
 # ---------------------------------  Publishing MSCA reports/logs
 - task: SdtReport@1
