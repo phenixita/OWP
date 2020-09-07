@@ -43,7 +43,7 @@ steps:
   inputs:
     userProvideBuildInfo: 'msBuildInfo'
     msBuildVersion: '16.0'
-    msBuildArchitecture: 'x86'
+    msBuildArchitecture: 'DotNetCore'
     msBuildCommandline: '"C:\Program Files\dotnet\dotnet.exe" build .\src\OwpPortal\owp-web.csproj'
 
 - task: CredScan@2
