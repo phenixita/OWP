@@ -87,6 +87,7 @@ steps:
 # SecDevTools analysis tool build tasks will NOT fail based on results or issues identified in your code by the tool.
 # The Post-Analysis build task will analyze the log files produced by the tools, and introduce a build break (the Post-Analysis task itself will fail) if/when there are findings (errors) detected by the tools.
 - task: PostAnalysis@1
+  condition: succeededOrFailed()
   inputs:
     AllTools: true
     BinSkimBreakOn: 'Error'
