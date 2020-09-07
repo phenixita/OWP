@@ -37,7 +37,11 @@ steps:
 
 # ---------------------------------  Publish build artifact(s)
 
-# ---------------------------------  Analysis 
+# ---------------------------------  Security Oriented Analysis 
+- task: RoslynAnalyzers@2
+  continueOnError: true
+  inputs:
+    userProvideBuildInfo: 'auto'
 
 - task: CredScan@2
   continueOnError: true
@@ -59,6 +63,8 @@ steps:
     AnalyzeTarget: '$(Build.ArtifactStagingDirectory)\owp*.dll'
 
 # Provare le baseline!
+
+# ---------------------------------  Misc Analysis
 
 # ---------------------------------  Publishing MSCA reports/logs
 - task: SdtReport@1
