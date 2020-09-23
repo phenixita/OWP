@@ -6,7 +6,7 @@ param (
 
 if (-not(Test-Path $repoRootFolder)) { Write-Error "Repo root folder [$repoRootFolder] not found!" ; exit 1 }
 
-Set-LocalGroup $repoRootFolder
+Set-Location $repoRootFolder
 
 Write-Host "##vso[task.setvariable variable=db.skip]1"
 
