@@ -45,12 +45,12 @@ jobs:
       name: 'MyLenovoP1'
     steps:
     - task: SonarQubePrepare@4
-      enabled: false
+      enabled: true
       inputs:
-        SonarQube: 'myAzureSonarQube'
+        SonarQube: 'localhostSonarqube'
         scannerMode: 'MSBuild'
-        projectKey: 'OPW-Imagination'
-        projectName: 'OPW-Imagination'
+        projectKey: 'onboarding'
+        projectName: 'onboarding'
         projectVersion: '$(Build.BuildId)'
 
 
@@ -74,12 +74,11 @@ jobs:
         projects: '**/*.csproj'
         arguments: '--configuration $(BuildConfiguration) /p:AssemblyVersion=$(GitVersion.SemVer)'
 
-
-
     - task: SonarQubeAnalyze@4
-      enabled: false
+      enabled: true
 
     - task: WhiteSource Bolt@19
+      enabled: :false
       inputs:
         cwd: 'src'
 
@@ -96,7 +95,6 @@ jobs:
         publishWebProjects: true
         arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
 
-      
     - task: PublishBuildArtifacts@1
       displayName: Publish binaries
       inputs:
