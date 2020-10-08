@@ -78,7 +78,7 @@ jobs:
       enabled: true
 
     - task: WhiteSource Bolt@19
-      enabled: :false
+      enabled: false
       inputs:
         cwd: 'src'
 
