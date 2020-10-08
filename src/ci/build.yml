@@ -77,6 +77,10 @@ jobs:
     - task: SonarQubeAnalyze@4
       enabled: true
 
+    - task: SonarQubePublish@4
+      inputs:
+        pollingTimeoutSec: '300'
+
     - task: WhiteSource Bolt@19
       enabled: false
       inputs:
