@@ -1,10 +1,11 @@
-trigger:
-  branches:
-      include:
-        - master
-  paths:
-      include:
-        - src/*
+# trigger:
+#   branches:
+#       include:
+#         - master
+#   paths:
+#       include:
+#         - src/*
+trigger: none
 
 
 variables:
