@@ -10,6 +10,7 @@ trigger: none
 
 variables:
   buildConfiguration: 'Release'
+  sonarqubeEnabled: 0
 
 
 jobs:
@@ -46,6 +47,7 @@ jobs:
       name: 'MyLenovoP1'
     steps:
     - task: SonarQubePrepare@4
+      condition: and(succeeded(), eq(variables['sonarqubeEnabled'], 1))
       enabled: true
       inputs:
         SonarQube: 'localhostSonarqube'
@@ -76,9 +78,11 @@ jobs:
         arguments: '--configuration $(BuildConfiguration) /p:AssemblyVersion=$(GitVersion.SemVer)'
 
     - task: SonarQubeAnalyze@4
+      condition: and(succeeded(), eq(variables['sonarqubeEnabled'], 1))
       enabled: true
 
-    - task: SonarQubePublish@4
+    - task: SonarQubePublish@
+      condition: and(succeeded(), eq(variables['sonarqubeEnabled'], 1))
       inputs:
         pollingTimeoutSec: '300'
 
