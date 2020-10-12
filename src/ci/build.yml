@@ -81,7 +81,7 @@ jobs:
       condition: and(succeeded(), eq(variables['sonarqubeEnabled'], 1))
       enabled: true
 
-    - task: SonarQubePublish@
+    - task: SonarQubePublish@4
       condition: and(succeeded(), eq(variables['sonarqubeEnabled'], 1))
       inputs:
         pollingTimeoutSec: '300'
