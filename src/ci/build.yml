@@ -7,11 +7,9 @@
 #         - src/*
 trigger: none
 
-
 variables:
   buildConfiguration: 'Release'
   sonarqubeEnabled: 0
-
 
 jobs:
   - job: ARM
@@ -44,7 +42,7 @@ jobs:
 
   - job: Binaries
     pool:
-      name: 'MyLenovoP1'
+      vmImage: 'windows-latest'
     steps:
     - task: SonarQubePrepare@4
       condition: and(succeeded(), eq(variables['sonarqubeEnabled'], 1))
@@ -55,69 +53,56 @@ jobs:
         projectKey: 'onboarding'
         projectName: 'onboarding'
         projectVersion: '$(Build.BuildId)'
-
-
     - task: GitVersion@5
       inputs:
         runtime: 'core'
         configFilePath: 'gitversion.yml'
-
     - task: DotNetCoreCLI@2
       displayName: Restore packages
       inputs:
         command: 'restore'
         projects: '**/*.csproj'
         feedsToUse: 'select'
-
-
     - task: DotNetCoreCLI@2
       displayName: Build source code
       inputs:
         command: 'build'
         projects: '**/*.csproj'
         arguments: '--configuration $(BuildConfiguration) /p:AssemblyVersion=$(GitVersion.SemVer)'
-
     - task: SonarQubeAnalyze@4
       condition: and(succeeded(), eq(variables['sonarqubeEnabled'], 1))
       enabled: true
-
     - task: SonarQubePublish@4
       condition: and(succeeded(), eq(variables['sonarqubeEnabled'], 1))
       inputs:
         pollingTimeoutSec: '300'
-
     - task: WhiteSource Bolt@19
       enabled: false
       inputs:
         cwd: 'src'
-
     - task: DotNetCoreCLI@2
       inputs:
         command: 'test'
         projects: 'src/OwpPortal.UnitTests/OwpPortal.UnitTests.csproj'
         testRunTitle: 'Unit Testing' 
-
     - task: DotNetCoreCLI@2
       displayName: Publish ASP.Net Core WebApp
       inputs:
         command: 'publish'
         publishWebProjects: true
         arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-
     - task: PublishBuildArtifacts@1
       displayName: Publish binaries
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
         ArtifactName: 'drop'
         publishLocation: 'Container'
-
     - task: PublishBuildArtifacts@1
       displayName: Publish IaC
       inputs:
         PathtoPublish: 'infra/OWP-Portal-Deployment/OWP-Portal-Deployment'
         ArtifactName: 'drop-IaC'
         publishLocation: 'Container'
-
 
   - job: Selenium
     dependsOn: []
@@ -126,9 +111,7 @@ jobs:
       name: Hosted Windows 2019 with VS2019 
       vmImage: 'windows-2019'
       demands: msbuild
-
     steps:
-
     - task: DotNetCoreCLI@2
       displayName: Restore UI tests
       inputs:
