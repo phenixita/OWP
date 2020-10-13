@@ -81,6 +81,7 @@ jobs:
       inputs:
         cwd: 'src'
     - task: DotNetCoreCLI@2
+      displayName: Run Unit Tests
       inputs:
         command: 'test'
         projects: 'src/OwpPortal.UnitTests/OwpPortal.UnitTests.csproj'
