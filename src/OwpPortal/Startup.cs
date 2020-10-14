@@ -45,6 +45,7 @@ namespace owp_web
             services.AddDbContext<OwpContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("OwpContext")));
             services.AddScoped<IOwpContext, OwpContext>();
+            services.AddApplicationInsightsTelemetry();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -12,8 +12,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.Graph;
 
 namespace owp_web.Controllers
-{
-    [Authorize(Roles = "DeliveryLeader")]
+{ 
     public class WorkItemsController : Controller
     {
         private readonly OwpContext _context;
