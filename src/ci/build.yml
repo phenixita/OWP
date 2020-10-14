@@ -1,11 +1,10 @@
-# trigger:
-#   branches:
-#       include:
-#         - master
-#   paths:
-#       include:
-#         - src/*
-trigger: none
+trigger:
+  branches:
+      include:
+        - master
+  paths:
+      include:
+        - src/*
 
 variables:
   buildConfiguration: 'Release'
