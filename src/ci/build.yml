@@ -25,7 +25,8 @@ jobs:
   - job: Database
     dependsOn: []
     pool:
-      vmImage: 'windows-latest'
+      # vmImage: 'windows-latest'
+      name: MyLenovoP1
     steps:
     - task: MSBuild@1
       displayName: Database DACPAC build
@@ -49,8 +50,8 @@ jobs:
       inputs:
         SonarQube: 'localhostSonarqube'
         scannerMode: 'MSBuild'
-        projectKey: 'onboarding'
-        projectName: 'onboarding'
+        projectKey: 'owp'
+        projectName: 'owp'
         projectVersion: '$(Build.BuildId)'
     - task: GitVersion@5
       inputs:
