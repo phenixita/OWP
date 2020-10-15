@@ -25,8 +25,7 @@ jobs:
   - job: Database
     dependsOn: []
     pool:
-      # vmImage: 'windows-latest'
-      name: MyLenovoP1
+      vmImage: 'windows-latest'      
     steps:
     - task: MSBuild@1
       displayName: Database DACPAC build
@@ -42,7 +41,8 @@ jobs:
 
   - job: Binaries
     pool:
-      vmImage: 'windows-latest'
+      #vmImage: 'windows-latest'
+      name: MyLenovoP1
     steps:
     - task: SonarQubePrepare@4
       condition: and(succeeded(), eq(variables['sonarqubeEnabled'], 1))
