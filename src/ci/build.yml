@@ -43,12 +43,13 @@ jobs:
     pool:
       #vmImage: 'windows-latest'
       name: MyLenovoP1
+
     steps:
     - task: SonarQubePrepare@4
       condition: and(succeeded(), eq(variables['sonarqubeEnabled'], 1))
       enabled: true
       inputs:
-        SonarQube: 'localhostSonarqube'
+        SonarQube: 'miferracSonarcloud'
         scannerMode: 'MSBuild'
         projectKey: 'owp'
         projectName: 'owp'
@@ -73,6 +74,7 @@ jobs:
       condition: and(succeeded(), eq(variables['sonarqubeEnabled'], 1))
       enabled: true
     - task: SonarQubePublish@4
+      enabled: false
       condition: and(succeeded(), eq(variables['sonarqubeEnabled'], 1))
       inputs:
         pollingTimeoutSec: '300'
