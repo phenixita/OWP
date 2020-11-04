@@ -8,7 +8,7 @@ trigger:
 
 variables:
   buildConfiguration: 'Release'
-  sonarqubeEnabled: 0
+  sonarqubeEnabled: 1
 
 jobs:
   - job: ARM
@@ -25,7 +25,7 @@ jobs:
   - job: Database
     dependsOn: []
     pool:
-      vmImage: 'windows-latest'
+      vmImage: 'windows-latest'      
     steps:
     - task: MSBuild@1
       displayName: Database DACPAC build
@@ -42,16 +42,18 @@ jobs:
   - job: Binaries
     pool:
       vmImage: 'windows-latest'
+      #name: MyLenovoP1
     steps:
-    - task: SonarQubePrepare@4
+    - task: SonarCloudPrepare@1
       condition: and(succeeded(), eq(variables['sonarqubeEnabled'], 1))
-      enabled: true
       inputs:
-        SonarQube: 'localhostSonarqube'
+        SonarCloud: 'miferracSonarcloud'
+        organization: 'miferrac'
         scannerMode: 'MSBuild'
-        projectKey: 'onboarding'
-        projectName: 'onboarding'
+        projectKey: 'owp'
+        projectName: 'owp'
         projectVersion: '$(Build.BuildId)'
+
     - task: GitVersion@5
       inputs:
         runtime: 'core'
@@ -68,13 +70,11 @@ jobs:
         command: 'build'
         projects: '**/*.csproj'
         arguments: '--configuration $(BuildConfiguration) /p:AssemblyVersion=$(GitVersion.SemVer)'
-    - task: SonarQubeAnalyze@4
+
+    - task: SonarCloudAnalyze@1
       condition: and(succeeded(), eq(variables['sonarqubeEnabled'], 1))
       enabled: true
-    - task: SonarQubePublish@4
-      condition: and(succeeded(), eq(variables['sonarqubeEnabled'], 1))
-      inputs:
-        pollingTimeoutSec: '300'
+
     - task: WhiteSource Bolt@19
       enabled: false
       inputs:
