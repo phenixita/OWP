@@ -1,0 +1,94 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "containerGroups_miferrac_aci_name": {
+            "defaultValue": "mfaci",
+            "type": "String"
+        },
+        "aciCount": {
+            "defaultValue": 1,
+            "type": "int"
+        },
+        "location": {
+            "defaultValue": "francecentral",
+            "type": "string"
+        },
+        "commandOverrideArray": {
+            "type": "array",
+            "defaultValue": [
+                "k6",
+                "run",
+                "https://raw.githubusercontent.com/phenixita/k6testing/main/k6-my-test-no-options.js"
+            ]
+        },
+        "k6vus": {
+            "defaultValue": 1,
+            "type": "int"
+        },
+        "k6duration": {
+            "defaultValue": "15s",
+            "type": "string"
+        },
+    },
+    "variables": {},
+    "resources": [
+        {
+            "copy": {
+                "name": "acicopy",
+                "count": "[parameters('aciCount')]",
+                "mode": "Parallel"
+            },
+            "type": "Microsoft.ContainerInstance/containerGroups",
+            "apiVersion": "2019-12-01",
+            "name": "[concat(parameters('containerGroups_miferrac_aci_name'), copyIndex())]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "sku": "Standard",
+                "containers": [
+                    {
+                        "name": "[concat(parameters('containerGroups_miferrac_aci_name'), copyIndex())]",
+                        "properties": {
+                            "image": "loadimpact/k6",
+                            "command": "[parameters('commandOverrideArray')]",
+                            "ports": [
+                                {
+                                    "protocol": "TCP",
+                                    "port": 80
+                                }
+                            ],
+                            "environmentVariables": [
+                                {
+                                    "name": "K6_VUS",
+                                    "value": "[parameters('k6vus')]"
+                                },
+                                {
+                                    "name": "K6_DURATION",
+                                    "value": "[parameters('k6duration')]"
+                                }
+                            ],
+                            "resources": {
+                                "requests": {
+                                    "memoryInGB": 4,
+                                    "cpu": 2
+                                }
+                            }
+                        }
+                    }
+                ],
+                "initContainers": [],
+                "restartPolicy": "Never",
+                "ipAddress": {
+                    "ports": [
+                        {
+                            "protocol": "TCP",
+                            "port": 80
+                        }
+                    ],
+                    "type": "Public"
+                },
+                "osType": "Linux"
+            }
+        }
+    ]
+}
