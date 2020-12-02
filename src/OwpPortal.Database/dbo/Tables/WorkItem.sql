@@ -12,6 +12,7 @@
 	[WorkItemPriority]	INT	NULL ,
     [ImageUrl] NVARCHAR(MAX) NULL, 
 	[Email] NVARCHAR(MAX) NULL,
+    [Priority] TINYINT NOT NULL DEFAULT 1,
     CONSTRAINT [PK_WorkItem] PRIMARY KEY CLUSTERED ([WorkItemId] ASC)
 );
 
