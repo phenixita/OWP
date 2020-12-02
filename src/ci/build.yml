@@ -45,6 +45,7 @@ jobs:
       #name: MyLenovoP1
     steps:
     - task: SonarCloudPrepare@1
+      enabled: false
       condition: and(succeeded(), eq(variables['sonarqubeEnabled'], 1))
       inputs:
         SonarCloud: 'miferracSonarcloud'
@@ -73,8 +74,8 @@ jobs:
         arguments: '--configuration $(BuildConfiguration) /p:AssemblyVersion=0.4.0.0'
 
     - task: SonarCloudAnalyze@1
+      enabled: false
       condition: and(succeeded(), eq(variables['sonarqubeEnabled'], 1))
-      enabled: true
 
     - task: WhiteSource Bolt@19
       enabled: false
