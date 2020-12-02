@@ -54,10 +54,11 @@ jobs:
         projectName: 'owp'
         projectVersion: '$(Build.BuildId)'
 
-    - task: GitVersion@5
-      inputs:
-        runtime: 'core'
-        configFilePath: 'gitversion.yml'
+    # - task: GitVersion@5
+    #   inputs:
+    #     runtime: 'core'
+    #     configFilePath: 'gitversion.yml'
+    
     - task: DotNetCoreCLI@2
       displayName: Restore packages
       inputs:
@@ -69,7 +70,7 @@ jobs:
       inputs:
         command: 'build'
         projects: '**/*.csproj'
-        arguments: '--configuration $(BuildConfiguration) /p:AssemblyVersion=$(GitVersion.SemVer)'
+        arguments: '--configuration $(BuildConfiguration) /p:AssemblyVersion=0.4.0.0'
 
     - task: SonarCloudAnalyze@1
       condition: and(succeeded(), eq(variables['sonarqubeEnabled'], 1))
