@@ -1,7 +1,10 @@
 pool:
   vmImage: 'ubuntu-latest'
 
-container: gittools/gitversion:5.5.2-beta1-18-linux-ubuntu.16.04-x64-netcoreapp3.1
+container:
+  image: gittools/gitversion:5.5.2-beta1-18-linux-ubuntu.16.04-x64-netcoreapp3.1
+  options:  /bin/sh -c "while true; sleep 2; done"
+
 steps:
 
 # - task: UseDotNet@2
