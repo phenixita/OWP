@@ -61,7 +61,7 @@ jobs:
     #     configFilePath: 'gitversion.yml'
     - task: gitversion/setup@0
       inputs:
-        versionSpec: '4.x'
+        versionSpec: '5.x'
 
     - task: gitversion/execute@0
       inputs:
