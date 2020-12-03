@@ -5,6 +5,10 @@ container: ubuntu:18.04
 
 steps:
 
+- task: UseDotNet@2
+  inputs:
+    packageType: 'runtime'
+    version: '3.x'
 - task: gitversion/setup@0
   inputs:
     versionSpec: '5.x'
