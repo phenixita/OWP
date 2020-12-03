@@ -1,7 +1,7 @@
 pool:
   vmImage: 'ubuntu-latest'
 
-# container: ubuntu:18.04
+container: gittools/gitversion:5.5.2-linux-ubuntu.16.04-x64-netcoreapp3.1
 
 steps:
 
@@ -9,16 +9,16 @@ steps:
 #   inputs:
 #     packageType: 'sdk'
 #     version: '3.x'
-# - task: gitversion/setup@0
-#   inputs:
-#     versionSpec: '5.x'
-
-# - task: gitversion/execute@0
-#   inputs:
-#     useConfigFile: true
-#     configFilePath: 'GitVersion.yml'
-
-- task: PowerShell@2
+- task: gitversion/setup@0
   inputs:
-    targetType: 'inline'
-    script: 'docker run --rm -v "$(pwd):/repo" gittools/gitversion:5.5.2-linux-ubuntu.16.04-x64-netcoreapp3.1 /repo -output json -output buildserver'
+    versionSpec: '5.x'
+
+- task: gitversion/execute@0
+  inputs:
+    useConfigFile: true
+    configFilePath: 'gitversion.yml'
+
+# - task: PowerShell@2
+#   inputs:
+#     targetType: 'inline'
+#     script: 'docker run --rm -v "$(pwd):/repo" gittools/gitversion:5.5.2-linux-ubuntu.16.04-x64-netcoreapp3.1 /repo -output json -output buildserver'
