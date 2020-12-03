@@ -16,4 +16,4 @@ steps:
 - task: gitversion/execute@0
   inputs:
     useConfigFile: true
-    configFilePath: 'gitversion.yml'
+    configFilePath: 'GitVersion.yml'
