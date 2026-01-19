@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Identity.Client;
+using Azure.Identity;
 using Microsoft.Graph;
-using Microsoft.Graph.Auth;
+using Microsoft.Graph.Models;
 using Microsoft.Extensions.Options;
 using owp_web.Models;
 
@@ -17,33 +17,35 @@ namespace owp_web.Helpers
 
         public GraphAPI()
         {
-            IConfidentialClientApplication confidentialClientApplication = ConfidentialClientApplicationBuilder
-                .Create("4a42c3ed-c598-478c-8e47-16da252fa026")
-                .WithTenantId("ecfdcfc9-91a9-4555-9a6e-ad249494c760")
-                .WithClientSecret("X.XP[W?FBHxnsb3BK:UX6uVJTsQq8sF0")
-                .Build();
+            var clientSecretCredential = new ClientSecretCredential(
+                "ecfdcfc9-91a9-4555-9a6e-ad249494c760", // tenantId
+                "4a42c3ed-c598-478c-8e47-16da252fa026", // clientId
+                "X.XP[W?FBHxnsb3BK:UX6uVJTsQq8sF0"   // clientSecret
+            );
 
-            ClientCredentialProvider authProvider = new ClientCredentialProvider(confidentialClientApplication);
-            _graphServiceClient = new GraphServiceClient(authProvider);
+            _graphServiceClient = new GraphServiceClient(clientSecretCredential);
         }
 
         public async Task<List<Worker>> GetWorkersListAsync()
         {
             List<Worker> Workers = new List<Worker>();
-            IServicePrincipalAppRoleAssignmentsCollectionPage _assignments = await _graphServiceClient.ServicePrincipals["4454926f-6463-4e95-a416-48d6d8bf86a6"].AppRoleAssignments.Request().GetAsync();
+            var _assignments = await _graphServiceClient.ServicePrincipals["4454926f-6463-4e95-a416-48d6d8bf86a6"].AppRoleAssignedTo.GetAsync();
 
-            foreach (AppRoleAssignment assigment in _assignments)
+            if (_assignments?.Value != null)
             {
-                if (assigment.AppRoleId.ToString() == "1b4f816e-5eaf-48b9-8613-7923830595ad")
+                foreach (AppRoleAssignment assigment in _assignments.Value)
                 {
-                    Workers.Add(
-                        new Worker()
-                        {
-                            AssignmentId = assigment.Id,
-                            PrincipalDisplayName = assigment.PrincipalDisplayName,
-                            PrincipalId = assigment.PrincipalId
-                        }
-                    );
+                    if (assigment.AppRoleId.ToString() == "1b4f816e-5eaf-48b9-8613-7923830595ad")
+                    {
+                        Workers.Add(
+                            new Worker()
+                            {
+                                AssignmentId = assigment.Id,
+                                PrincipalDisplayName = assigment.PrincipalDisplayName,
+                                PrincipalId = assigment.PrincipalId
+                            }
+                        );
+                    }
                 }
             }
 
@@ -52,7 +54,7 @@ namespace owp_web.Helpers
 
         public async Task<Worker> GetWorkerByAssignmentIdAsync(string assignmentId)
         {
-            AppRoleAssignment _assignment = await _graphServiceClient.ServicePrincipals["4454926f-6463-4e95-a416-48d6d8bf86a6"].AppRoleAssignments[assignmentId].Request().GetAsync();
+            var _assignment = await _graphServiceClient.ServicePrincipals["4454926f-6463-4e95-a416-48d6d8bf86a6"].AppRoleAssignedTo[assignmentId].GetAsync();
 
             return new Worker()
             {
@@ -66,7 +68,7 @@ namespace owp_web.Helpers
         {
             List<Recipient> recipientList = new List<Recipient>();
 
-            User user = await _graphServiceClient.Users[principalId.ToString()].Request().GetAsync();
+            var user = await _graphServiceClient.Users[principalId.ToString()].GetAsync();
 
             recipientList.Add(new Recipient
             {
@@ -78,7 +80,12 @@ namespace owp_web.Helpers
 
             message.ToRecipients = recipientList;
 
-            await _graphServiceClient.Users["8716bb10-935f-4ae0-a4f0-0313994fd41e"].SendMail(message).Request().PostAsync();
+            var sendMailPostRequestBody = new Microsoft.Graph.Users.Item.SendMail.SendMailPostRequestBody
+            {
+                Message = message
+            };
+
+            await _graphServiceClient.Users["8716bb10-935f-4ae0-a4f0-0313994fd41e"].SendMail.PostAsync(sendMailPostRequestBody);
         }
 
         public async Task SendEmailByEmailAsync(EmailAddress emailAddress, Message message)
@@ -92,7 +99,12 @@ namespace owp_web.Helpers
 
             message.ToRecipients = recipientList;
 
-            await _graphServiceClient.Users["8716bb10-935f-4ae0-a4f0-0313994fd41e"].SendMail(message).Request().PostAsync();
+            var sendMailPostRequestBody = new Microsoft.Graph.Users.Item.SendMail.SendMailPostRequestBody
+            {
+                Message = message
+            };
+
+            await _graphServiceClient.Users["8716bb10-935f-4ae0-a4f0-0313994fd41e"].SendMail.PostAsync(sendMailPostRequestBody);
         }
     }
 }

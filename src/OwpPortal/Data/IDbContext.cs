@@ -36,7 +36,6 @@ namespace owp_web.Data
         Task<TEntity> FindAsync<TEntity>(object[] keyValues, CancellationToken cancellationToken) where TEntity : class;
         Task<object> FindAsync(Type entityType, params object[] keyValues);
         int GetHashCode();
-        DbQuery<TQuery> Query<TQuery>() where TQuery : class;
         EntityEntry Remove(object entity);
         EntityEntry<TEntity> Remove<TEntity>(TEntity entity) where TEntity : class;
         void RemoveRange(IEnumerable<object> entities);
