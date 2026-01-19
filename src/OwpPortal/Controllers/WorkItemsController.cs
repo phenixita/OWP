@@ -10,6 +10,7 @@ using owp_web.Models;
 using owp_web.Helpers;
 using Microsoft.Extensions.Options;
 using Microsoft.Graph;
+using Microsoft.Graph.Models;
 
 namespace owp_web.Controllers
 {
